@@ -2,21 +2,126 @@ package com.yuale01.mis.po;
 
 public class BasicInfo 
 {
-	private String aa;
-	private String bb;
-	public String getAa() {
-		return aa;
-	}
-	public void setAa(String aa) {
-		this.aa = aa;
-	}
-	public String getBb() {
-		return bb;
-	}
-	public void setBb(String bb) {
-		this.bb = bb;
-	}
+	private String name;
+	private String grade;
+	private String class_;
+	private boolean sex;
+	private String nation;
+	private String birthday;
+	private String idCardNo;
+	private String huKou;
+	private String huKouAddr;
+	private boolean migaration;
+	private boolean onlyChild;
+	private boolean minLiving;
+	private boolean imburse;
+	private boolean orphan;
+	private boolean pathography;
+	private String specialPerformance;
+	private String otherAnnouncement;
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+	public String getClass_() {
+		return class_;
+	}
+	public void setClass_(String class_) {
+		this.class_ = class_;
+	}
+	public boolean isSex() {
+		return sex;
+	}
+	public void setSex(boolean sex) {
+		this.sex = sex;
+	}
+	public String getNation() {
+		return nation;
+	}
+	public void setNation(String nation) {
+		this.nation = nation;
+	}
+	public String getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+	public String getIdCardNo() {
+		return idCardNo;
+	}
+	public void setIdCardNo(String idCardNo) {
+		this.idCardNo = idCardNo;
+	}
+	public String getHuKou() {
+		return huKou;
+	}
+	public void setHuKou(String huKou) {
+		this.huKou = huKou;
+	}
+	public String getHuKouAddr() {
+		return huKouAddr;
+	}
+	public void setHuKouAddr(String huKouAddr) {
+		this.huKouAddr = huKouAddr;
+	}
+	public boolean isMigaration() {
+		return migaration;
+	}
+	public void setMigaration(boolean migaration) {
+		this.migaration = migaration;
+	}
+	public boolean isOnlyChild() {
+		return onlyChild;
+	}
+	public void setOnlyChild(boolean onlyChild) {
+		this.onlyChild = onlyChild;
+	}
+	public boolean isMinLiving() {
+		return minLiving;
+	}
+	public void setMinLiving(boolean minLiving) {
+		this.minLiving = minLiving;
+	}
+	public boolean isImburse() {
+		return imburse;
+	}
+	public void setImburse(boolean imburse) {
+		this.imburse = imburse;
+	}
+	public boolean isOrphan() {
+		return orphan;
+	}
+	public void setOrphan(boolean orphan) {
+		this.orphan = orphan;
+	}
+	public boolean isPathography() {
+		return pathography;
+	}
+	public void setPathography(boolean pathography) {
+		this.pathography = pathography;
+	}
+	public String getSpecialPerformance() {
+		return specialPerformance;
+	}
+	public void setSpecialPerformance(String specialPerformance) {
+		this.specialPerformance = specialPerformance;
+	}
+	public String getOtherAnnouncement() {
+		return otherAnnouncement;
+	}
+	public void setOtherAnnouncement(String otherAnnouncement) {
+		this.otherAnnouncement = otherAnnouncement;
+	}
 	
 
 }

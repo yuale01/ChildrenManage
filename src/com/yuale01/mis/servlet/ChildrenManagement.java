@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
 
 import com.yuale01.mis.po.BasicInfo;
 
