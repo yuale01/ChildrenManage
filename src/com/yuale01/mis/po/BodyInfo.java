@@ -2,7 +2,8 @@ package com.yuale01.mis.po;
 
 public class BodyInfo 
 {
-	private int doffOn;
+	private long id;
+	private int doffDon;
 	private int eating;
 	private int toileting;
 	private int sleeping;
@@ -16,11 +17,17 @@ public class BodyInfo
 	private String foodAllergyInfo;
 	private int healthStatus;
 	
-	public int getDoffOn() {
-		return doffOn;
+	public long getId() {
+		return id;
 	}
-	public void setDoffOn(int doffOn) {
-		this.doffOn = doffOn;
+	public void setId(long id) {
+		this.id = id;
+	}
+	public int getDoffDon() {
+		return doffDon;
+	}
+	public void setDoffDon(int doffDon) {
+		this.doffDon = doffDon;
 	}
 	public int getEating() {
 		return eating;

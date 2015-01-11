@@ -11,7 +11,12 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.io.IOUtils;
 
+import com.yuale01.mis.dao.IChildDAO;
 import com.yuale01.mis.po.BasicInfo;
+import com.yuale01.mis.po.BodyInfo;
+import com.yuale01.mis.po.Child;
+import com.yuale01.mis.po.ContactInfo;
+import com.yuale01.mis.utils.DAOFactory;
 
 public class ChildrenManagement extends HttpServlet{
 
@@ -27,8 +32,8 @@ public class ChildrenManagement extends HttpServlet{
 			String json = "{'aa': '1'}";
 			JSONObject jsonObject = JSONObject.fromObject( json );  
 			BasicInfo bean = (BasicInfo) JSONObject.toBean( jsonObject, BasicInfo.class );
-			String path = request.getPathInfo();
-			if (path.endsWith("list"))
+			String pathInfo = request.getPathInfo();
+			if (pathInfo.endsWith("list"))
 			{
 				response.setCharacterEncoding("utf-8");
 				PrintWriter out = response.getWriter();
@@ -36,7 +41,45 @@ public class ChildrenManagement extends HttpServlet{
 				out.flush();
 				out.close();
 			}
-			System.out.println(path);
+			if (pathInfo.endsWith("create"))
+			{
+				Child child = new Child();
+				BasicInfo basicInfo = new BasicInfo();
+				basicInfo.setName("test");
+				basicInfo.setBirthday("1987-08-22");
+				basicInfo.setGender(0);
+				basicInfo.setClassName("class1");
+				basicInfo.setGrade("grade1");
+				basicInfo.setIdCardNo("130303198708222110");
+				basicInfo.setMigaration(true);
+				basicInfo.setSpecialPerformance("this is special");
+				
+				ContactInfo contactInfo = new ContactInfo();
+				contactInfo.setMotherName("wang");
+				contactInfo.setMotherCompany("comp");
+				contactInfo.setMotherIdCard("130303169870888552");
+				contactInfo.setMotherContact("afdsfdf");
+				contactInfo.setFatherName("fang");
+				contactInfo.setFatherCompany("comp");
+				contactInfo.setFatherIdCard("130303169870888552");
+				contactInfo.setFatherContact("afdsfdf");
+				
+				BodyInfo bodyInfo = new BodyInfo();
+				bodyInfo.setDoffOn(0);
+				bodyInfo.setEating(1);
+				bodyInfo.setSleeping(2);
+				bodyInfo.setSleepingInfo("sleeping info");
+				
+				child.setBasicInfo(basicInfo);
+				child.setContactInfo(contactInfo);
+				child.setBodyInfo(bodyInfo);
+				
+				IChildDAO childDAO = DAOFactory.getChildDAO();
+				childDAO.createChild(child);
+				
+				
+			}
+			System.out.println(pathInfo);
 		}
 		catch (Exception e)
 		{
@@ -50,6 +93,45 @@ public class ChildrenManagement extends HttpServlet{
 		{
 			String requestStr = IOUtils.toString(request.getInputStream(), "UTF-8");
 			System.out.println(requestStr);
+			String pathInfo = request.getPathInfo();
+			if (pathInfo.endsWith("create"))
+			{
+				Child child = new Child();
+				BasicInfo basicInfo = new BasicInfo();
+				basicInfo.setName("test");
+				basicInfo.setBirthday("1987-08-22");
+				basicInfo.setGender(0);
+				basicInfo.setClassName("class1");
+				basicInfo.setGrade("grade1");
+				basicInfo.setIdCardNo("130303198708222110");
+				basicInfo.setMigaration(true);
+				basicInfo.setSpecialPerformance("this is special");
+				
+				ContactInfo contactInfo = new ContactInfo();
+				contactInfo.setMotherName("wang");
+				contactInfo.setMotherCompany("comp");
+				contactInfo.setMotherIdCard("130303169870888552");
+				contactInfo.setMotherContact("afdsfdf");
+				contactInfo.setFatherName("fang");
+				contactInfo.setFatherCompany("comp");
+				contactInfo.setFatherIdCard("130303169870888552");
+				contactInfo.setFatherContact("afdsfdf");
+				
+				BodyInfo bodyInfo = new BodyInfo();
+				bodyInfo.setDoffOn(0);
+				bodyInfo.setEating(1);
+				bodyInfo.setSleeping(2);
+				bodyInfo.setSleepingInfo("sleeping info");
+				
+				child.setBasicInfo(basicInfo);
+				child.setContactInfo(contactInfo);
+				child.setBodyInfo(bodyInfo);
+				
+				IChildDAO childDAO = DAOFactory.getChildDAO();
+				childDAO.createChild(child);
+				
+				
+			}
 		} 
 		catch (IOException e) 
 		{

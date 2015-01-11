@@ -2,16 +2,24 @@ package com.yuale01.mis.po;
 
 public class ContactInfo 
 {
+	private long id;
 	private String motherName;
 	private String motherCompany;
 	private String motherContact;
 	private String motherIdCard;
 	private String fatherName;
 	private String fatherCompany;
+	private String fatherContact;
 	private String fatherIdCard;
 	private String livingAddr;
 	private String otherContact;
 	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getMotherName() {
 		return motherName;
 	}
@@ -47,6 +55,12 @@ public class ContactInfo
 	}
 	public void setFatherCompany(String fatherCompany) {
 		this.fatherCompany = fatherCompany;
+	}
+	public String getFatherContact() {
+		return fatherContact;
+	}
+	public void setFatherContact(String fatherContact) {
+		this.fatherContact = fatherContact;
 	}
 	public String getFatherIdCard() {
 		return fatherIdCard;

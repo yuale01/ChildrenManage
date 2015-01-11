@@ -2,10 +2,11 @@ package com.yuale01.mis.po;
 
 public class BasicInfo 
 {
+	private long id;
 	private String name;
 	private String grade;
-	private String class_;
-	private boolean sex;
+	private String className;
+	private int gender;
 	private String nation;
 	private String birthday;
 	private String idCardNo;
@@ -20,6 +21,12 @@ public class BasicInfo
 	private String specialPerformance;
 	private String otherAnnouncement;
 	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -32,17 +39,17 @@ public class BasicInfo
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
-	public String getClass_() {
-		return class_;
+	public String getClassName() {
+		return className;
 	}
-	public void setClass_(String class_) {
-		this.class_ = class_;
+	public void setClassName(String className) {
+		this.className = className;
 	}
-	public boolean isSex() {
-		return sex;
+	public int getGender() {
+		return gender;
 	}
-	public void setSex(boolean sex) {
-		this.sex = sex;
+	public void setGender(int gender) {
+		this.gender = gender;
 	}
 	public String getNation() {
 		return nation;
