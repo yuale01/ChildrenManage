@@ -65,7 +65,7 @@ public class ChildrenManagement extends HttpServlet{
 				contactInfo.setFatherContact("afdsfdf");
 				
 				BodyInfo bodyInfo = new BodyInfo();
-				bodyInfo.setDoffOn(0);
+				bodyInfo.setDoffDon(0);
 				bodyInfo.setEating(1);
 				bodyInfo.setSleeping(2);
 				bodyInfo.setSleepingInfo("sleeping info");
@@ -118,7 +118,7 @@ public class ChildrenManagement extends HttpServlet{
 				contactInfo.setFatherContact("afdsfdf");
 				
 				BodyInfo bodyInfo = new BodyInfo();
-				bodyInfo.setDoffOn(0);
+				bodyInfo.setDoffDon(0);
 				bodyInfo.setEating(1);
 				bodyInfo.setSleeping(2);
 				bodyInfo.setSleepingInfo("sleeping info");
