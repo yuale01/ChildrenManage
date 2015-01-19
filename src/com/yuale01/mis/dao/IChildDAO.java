@@ -8,11 +8,11 @@ public interface IChildDAO {
 	
 	public List<Child> getChildren();
 	
-	public Child getChild();
+	public Child getChild(Long id);
 	
 	public void updateChild(Child child);
 	
-	public void deleteChild(long id);
+	public void deleteChildren(Long[] ids);
 	
 	public void createChild(Child child);
 

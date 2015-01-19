@@ -18,6 +18,14 @@ import com.yuale01.mis.utils.Constants;
 
 public class ChildDAO  implements IChildDAO
 {
+
+	@Override
+	public Child getChild(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
 	public List<Child> getChildren() 
 	{
 		ComboPooledDataSource ds = null;
@@ -118,21 +126,19 @@ public class ChildDAO  implements IChildDAO
 		return children;
 	}
 	
-	public Child getChild()
-	{
-		return null;
-	}
-	
+	@Override
 	public void updateChild(Child child)
 	{
 		
 	}
 	
-	public void deleteChild(long id)
+	@Override
+	public void deleteChildren(Long[] ids)
 	{
 		
 	}
 	
+	@Override
 	public void createChild(Child child)
 	{
 		long id = Constants.getCurrentLongTime();

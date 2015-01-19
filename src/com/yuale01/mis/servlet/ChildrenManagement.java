@@ -2,11 +2,15 @@ package com.yuale01.mis.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.io.IOUtils;
@@ -29,15 +33,18 @@ public class ChildrenManagement extends HttpServlet{
 	{
 		try
 		{
+			IChildDAO childDAO = DAOFactory.getChildDAO();
 			String json = "{'aa': '1'}";
 			JSONObject jsonObject = JSONObject.fromObject( json );  
 			BasicInfo bean = (BasicInfo) JSONObject.toBean( jsonObject, BasicInfo.class );
 			String pathInfo = request.getPathInfo();
 			if (pathInfo.endsWith("list"))
 			{
+				List<Child> children = childDAO.getChildren();
+				JSONArray jsonChildren = JSONArray.fromObject(children);
 				response.setCharacterEncoding("utf-8");
 				PrintWriter out = response.getWriter();
-				out.print("{'aa': '1'}");
+				out.print(jsonChildren);
 				out.flush();
 				out.close();
 			}
@@ -74,7 +81,6 @@ public class ChildrenManagement extends HttpServlet{
 				child.setContactInfo(contactInfo);
 				child.setBodyInfo(bodyInfo);
 				
-				IChildDAO childDAO = DAOFactory.getChildDAO();
 				childDAO.createChild(child);
 				
 				
@@ -94,10 +100,13 @@ public class ChildrenManagement extends HttpServlet{
 			String requestStr = IOUtils.toString(request.getInputStream(), "UTF-8");
 			System.out.println(requestStr);
 			String pathInfo = request.getPathInfo();
+			IChildDAO childDAO = DAOFactory.getChildDAO();
 			if (pathInfo.endsWith("create"))
 			{
-				Child child = new Child();
-				BasicInfo basicInfo = new BasicInfo();
+				JSONObject jsonChild = JSONObject.fromObject(requestStr);
+				Child child = (Child) JSONObject.toBean(jsonChild, Child.class);
+				
+				/*BasicInfo basicInfo = new BasicInfo();
 				basicInfo.setName("test");
 				basicInfo.setBirthday("1987-08-22");
 				basicInfo.setGender(0);
@@ -125,12 +134,20 @@ public class ChildrenManagement extends HttpServlet{
 				
 				child.setBasicInfo(basicInfo);
 				child.setContactInfo(contactInfo);
-				child.setBodyInfo(bodyInfo);
+				child.setBodyInfo(bodyInfo);*/
 				
-				IChildDAO childDAO = DAOFactory.getChildDAO();
+				
 				childDAO.createChild(child);
-				
-				
+			}
+			else if (pathInfo.endsWith("delete"))
+			{
+				JSONArray jsonArray = JSONArray.fromObject(requestStr);
+				Long[] ids = new Long[jsonArray.size()];
+				for (int i=0; i<jsonArray.size(); i++)
+				{
+					ids[i] = jsonArray.getLong(i);
+				}
+				childDAO.deleteChildren(ids);
 			}
 		} 
 		catch (IOException e) 
