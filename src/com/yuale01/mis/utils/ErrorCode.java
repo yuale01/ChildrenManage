@@ -8,7 +8,8 @@ public class ErrorCode
 	public static final int error_delete_children = 2001;
 	public static final int error_update_child = 2002;
 	public static final int error_get_children = 2003;
+	public static final int bad_input_child_body = 2004;
 	
-	public static final int not_found_child = 2004;
+	public static final int not_found_child = 2005;
 
 }

@@ -11,10 +11,10 @@ public interface IChildDAO {
 	
 	public Child getChild(Long id) throws CommonException;
 	
-	public void updateChild(Child child) throws CommonException;
+	public Child updateChild(Child child) throws CommonException;
 	
 	public void deleteChildren(Long[] ids) throws CommonException;
 	
-	public void createChild(Child child) throws CommonException;
+	public Child createChild(Child child) throws CommonException;
 
 }

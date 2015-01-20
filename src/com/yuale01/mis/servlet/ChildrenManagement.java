@@ -132,8 +132,8 @@ public class ChildrenManagement extends HttpServlet{
 				child.setBodyInfo(bodyInfo);
 				
 				
-				childDAO.createChild(child);
-				out.print(JSONObject.fromObject("{\"success\":true}"));
+				Child result = childDAO.createChild(child);
+				out.print(JSONObject.fromObject(result));
 				out.flush();
 				out.close();
 			}

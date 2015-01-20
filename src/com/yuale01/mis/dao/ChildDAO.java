@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.yuale01.mis.exception.BadRequestException;
 import com.yuale01.mis.exception.CommonException;
 import com.yuale01.mis.exception.InternalServerErrorException;
 import com.yuale01.mis.manage.ConnectionPoolManager;
@@ -131,9 +132,9 @@ public class ChildDAO  implements IChildDAO
 	}
 	
 	@Override
-	public void updateChild(Child child)
+	public Child updateChild(Child child)
 	{
-		
+		return null;
 	}
 	
 	@Override
@@ -218,7 +219,7 @@ public class ChildDAO  implements IChildDAO
 
 	
 	@Override
-	public void createChild(Child child) throws CommonException
+	public Child createChild(Child child) throws CommonException
 	{
 		long id = Constants.getCurrentLongTime();
 		BasicInfo basicInfo = child.getBasicInfo();
@@ -232,7 +233,11 @@ public class ChildDAO  implements IChildDAO
 		try
 		{
 			if (basicInfo == null || contactInfo == null || bodyInfo == null)
-				return;
+				throw new BadRequestException(ErrorCode.bad_input_child_body, "lack of child information, cannot create");
+			basicInfo.setId(id);
+			contactInfo.setId(id);
+			bodyInfo.setId(id);
+			
 			ds = ConnectionPoolManager.getDataSource();
 			conn = ds.getConnection();
 			conn.setAutoCommit(false);
@@ -299,6 +304,8 @@ public class ChildDAO  implements IChildDAO
 			prestat3.executeUpdate();
 			
 			conn.commit();
+			
+			return child;
 		} catch (SQLException e) 
 		{
 			// TODO Auto-generated catch block
