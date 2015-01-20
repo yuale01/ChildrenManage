@@ -9,12 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.yuale01.mis.exception.CommonException;
+import com.yuale01.mis.exception.InternalServerErrorException;
 import com.yuale01.mis.manage.ConnectionPoolManager;
 import com.yuale01.mis.po.BasicInfo;
 import com.yuale01.mis.po.BodyInfo;
 import com.yuale01.mis.po.Child;
 import com.yuale01.mis.po.ContactInfo;
 import com.yuale01.mis.utils.Constants;
+import com.yuale01.mis.utils.ErrorCode;
 
 public class ChildDAO  implements IChildDAO
 {
@@ -26,7 +29,7 @@ public class ChildDAO  implements IChildDAO
 	}
 	
 	@Override
-	public List<Child> getChildren() 
+	public List<Child> getChildren() throws CommonException 
 	{
 		ComboPooledDataSource ds = null;
 		Connection conn = null;
@@ -105,6 +108,7 @@ public class ChildDAO  implements IChildDAO
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new InternalServerErrorException(ErrorCode.error_get_children, e.getMessage());
 		}
 		finally
 		{
@@ -133,13 +137,88 @@ public class ChildDAO  implements IChildDAO
 	}
 	
 	@Override
-	public void deleteChildren(Long[] ids)
+	public void deleteChildren(Long[] ids) throws CommonException
 	{
-		
+		ComboPooledDataSource ds = null;
+		Connection conn = null;
+		PreparedStatement prestat = null;
+		List<Long> errorIds = new ArrayList<Long>();
+		try
+		{
+			ds = ConnectionPoolManager.getDataSource();
+			conn = ds.getConnection();
+			conn.setAutoCommit(false);
+			for (Long id : ids)
+			{
+				try
+				{
+					String sql = "delete from basic_info where id = ?";
+					prestat = conn.prepareStatement(sql);
+					prestat.setLong(1, id);
+					prestat.executeUpdate();
+					prestat.close();
+					
+					sql = "delete from contact_info where id = ?";
+					prestat = conn.prepareStatement(sql);
+					prestat.setLong(1, id);
+					prestat.executeUpdate();
+					prestat.close();
+					
+					sql = "delete from body_info where id = ?";
+					prestat = conn.prepareStatement(sql);
+					prestat.setLong(1, id);
+					prestat.executeUpdate();
+					prestat.close();
+					
+					conn.commit();
+				} catch (SQLException e) {
+					try {
+						conn.rollback();
+					} catch (SQLException ex) {
+						ex.printStackTrace();
+					}
+					errorIds.add(id);
+				}
+				
+			}
+			if (!errorIds.isEmpty())
+			{
+				StringBuffer sb = new StringBuffer();
+				for (Long id : errorIds)
+				{
+					sb.append(id);
+					sb.append(", ");
+				}
+				throw new InternalServerErrorException(ErrorCode.error_delete_children, sb.substring(0, sb.length()-2));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new InternalServerErrorException(ErrorCode.error_delete_children, e.getMessage());
+		} 
+		finally
+		{
+			if (prestat != null) {
+				try {
+					prestat.close();
+				} catch (SQLException e) {
+				}
+				prestat = null;
+			}
+			if (conn != null) {
+				try {
+					conn.setAutoCommit(true);
+					conn.close();
+				} catch (SQLException e) {
+				}
+				conn = null;
+			}
+		} 
 	}
+
 	
 	@Override
-	public void createChild(Child child)
+	public void createChild(Child child) throws CommonException
 	{
 		long id = Constants.getCurrentLongTime();
 		BasicInfo basicInfo = child.getBasicInfo();
@@ -229,6 +308,7 @@ public class ChildDAO  implements IChildDAO
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
+			throw new InternalServerErrorException(ErrorCode.error_create_child, e.getMessage());
 		}
 		finally
 		{
