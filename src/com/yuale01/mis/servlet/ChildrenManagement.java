@@ -2,8 +2,6 @@ package com.yuale01.mis.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServlet;
@@ -42,6 +40,7 @@ public class ChildrenManagement extends HttpServlet{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return;
 		}
 		try
 		{
@@ -89,6 +88,7 @@ public class ChildrenManagement extends HttpServlet{
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return;
 		}
 		try 
 		{
