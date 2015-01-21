@@ -14,15 +14,15 @@ import net.sf.json.JSONObject;
 
 import org.apache.commons.io.IOUtils;
 
+import com.yuale01.mis.controller.DAOFactory;
 import com.yuale01.mis.dao.IChildDAO;
 import com.yuale01.mis.exception.CommonException;
+import com.yuale01.mis.exception.ErrorCode;
+import com.yuale01.mis.exception.ErrorMessage;
 import com.yuale01.mis.po.BasicInfo;
 import com.yuale01.mis.po.BodyInfo;
 import com.yuale01.mis.po.Child;
 import com.yuale01.mis.po.ContactInfo;
-import com.yuale01.mis.po.ErrorMessage;
-import com.yuale01.mis.utils.DAOFactory;
-import com.yuale01.mis.utils.ErrorCode;
 
 public class ChildrenManagement extends HttpServlet{
 
@@ -98,9 +98,9 @@ public class ChildrenManagement extends HttpServlet{
 			IChildDAO childDAO = DAOFactory.getChildDAO();
 			if (pathInfo.endsWith("create"))
 			{
-				//JSONObject jsonChild = JSONObject.fromObject(requestStr);
-				//Child child = (Child) JSONObject.toBean(jsonChild, Child.class);
-				Child child = new Child();
+				JSONObject jsonChild = JSONObject.fromObject(requestStr);
+				Child child = (Child) JSONObject.toBean(jsonChild, Child.class);
+				/*Child child = new Child();
 				BasicInfo basicInfo = new BasicInfo();
 				basicInfo.setName("test");
 				basicInfo.setBirthday("1987-08-22");
@@ -129,7 +129,7 @@ public class ChildrenManagement extends HttpServlet{
 				
 				child.setBasicInfo(basicInfo);
 				child.setContactInfo(contactInfo);
-				child.setBodyInfo(bodyInfo);
+				child.setBodyInfo(bodyInfo);*/
 				
 				
 				Child result = childDAO.createChild(child);
@@ -149,6 +149,10 @@ public class ChildrenManagement extends HttpServlet{
 				out.print(JSONObject.fromObject("{\"success\":true}"));
 				out.flush();
 				out.close();
+			}
+			else if (pathInfo.endsWith("update"))
+			{
+				
 			}
 		} 
 		catch (Exception e) 

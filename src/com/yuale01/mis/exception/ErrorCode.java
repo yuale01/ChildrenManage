@@ -1,4 +1,4 @@
-package com.yuale01.mis.utils;
+package com.yuale01.mis.exception;
 
 public class ErrorCode 
 {

@@ -1,4 +1,4 @@
-package com.yuale01.mis.po;
+package com.yuale01.mis.exception;
 
 public class ErrorMessage 
 {

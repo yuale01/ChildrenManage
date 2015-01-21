@@ -1,7 +1,6 @@
 package com.yuale01.mis.exception;
 
 import javax.ws.rs.core.Response;
-import com.yuale01.mis.po.ErrorMessage;
 
 
 public class CommonException extends Exception
