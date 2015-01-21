@@ -1,4 +1,4 @@
-package com.yuale01.mis.manage;
+package com.yuale01.mis.controller;
 
 import java.beans.PropertyVetoException;
 
