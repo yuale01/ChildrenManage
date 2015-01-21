@@ -2,7 +2,7 @@ package com.yuale01.mis.po;
 
 public class ContactInfo 
 {
-	private long id;
+	private Long id;
 	private String motherName;
 	private String motherCompany;
 	private String motherContact;
@@ -14,10 +14,10 @@ public class ContactInfo
 	private String livingAddr;
 	private String otherContact;
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getMotherName() {

@@ -2,29 +2,29 @@ package com.yuale01.mis.po;
 
 public class BasicInfo 
 {
-	private long id;
+	private Long id;
 	private String name;
 	private String grade;
 	private String className;
-	private int gender;
+	private Integer gender;
 	private String nation;
 	private String birthday;
 	private String idCardNo;
 	private String huKou;
 	private String huKouAddr;
-	private boolean migaration;
-	private boolean onlyChild;
-	private boolean minLiving;
-	private boolean imburse;
-	private boolean orphan;
-	private boolean pathography;
+	private Boolean migration;
+	private Boolean onlyChild;
+	private Boolean minLiving;
+	private Boolean imburse;
+	private Boolean orphan;
+	private Boolean pathography;
 	private String specialPerformance;
 	private String otherAnnouncement;
 	
 	public long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -45,10 +45,10 @@ public class BasicInfo
 	public void setClassName(String className) {
 		this.className = className;
 	}
-	public int getGender() {
+	public Integer getGender() {
 		return gender;
 	}
-	public void setGender(int gender) {
+	public void setGender(Integer gender) {
 		this.gender = gender;
 	}
 	public String getNation() {
@@ -81,40 +81,40 @@ public class BasicInfo
 	public void setHuKouAddr(String huKouAddr) {
 		this.huKouAddr = huKouAddr;
 	}
-	public boolean isMigaration() {
-		return migaration;
+	public Boolean isMigration() {
+		return migration;
 	}
-	public void setMigaration(boolean migaration) {
-		this.migaration = migaration;
+	public void setMigration(Boolean migration) {
+		this.migration = migration;
 	}
-	public boolean isOnlyChild() {
+	public Boolean isOnlyChild() {
 		return onlyChild;
 	}
-	public void setOnlyChild(boolean onlyChild) {
+	public void setOnlyChild(Boolean onlyChild) {
 		this.onlyChild = onlyChild;
 	}
-	public boolean isMinLiving() {
+	public Boolean isMinLiving() {
 		return minLiving;
 	}
-	public void setMinLiving(boolean minLiving) {
+	public void setMinLiving(Boolean minLiving) {
 		this.minLiving = minLiving;
 	}
-	public boolean isImburse() {
+	public Boolean isImburse() {
 		return imburse;
 	}
-	public void setImburse(boolean imburse) {
+	public void setImburse(Boolean imburse) {
 		this.imburse = imburse;
 	}
-	public boolean isOrphan() {
+	public Boolean isOrphan() {
 		return orphan;
 	}
-	public void setOrphan(boolean orphan) {
+	public void setOrphan(Boolean orphan) {
 		this.orphan = orphan;
 	}
-	public boolean isPathography() {
+	public Boolean isPathography() {
 		return pathography;
 	}
-	public void setPathography(boolean pathography) {
+	public void setPathography(Boolean pathography) {
 		this.pathography = pathography;
 	}
 	public String getSpecialPerformance() {

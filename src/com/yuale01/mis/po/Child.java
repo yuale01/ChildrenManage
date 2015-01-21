@@ -5,6 +5,7 @@ public class Child
 	private BasicInfo basicInfo;
 	private ContactInfo contactInfo;
 	private BodyInfo bodyInfo;
+	private long id;
 	
 	public BasicInfo getBasicInfo() {
 		return basicInfo;
@@ -24,5 +25,12 @@ public class Child
 	public void setContactInfo(ContactInfo contactInfo) {
 		this.contactInfo = contactInfo;
 	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	
 
 }

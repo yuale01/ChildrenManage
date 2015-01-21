@@ -2,49 +2,49 @@ package com.yuale01.mis.po;
 
 public class BodyInfo 
 {
-	private long id;
-	private int doffDon;
-	private int eating;
-	private int toileting;
-	private int sleeping;
+	private Long id;
+	private Integer doffDon;
+	private Integer eating;
+	private Integer toileting;
+	private Integer sleeping;
 	private String sleepingInfo;
-	private int eatingSpeed;
-	private int appetite;
-	private int pickyEating;
+	private Integer eatingSpeed;
+	private Integer appetite;
+	private Integer pickyEating;
 	private String pickyEatingInfo;
-	private int eatingAbility;
-	private int foodAllergy;
+	private Integer eatingAbility;
+	private Integer foodAllergy;
 	private String foodAllergyInfo;
-	private int healthStatus;
+	private Integer healthStatus;
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-	public int getDoffDon() {
+	public Integer getDoffDon() {
 		return doffDon;
 	}
-	public void setDoffDon(int doffDon) {
+	public void setDoffDon(Integer doffDon) {
 		this.doffDon = doffDon;
 	}
-	public int getEating() {
+	public Integer getEating() {
 		return eating;
 	}
-	public void setEating(int eating) {
+	public void setEating(Integer eating) {
 		this.eating = eating;
 	}
-	public int getToileting() {
+	public Integer getToileting() {
 		return toileting;
 	}
-	public void setToileting(int toileting) {
+	public void setToileting(Integer toileting) {
 		this.toileting = toileting;
 	}
-	public int getSleeping() {
+	public Integer getSleeping() {
 		return sleeping;
 	}
-	public void setSleeping(int sleeping) {
+	public void setSleeping(Integer sleeping) {
 		this.sleeping = sleeping;
 	}
 	public String getSleepingInfo() {
@@ -53,22 +53,22 @@ public class BodyInfo
 	public void setSleepingInfo(String sleepingInfo) {
 		this.sleepingInfo = sleepingInfo;
 	}
-	public int getEatingSpeed() {
+	public Integer getEatingSpeed() {
 		return eatingSpeed;
 	}
-	public void setEatingSpeed(int eatingSpeed) {
+	public void setEatingSpeed(Integer eatingSpeed) {
 		this.eatingSpeed = eatingSpeed;
 	}
-	public int getAppetite() {
+	public Integer getAppetite() {
 		return appetite;
 	}
-	public void setAppetite(int appetite) {
+	public void setAppetite(Integer appetite) {
 		this.appetite = appetite;
 	}
-	public int getPickyEating() {
+	public Integer getPickyEating() {
 		return pickyEating;
 	}
-	public void setPickyEating(int pickyEating) {
+	public void setPickyEating(Integer pickyEating) {
 		this.pickyEating = pickyEating;
 	}
 	public String getPickyEatingInfo() {
@@ -77,16 +77,16 @@ public class BodyInfo
 	public void setPickyEatingInfo(String pickyEatingInfo) {
 		this.pickyEatingInfo = pickyEatingInfo;
 	}
-	public int getEatingAbility() {
+	public Integer getEatingAbility() {
 		return eatingAbility;
 	}
-	public void setEatingAbility(int eatingAbility) {
+	public void setEatingAbility(Integer eatingAbility) {
 		this.eatingAbility = eatingAbility;
 	}
-	public int getFoodAllergy() {
+	public Integer getFoodAllergy() {
 		return foodAllergy;
 	}
-	public void setFoodAllergy(int foodAllergy) {
+	public void setFoodAllergy(Integer foodAllergy) {
 		this.foodAllergy = foodAllergy;
 	}
 	public String getFoodAllergyInfo() {
@@ -95,10 +95,10 @@ public class BodyInfo
 	public void setFoodAllergyInfo(String foodAllergyInfo) {
 		this.foodAllergyInfo = foodAllergyInfo;
 	}
-	public int getHealthStatus() {
+	public Integer getHealthStatus() {
 		return healthStatus;
 	}
-	public void setHealthStatus(int healthStatus) {
+	public void setHealthStatus(Integer healthStatus) {
 		this.healthStatus = healthStatus;
 	}
 
