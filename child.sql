@@ -23,6 +23,7 @@ CREATE TABLE `basic_info` (
   `pathography` tinyint(1),
   `special_performance` longtext,
   `other_announcement` longtext,
+  `timestamp` bigint(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -40,6 +41,7 @@ CREATE TABLE `contact_info` (
   `father_id_card` varchar(20),
   `living_addr` varchar(50),
   `other_contact` varchar(50),
+  `timestamp` bigint(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -60,5 +62,6 @@ CREATE TABLE `body_info` (
   `food_allergy` tinyint(1),
   `food_allergy_info` varchar(50),
   `health_status` tinyint(1),
+  `timestamp` bigint(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

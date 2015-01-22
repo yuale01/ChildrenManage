@@ -12,5 +12,6 @@ public class ErrorCode
 	public static final int error_get_child = 2012;
 	public static final int bad_input_child_body = 2013;
 	public static final int not_found_child = 2014;
+	public static final int child_info_conflict = 2015;
 
 }

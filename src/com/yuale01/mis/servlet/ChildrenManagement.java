@@ -19,10 +19,7 @@ import com.yuale01.mis.dao.IChildDAO;
 import com.yuale01.mis.exception.CommonException;
 import com.yuale01.mis.exception.ErrorCode;
 import com.yuale01.mis.exception.ErrorMessage;
-import com.yuale01.mis.po.BasicInfo;
-import com.yuale01.mis.po.BodyInfo;
 import com.yuale01.mis.po.Child;
-import com.yuale01.mis.po.ContactInfo;
 
 public class ChildrenManagement extends HttpServlet{
 
@@ -65,12 +62,14 @@ public class ChildrenManagement extends HttpServlet{
 				em.setErrorCode(((CommonException) e).getErrorCode());
 				em.setMessage(((CommonException) e).getLocalizedMessage());
 				em.setStatusCode(((CommonException) e).getStatusCode());
+				response.setStatus(((CommonException) e).getStatusCode());
 			}
 			else
 			{
 				em.setErrorCode(ErrorCode.unknow_internal_error);
 				em.setMessage(e.getMessage());
 				em.setStatusCode(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+				response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			}
 			JSONObject errorMessage = JSONObject.fromObject(em);
 			out.print(errorMessage);
@@ -100,37 +99,6 @@ public class ChildrenManagement extends HttpServlet{
 			{
 				JSONObject jsonChild = JSONObject.fromObject(requestStr);
 				Child child = (Child) JSONObject.toBean(jsonChild, Child.class);
-				/*Child child = new Child();
-				BasicInfo basicInfo = new BasicInfo();
-				basicInfo.setName("test");
-				basicInfo.setBirthday("1987-08-22");
-				basicInfo.setGender(0);
-				basicInfo.setClassName("class1");
-				basicInfo.setGrade("grade1");
-				basicInfo.setIdCardNo("130303198708222110");
-				basicInfo.setMigaration(true);
-				basicInfo.setSpecialPerformance("this is special");
-				
-				ContactInfo contactInfo = new ContactInfo();
-				contactInfo.setMotherName("wang");
-				contactInfo.setMotherCompany("comp");
-				contactInfo.setMotherIdCard("130303169870888552");
-				contactInfo.setMotherContact("afdsfdf");
-				contactInfo.setFatherName("fang");
-				contactInfo.setFatherCompany("comp");
-				contactInfo.setFatherIdCard("130303169870888552");
-				contactInfo.setFatherContact("afdsfdf");
-				
-				BodyInfo bodyInfo = new BodyInfo();
-				bodyInfo.setDoffDon(0);
-				bodyInfo.setEating(1);
-				bodyInfo.setSleeping(2);
-				bodyInfo.setSleepingInfo("sleeping info");
-				
-				child.setBasicInfo(basicInfo);
-				child.setContactInfo(contactInfo);
-				child.setBodyInfo(bodyInfo);*/
-				
 				
 				Child result = childDAO.createChild(child);
 				out.print(JSONObject.fromObject(result));
@@ -152,7 +120,12 @@ public class ChildrenManagement extends HttpServlet{
 			}
 			else if (pathInfo.endsWith("update"))
 			{
-				
+				JSONObject jsonChild = JSONObject.fromObject(requestStr);
+				Child child = (Child) JSONObject.toBean(jsonChild, Child.class);
+				childDAO.updateChild(child);
+				out.print(JSONObject.fromObject("{\"success\":true}"));
+				out.flush();
+				out.close();
 			}
 		} 
 		catch (Exception e) 
@@ -165,12 +138,14 @@ public class ChildrenManagement extends HttpServlet{
 				em.setErrorCode(((CommonException) e).getErrorCode());
 				em.setMessage(((CommonException) e).getLocalizedMessage());
 				em.setStatusCode(((CommonException) e).getStatusCode());
+				response.setStatus(((CommonException) e).getStatusCode());
 			}
 			else
 			{
 				em.setErrorCode(ErrorCode.unknow_internal_error);
 				em.setMessage(e.getMessage());
 				em.setStatusCode(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
+				response.setStatus(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode());
 			}
 			JSONObject errorMessage = JSONObject.fromObject(em);
 			out.print(errorMessage);

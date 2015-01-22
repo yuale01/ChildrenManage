@@ -13,6 +13,7 @@ public class ContactInfo
 	private String fatherIdCard;
 	private String livingAddr;
 	private String otherContact;
+	private Long timeStamp;
 	
 	public Long getId() {
 		return id;
@@ -80,6 +81,11 @@ public class ContactInfo
 	public void setOtherContact(String otherContact) {
 		this.otherContact = otherContact;
 	}
+	public Long getTimeStamp() {
+		return timeStamp;
+	}
+	public void setTimeStamp(Long timeStamp) {
+		this.timeStamp = timeStamp;
+	}
 	
-
 }

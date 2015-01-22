@@ -20,6 +20,7 @@ public class Constants {
 	public static String BASIC_INFO_PATHOGRAPHY = "pathography";
 	public static String BASIC_INFO_SPECIAL_PERFORMANCE = "special_performance";
 	public static String BASIC_INFO_OTHER_ANNOUNCEMENT = "other_announcement";
+	public static String BASIC_INFO_TIMESTAMP = "timestamp";
 	
 	public static String CONTACT_INFO_MOTHER_NAME = "mother_name"; 
 	public static String CONTACT_INFO_MOTHER_COMPANY = "mother_company";
@@ -31,6 +32,7 @@ public class Constants {
 	public static String CONTACT_INFO_FATHER_ID_CARD = "father_id_card";
 	public static String CONTACT_INFO_LIVING_ADDR = "living_addr";
 	public static String CONTACT_INFO_OTHER_CONTACT = "other_contact";
+	public static String CONTACT_INFO_TIMESTAMP = "timestamp";
 
 	public static String BODY_INFO_DOFF_DON = "doff_don";
 	public static String BODY_INFO_EATING = "eating";
@@ -45,6 +47,7 @@ public class Constants {
 	public static String BODY_INFO_FOOD_ALLERGY = "food_allergy";
 	public static String BODY_INFO_FOOD_ALLERGY_INFO = "food_allergy_info";
 	public static String BODY_INFO_HEALTH_STATUS = "health_status";
+	public static String BODY_INFO_TIMESTAMP = "timestamp";
 	
 	public synchronized static long getCurrentLongTime()
 	{

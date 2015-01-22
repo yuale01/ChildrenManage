@@ -16,6 +16,7 @@ public class BodyInfo
 	private Integer foodAllergy;
 	private String foodAllergyInfo;
 	private Integer healthStatus;
+	private Long timeStamp;
 	
 	public Long getId() {
 		return id;
@@ -101,5 +102,12 @@ public class BodyInfo
 	public void setHealthStatus(Integer healthStatus) {
 		this.healthStatus = healthStatus;
 	}
+	public Long getTimeStamp() {
+		return timeStamp;
+	}
+	public void setTimeStamp(Long timeStamp) {
+		this.timeStamp = timeStamp;
+	}
+	
 
 }

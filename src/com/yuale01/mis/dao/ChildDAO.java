@@ -8,10 +8,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.sf.json.JSONArray;
+
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.yuale01.mis.controller.ConnectionPoolManager;
 import com.yuale01.mis.exception.BadRequestException;
 import com.yuale01.mis.exception.CommonException;
+import com.yuale01.mis.exception.ConflictException;
 import com.yuale01.mis.exception.ErrorCode;
 import com.yuale01.mis.exception.InternalServerErrorException;
 import com.yuale01.mis.exception.NotFoundException;
@@ -70,6 +73,7 @@ public class ChildDAO  implements IChildDAO
 				basicInfo.setPathography(result.getBoolean(Constants.BASIC_INFO_PATHOGRAPHY));
 				basicInfo.setSpecialPerformance(result.getString(Constants.BASIC_INFO_SPECIAL_PERFORMANCE));
 				basicInfo.setOtherAnnouncement(result.getString(Constants.BASIC_INFO_OTHER_ANNOUNCEMENT));
+				basicInfo.setTimeStamp(result.getLong(Constants.BASIC_INFO_TIMESTAMP));
 				
 				contactInfo.setId(id);
 				contactInfo.setMotherName(result.getString(Constants.CONTACT_INFO_MOTHER_NAME));
@@ -82,6 +86,7 @@ public class ChildDAO  implements IChildDAO
 				contactInfo.setFatherIdCard(Constants.CONTACT_INFO_FATHER_ID_CARD);
 				contactInfo.setLivingAddr(result.getString(Constants.CONTACT_INFO_LIVING_ADDR));
 				contactInfo.setOtherContact(result.getString(Constants.CONTACT_INFO_OTHER_CONTACT));
+				contactInfo.setTimeStamp(result.getLong(Constants.CONTACT_INFO_TIMESTAMP));
 				
 				bodyInfo.setId(id);
 				bodyInfo.setDoffDon(result.getInt(Constants.BODY_INFO_DOFF_DON));
@@ -97,13 +102,14 @@ public class ChildDAO  implements IChildDAO
 				bodyInfo.setFoodAllergy(result.getInt(Constants.BODY_INFO_FOOD_ALLERGY));
 				bodyInfo.setFoodAllergyInfo(result.getString(Constants.BODY_INFO_FOOD_ALLERGY_INFO));
 				bodyInfo.setHealthStatus(result.getInt(Constants.BODY_INFO_HEALTH_STATUS));
+				bodyInfo.setTimeStamp(result.getLong(Constants.BODY_INFO_TIMESTAMP));
 				
 				child.setBasicInfo(basicInfo);
 				child.setBodyInfo(bodyInfo);
 				child.setContactInfo(contactInfo);
 				child.setId(id);
 			}
-		} catch (SQLException e) 
+		} catch (Exception e) 
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -172,6 +178,7 @@ public class ChildDAO  implements IChildDAO
 				basicInfo.setPathography(result.getBoolean(Constants.BASIC_INFO_PATHOGRAPHY));
 				basicInfo.setSpecialPerformance(result.getString(Constants.BASIC_INFO_SPECIAL_PERFORMANCE));
 				basicInfo.setOtherAnnouncement(result.getString(Constants.BASIC_INFO_OTHER_ANNOUNCEMENT));
+				basicInfo.setTimeStamp(result.getLong(Constants.BASIC_INFO_TIMESTAMP));
 				
 				contactInfo.setId(id);
 				contactInfo.setMotherName(result.getString(Constants.CONTACT_INFO_MOTHER_NAME));
@@ -184,6 +191,7 @@ public class ChildDAO  implements IChildDAO
 				contactInfo.setFatherIdCard(Constants.CONTACT_INFO_FATHER_ID_CARD);
 				contactInfo.setLivingAddr(result.getString(Constants.CONTACT_INFO_LIVING_ADDR));
 				contactInfo.setOtherContact(result.getString(Constants.CONTACT_INFO_OTHER_CONTACT));
+				contactInfo.setTimeStamp(result.getLong(Constants.CONTACT_INFO_TIMESTAMP));
 				
 				bodyInfo.setId(id);
 				bodyInfo.setDoffDon(result.getInt(Constants.BODY_INFO_DOFF_DON));
@@ -199,6 +207,7 @@ public class ChildDAO  implements IChildDAO
 				bodyInfo.setFoodAllergy(result.getInt(Constants.BODY_INFO_FOOD_ALLERGY));
 				bodyInfo.setFoodAllergyInfo(result.getString(Constants.BODY_INFO_FOOD_ALLERGY_INFO));
 				bodyInfo.setHealthStatus(result.getInt(Constants.BODY_INFO_HEALTH_STATUS));
+				bodyInfo.setTimeStamp(result.getLong(Constants.BODY_INFO_TIMESTAMP));
 				
 				child.setBasicInfo(basicInfo);
 				child.setBodyInfo(bodyInfo);
@@ -206,7 +215,7 @@ public class ChildDAO  implements IChildDAO
 				child.setId(id);
 				children.add(child);
 			}
-		} catch (SQLException e) 
+		} catch (Exception e) 
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -235,6 +244,9 @@ public class ChildDAO  implements IChildDAO
 	@Override
 	public Child updateChild(Child child) throws CommonException
 	{
+		if (child == null)
+			throw new BadRequestException(ErrorCode.bad_input_child_body, "child information isempty, cannot update");
+		
 		BasicInfo basicInfo = child.getBasicInfo();
 		ContactInfo contactInfo = child.getContactInfo();
 		BodyInfo bodyInfo = child.getBodyInfo();
@@ -258,6 +270,9 @@ public class ChildDAO  implements IChildDAO
 			
 			if (basicInfo != null)
 			{
+				if (!basicInfo.getTimeStamp().equals(originChild.getBasicInfo().getTimeStamp()))
+					throw new ConflictException(ErrorCode.child_info_conflict, "basin info is not the latest.");
+				
 				StringBuffer sqlBuffer = new StringBuffer("update basic_info set ");
 				if (basicInfo.getIdCardNo() != null)
 					sqlBuffer.append(Constants.BASIC_INFO_ID_CARD_NO).append("='").append(basicInfo.getIdCardNo()).append("', ");
@@ -268,7 +283,7 @@ public class ChildDAO  implements IChildDAO
 				if (basicInfo.getClassName() != null)
 					sqlBuffer.append(Constants.BASIC_INFO_CLASS_NAME).append("='").append(basicInfo.getClassName()).append("', ");
 				if (basicInfo.getGender() != null)
-					sqlBuffer.append(Constants.BASIC_INFO_NAME).append("=").append(basicInfo.getName()).append(", ");
+					sqlBuffer.append(Constants.BASIC_INFO_GENDER).append("=").append(basicInfo.getGender()).append(", ");
 				if (basicInfo.getNation() != null)
 					sqlBuffer.append(Constants.BASIC_INFO_NATION).append("='").append(basicInfo.getNation()).append("', ");
 				if (basicInfo.getBirthday() != null)
@@ -277,18 +292,18 @@ public class ChildDAO  implements IChildDAO
 					sqlBuffer.append(Constants.BASIC_INFO_HUKOU).append("='").append(basicInfo.getHuKou()).append("', ");
 				if (basicInfo.getHuKouAddr() != null)
 					sqlBuffer.append(Constants.BASIC_INFO_HUKOU_ADDR).append("='").append(basicInfo.getHuKouAddr()).append("', ");
-				if (basicInfo.isMigration() != null)
-					sqlBuffer.append(Constants.BASIC_INFO_MIGRATION).append("=").append(basicInfo.isMigration()).append(", ");
-				if (basicInfo.isOnlyChild() != null)
-					sqlBuffer.append(Constants.BASIC_INFO_ONLY_CHILD).append("=").append(basicInfo.isOnlyChild()).append(", ");
-				if (basicInfo.isMinLiving() != null)
-					sqlBuffer.append(Constants.BASIC_INFO_MIN_LIVING).append("=").append(basicInfo.isMinLiving()).append(", ");
-				if (basicInfo.isImburse() != null)
-					sqlBuffer.append(Constants.BASIC_INFO_IMBURSE).append("=").append(basicInfo.isImburse()).append(", ");
-				if (basicInfo.isOrphan() != null)
-					sqlBuffer.append(Constants.BASIC_INFO_ORPHAN).append("=").append(basicInfo.isOrphan()).append(", ");
-				if (basicInfo.isPathography() != null)
-					sqlBuffer.append(Constants.BASIC_INFO_PATHOGRAPHY).append("=").append(basicInfo.isPathography()).append(", ");
+				if (basicInfo.getMigration() != null)
+					sqlBuffer.append(Constants.BASIC_INFO_MIGRATION).append("=").append(basicInfo.getMigration()).append(", ");
+				if (basicInfo.getOnlyChild() != null)
+					sqlBuffer.append(Constants.BASIC_INFO_ONLY_CHILD).append("=").append(basicInfo.getOnlyChild()).append(", ");
+				if (basicInfo.getMinLiving() != null)
+					sqlBuffer.append(Constants.BASIC_INFO_MIN_LIVING).append("=").append(basicInfo.getMinLiving()).append(", ");
+				if (basicInfo.getImburse() != null)
+					sqlBuffer.append(Constants.BASIC_INFO_IMBURSE).append("=").append(basicInfo.getImburse()).append(", ");
+				if (basicInfo.getOrphan() != null)
+					sqlBuffer.append(Constants.BASIC_INFO_ORPHAN).append("=").append(basicInfo.getOrphan()).append(", ");
+				if (basicInfo.getPathography() != null)
+					sqlBuffer.append(Constants.BASIC_INFO_PATHOGRAPHY).append("=").append(basicInfo.getPathography()).append(", ");
 				if (basicInfo.getSpecialPerformance() != null)
 					sqlBuffer.append(Constants.BASIC_INFO_SPECIAL_PERFORMANCE).append("='").append(basicInfo.getSpecialPerformance()).append("', ");
 				if (basicInfo.getOtherAnnouncement() != null)
@@ -296,7 +311,7 @@ public class ChildDAO  implements IChildDAO
 				
 				if (sqlBuffer.length() != "update basic_info set ".length())
 				{
-					sqlBuffer.delete(sqlBuffer.length()-2, sqlBuffer.length());
+					sqlBuffer.append(Constants.BASIC_INFO_TIMESTAMP).append("=").append(System.currentTimeMillis());
 					sqlBuffer.append(" where id = ").append(id);
 					stat = conn.createStatement();
 					stat.executeUpdate(sqlBuffer.toString());
@@ -306,6 +321,9 @@ public class ChildDAO  implements IChildDAO
 			
 			if (contactInfo != null)
 			{
+				if (!contactInfo.getTimeStamp().equals(originChild.getContactInfo().getTimeStamp()))
+					throw new ConflictException(ErrorCode.child_info_conflict, "contact info is not the latest.");
+				
 				StringBuffer sqlBuffer = new StringBuffer("update contact_info set ");
 				if (contactInfo.getMotherName() != null)
 					sqlBuffer.append(Constants.CONTACT_INFO_MOTHER_NAME).append("='").append(contactInfo.getMotherName()).append("', ");
@@ -314,7 +332,7 @@ public class ChildDAO  implements IChildDAO
 				if (contactInfo.getMotherContact() != null)
 					sqlBuffer.append(Constants.CONTACT_INFO_MOTHER_CONTACT).append("='").append(contactInfo.getMotherContact()).append("', ");
 				if (contactInfo.getMotherIdCard() != null)
-					sqlBuffer.append(Constants.CONTACT_INFO_MOTHER_CONTACT).append("='").append(contactInfo.getMotherIdCard()).append("', ");
+					sqlBuffer.append(Constants.CONTACT_INFO_MOTHER_ID_CARD).append("='").append(contactInfo.getMotherIdCard()).append("', ");
 				if (contactInfo.getFatherName() != null)
 					sqlBuffer.append(Constants.CONTACT_INFO_FATHER_NAME).append("='").append(contactInfo.getFatherName()).append("', ");
 				if (contactInfo.getFatherCompany() != null)
@@ -330,7 +348,7 @@ public class ChildDAO  implements IChildDAO
 				
 				if (sqlBuffer.length() != "update contact_info set ".length())
 				{
-					sqlBuffer.delete(sqlBuffer.length()-2, sqlBuffer.length());
+					sqlBuffer.append(Constants.CONTACT_INFO_TIMESTAMP).append("=").append(System.currentTimeMillis());
 					sqlBuffer.append(" where id = ").append(id);
 					stat = conn.createStatement();
 					stat.executeUpdate(sqlBuffer.toString());
@@ -340,6 +358,9 @@ public class ChildDAO  implements IChildDAO
 			
 			if (bodyInfo != null)
 			{
+				if (!bodyInfo.getTimeStamp().equals(originChild.getBodyInfo().getTimeStamp()))
+					throw new ConflictException(ErrorCode.child_info_conflict, "body info is not the latest.");
+				
 				StringBuffer sqlBuffer = new StringBuffer("update body_info set ");
 				if (bodyInfo.getDoffDon() != null)
 					sqlBuffer.append(Constants.BODY_INFO_DOFF_DON).append("=").append(bodyInfo.getDoffDon()).append(", ");
@@ -370,7 +391,7 @@ public class ChildDAO  implements IChildDAO
 				
 				if (sqlBuffer.length() != "update body_info set ".length())
 				{
-					sqlBuffer.delete(sqlBuffer.length()-2, sqlBuffer.length());
+					sqlBuffer.append(Constants.BODY_INFO_TIMESTAMP).append("=").append(System.currentTimeMillis());
 					sqlBuffer.append(" where id = ").append(id);
 					stat = conn.createStatement();
 					stat.executeUpdate(sqlBuffer.toString());
@@ -380,16 +401,20 @@ public class ChildDAO  implements IChildDAO
 			
 			conn.commit();
 			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e)
+		{
 			e.printStackTrace();
 			try {
 				conn.rollback();
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
-			throw new InternalServerErrorException(ErrorCode.error_update_child, e.getMessage());
-		} 
+			
+			if (e instanceof CommonException)
+				throw (CommonException)e;
+			else
+				throw new InternalServerErrorException(ErrorCode.error_update_child, e.getMessage());
+		}
 		finally
 		{
 			if (stat != null) {
@@ -446,7 +471,7 @@ public class ChildDAO  implements IChildDAO
 					prestat.close();
 					
 					conn.commit();
-				} catch (SQLException e) {
+				} catch (Exception e) {
 					try {
 						conn.rollback();
 					} catch (SQLException ex) {
@@ -456,21 +481,17 @@ public class ChildDAO  implements IChildDAO
 				}
 				
 			}
+			
 			if (!errorIds.isEmpty())
-			{
-				StringBuffer sb = new StringBuffer();
-				for (Long id : errorIds)
-				{
-					sb.append(id);
-					sb.append(", ");
-				}
-				throw new InternalServerErrorException(ErrorCode.error_delete_children, sb.substring(0, sb.length()-2));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+				throw new InternalServerErrorException(ErrorCode.error_delete_children, JSONArray.fromObject(errorIds).toString());
+
+		}  catch (Exception e) {
 			e.printStackTrace();
-			throw new InternalServerErrorException(ErrorCode.error_delete_children, e.getMessage());
-		} 
+			if (e instanceof CommonException)
+				throw (CommonException)e;
+			else
+				throw new InternalServerErrorException(ErrorCode.error_delete_children, e.getMessage());
+		}
 		finally
 		{
 			if (prestat != null) {
@@ -518,31 +539,32 @@ public class ChildDAO  implements IChildDAO
 			
 			String basicSql = "insert into basic_info (id, name, grade, class_name, gender, nation, birthday,"
 					+ "id_card_no, hukou, hukou_addr, migration, only_child, min_living, imburse, orphan,"
-					+ "pathography, special_performance, other_announcement) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					+ "pathography, special_performance, other_announcement, timestamp) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			prestat1 = conn.prepareStatement(basicSql);
 			prestat1.setLong(1, id);
 			prestat1.setString(2, basicInfo.getName());
 			prestat1.setString(3, basicInfo.getGrade());
 			prestat1.setString(4, basicInfo.getClassName());
-			prestat1.setInt(5, basicInfo.getGender());
+			prestat1.setInt(5, basicInfo.getGender() == null ? 0 : basicInfo.getGender());
 			prestat1.setString(6, basicInfo.getNation());
 			prestat1.setString(7, basicInfo.getBirthday());
 			prestat1.setString(8, basicInfo.getIdCardNo());
 			prestat1.setString(9, basicInfo.getHuKou());
 			prestat1.setString(10, basicInfo.getHuKouAddr());
-			prestat1.setBoolean(11, basicInfo.isMigration());
-			prestat1.setBoolean(12, basicInfo.isOnlyChild());
-			prestat1.setBoolean(13, basicInfo.isMinLiving());
-			prestat1.setBoolean(14, basicInfo.isImburse());
-			prestat1.setBoolean(15, basicInfo.isOrphan());
-			prestat1.setBoolean(16, basicInfo.isPathography());
+			prestat1.setBoolean(11, basicInfo.getMigration() == null ? false : basicInfo.getMigration());
+			prestat1.setBoolean(12, basicInfo.getOnlyChild() == null ? false : basicInfo.getOnlyChild());
+			prestat1.setBoolean(13, basicInfo.getMinLiving() == null ? false : basicInfo.getMinLiving());
+			prestat1.setBoolean(14, basicInfo.getImburse() == null ? false : basicInfo.getImburse());
+			prestat1.setBoolean(15, basicInfo.getOrphan() == null ? false : basicInfo.getOrphan());
+			prestat1.setBoolean(16, basicInfo.getPathography() == null ? false : basicInfo.getPathography());
 			prestat1.setString(17, basicInfo.getSpecialPerformance());
 			prestat1.setString(18, basicInfo.getOtherAnnouncement());
+			prestat1.setLong(19, System.currentTimeMillis());
 			prestat1.executeUpdate();
 			
 			String contactSql = "insert into contact_info (id, mother_name, mother_company, "
 					+ "mother_contact, mother_id_card, father_name, father_company, father_contact, "
-					+ "father_id_card, living_addr, other_contact) values (?,?,?,?,?,?,?,?,?,?,?)";
+					+ "father_id_card, living_addr, other_contact, timestamp) values (?,?,?,?,?,?,?,?,?,?,?,?)";
 			prestat2 = conn.prepareStatement(contactSql);
 			prestat2.setLong(1, id);
 			prestat2.setString(2, contactInfo.getMotherName());
@@ -555,41 +577,46 @@ public class ChildDAO  implements IChildDAO
 			prestat2.setString(9, contactInfo.getFatherIdCard());
 			prestat2.setString(10, contactInfo.getLivingAddr());
 			prestat2.setString(11, contactInfo.getOtherContact());
+			prestat2.setLong(12, System.currentTimeMillis());
 			prestat2.executeUpdate();
 			
 			String bodySql = "insert into body_info (id, doff_don, eating, toileting, sleeping, sleeping_info, "
 					+ "eating_speed, appetite, picky_eating, picky_eating_info, eating_ability, food_allergy, "
-					+ "food_allergy_info, health_status) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					+ "food_allergy_info, health_status, timestamp) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			prestat3 = conn.prepareStatement(bodySql);
 			prestat3.setLong(1, id);
-			prestat3.setInt(2, bodyInfo.getDoffDon());
-			prestat3.setInt(3, bodyInfo.getEating());
-			prestat3.setInt(4, bodyInfo.getToileting());
-			prestat3.setInt(5, bodyInfo.getSleeping());
+			prestat3.setInt(2, bodyInfo.getDoffDon() == null ? 0 : bodyInfo.getDoffDon());
+			prestat3.setInt(3, bodyInfo.getEating() == null ? 0 : bodyInfo.getEating());
+			prestat3.setInt(4, bodyInfo.getToileting() == null ? 0 : bodyInfo.getToileting());
+			prestat3.setInt(5, bodyInfo.getSleeping() == null ? 0 : bodyInfo.getSleeping());
 			prestat3.setString(6, bodyInfo.getSleepingInfo());
-			prestat3.setInt(7, bodyInfo.getEatingSpeed());
-			prestat3.setInt(8, bodyInfo.getAppetite());
-			prestat3.setInt(9, bodyInfo.getPickyEating());
+			prestat3.setInt(7, bodyInfo.getEatingSpeed() == null ? 0 : bodyInfo.getEatingSpeed());
+			prestat3.setInt(8, bodyInfo.getAppetite() == null ? 0 : bodyInfo.getAppetite());
+			prestat3.setInt(9, bodyInfo.getPickyEating() == null ? 0 : bodyInfo.getPickyEating());
 			prestat3.setString(10, bodyInfo.getPickyEatingInfo());
-			prestat3.setInt(11, bodyInfo.getEatingAbility());
-			prestat3.setInt(12, bodyInfo.getFoodAllergy());
+			prestat3.setInt(11, bodyInfo.getEatingAbility() == null ? 0 : bodyInfo.getEatingAbility());
+			prestat3.setInt(12, bodyInfo.getFoodAllergy() == null ? 0 : bodyInfo.getFoodAllergy());
 			prestat3.setString(13, bodyInfo.getFoodAllergyInfo());
-			prestat3.setInt(14, bodyInfo.getHealthStatus());
+			prestat3.setInt(14, bodyInfo.getHealthStatus() == null ? 0 : bodyInfo.getHealthStatus());
+			prestat3.setLong(15, System.currentTimeMillis());
 			prestat3.executeUpdate();
 			
 			conn.commit();
 			
-			return child;
-		} catch (SQLException e) 
+			return getChild(id);
+		} catch (Exception e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			try {
 				conn.rollback();
 			} catch (SQLException ex) {
 				ex.printStackTrace();
 			}
-			throw new InternalServerErrorException(ErrorCode.error_create_child, e.getMessage());
+			
+			if (e instanceof CommonException)
+				throw (CommonException)e;
+			else
+				throw new InternalServerErrorException(ErrorCode.error_create_child, e.getMessage());
 		}
 		finally
 		{

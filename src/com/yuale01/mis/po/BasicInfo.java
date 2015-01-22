@@ -20,8 +20,9 @@ public class BasicInfo
 	private Boolean pathography;
 	private String specialPerformance;
 	private String otherAnnouncement;
+	private Long timeStamp;
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
@@ -78,41 +79,41 @@ public class BasicInfo
 	public String getHuKouAddr() {
 		return huKouAddr;
 	}
-	public void setHuKouAddr(String huKouAddr) {
-		this.huKouAddr = huKouAddr;
-	}
-	public Boolean isMigration() {
+	public Boolean getMigration() {
 		return migration;
 	}
 	public void setMigration(Boolean migration) {
 		this.migration = migration;
 	}
-	public Boolean isOnlyChild() {
+	public Boolean getOnlyChild() {
 		return onlyChild;
 	}
 	public void setOnlyChild(Boolean onlyChild) {
 		this.onlyChild = onlyChild;
 	}
-	public Boolean isMinLiving() {
+	public Boolean getMinLiving() {
 		return minLiving;
 	}
 	public void setMinLiving(Boolean minLiving) {
 		this.minLiving = minLiving;
 	}
-	public Boolean isImburse() {
+	public Boolean getImburse() {
 		return imburse;
 	}
 	public void setImburse(Boolean imburse) {
 		this.imburse = imburse;
 	}
-	public Boolean isOrphan() {
+	public Boolean getOrphan() {
 		return orphan;
 	}
 	public void setOrphan(Boolean orphan) {
 		this.orphan = orphan;
 	}
-	public Boolean isPathography() {
+	public Boolean getPathography() {
 		return pathography;
+	}
+	public void setHuKouAddr(String huKouAddr) {
+		this.huKouAddr = huKouAddr;
 	}
 	public void setPathography(Boolean pathography) {
 		this.pathography = pathography;
@@ -129,6 +130,11 @@ public class BasicInfo
 	public void setOtherAnnouncement(String otherAnnouncement) {
 		this.otherAnnouncement = otherAnnouncement;
 	}
+	public Long getTimeStamp() {
+		return timeStamp;
+	}
+	public void setTimeStamp(Long timeStamp) {
+		this.timeStamp = timeStamp;
+	}
 	
-
 }
