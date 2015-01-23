@@ -1,0 +1,21 @@
+<!doctype html>
+<html ng-app="app">
+  <head>
+	<link rel="stylesheet" href="styles/main.css">
+	<link rel="stylesheet" href="ui-grid.info-gh-pages/release/ui-grid-unstable.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-touch.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-animate.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/csv.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/pdfmake.js"></script>
+    <script src="http://ui-grid.info/docs/grunt-scripts/vfs_fonts.js"></script>
+    <script src="ui-grid.info-gh-pages/release/ui-grid-unstable.js"></script>
+    
+    <script src="scripts/app.js"></script>
+  </head>
+  <body>
+    <div ng-controller="MainCtrl">
+      <div id="grid1" ui-grid="gridOptions" ui-grid-exporter ui-grid-selection class="grid"></div>
+    </div>
+  </body>
+</html>

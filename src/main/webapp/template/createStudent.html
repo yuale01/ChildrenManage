@@ -1,0 +1,406 @@
+<html ng-app="MyApp">
+<div>
+  <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+      <h4 class="modal-title">Create New Student</h4>
+  </div>
+  <div class="modal-body">
+  
+    <div class="row">
+      <div class="form-group col-md-3">
+		  <label for="name" class="col-md-4" style="font-weight: normal">Name:</label>
+		  <div class="col-md-8">
+			<input type="text" class="form-control input-sm" id="name">
+		  </div>
+      </div>
+	  <div class="form-group col-md-3">
+		  <label for="grade" class="col-md-4">Grade:</label>
+		  <div class="col-md-8">
+			<input type="text" class="form-control input-sm" id="grade">
+		  </div>
+      </div>
+	  <div class="form-group col-md-3">
+		  <label for="class" class="col-md-4">Class:</label>
+		  <div class="col-md-8">
+			<input type="text" class="form-control input-sm" id="class">
+		  </div>
+      </div>
+	  <div class="form-group col-md-3">
+		  <label for="sex" class="col-md-4">Sex:</label>
+		  <div class="col-md-8">
+			<select class="form-control input-sm" id="sex">
+			  <option>male</option>
+			  <option>female</option>
+			</select>
+		  </div>
+        </div>
+    </div>
+	
+	<div class="row">
+      <div class="form-group col-md-3">
+		  <label for="nation" class="col-md-4">Nation:</label>
+		  <div class="col-md-8">
+			<input type="text" class="form-control input-sm" id="nation">
+		  </div>
+      </div>
+	  <div class="form-group col-md-4">
+		  <label for="birthday" class="col-md-4">Birthday:</label>
+		  <div class="input-group col-md-8">
+            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2020-12-31'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+		  </div>
+		  
+      </div>
+	  <div class="form-group col-md-5">
+		  <label for="id" class="col-md-3">ID Crad:</label>
+		  <div class="col-md-9">
+			<input type="text" class="form-control input-sm" id="id">
+		  </div>
+      </div>
+    </div>
+	
+	<div class="row">
+      <div class="form-group col-md-3">
+		  <label for="hukou" class="col-md-4">Hukou:</label>
+		  <div class="col-md-8">
+			<select class="form-control input-sm" id="hukou">
+			  <option>Country</option>
+			  <option>City</option>
+			</select>
+		  </div>
+      </div>
+	  <div class="form-group col-md-9">
+		  <label for="registrationAddr" class="col-md-3">Registration Addr:</label>
+		  <div class="col-md-9">
+			<input type="text" class="form-control input-sm" id="registrationAddr">
+		  </div>
+      </div>
+    </div>
+	
+	<div class="row">
+      <div class="form-group col-md-4">
+		  <label for="migrantChildren" class="col-md-7">Migrant Children:</label>
+		  <div class="col-md-5">
+			<select class="form-control input-sm" id="migrantChildren">
+			  <option>No</option>
+			  <option>Yes</option>
+			</select>
+		  </div>
+      </div>
+	  <div class="form-group col-md-4">
+		  <label for="orphanhood" class="col-md-7">Orphanhood:</label>
+		  <div class="col-md-5">
+			<select class="form-control input-sm" id="orphanhood">
+			  <option>No</option>
+			  <option>Yes</option>
+			</select>
+		  </div>
+      </div>
+	  <div class="form-group col-md-4">
+		  <label for="minimumLiving" class="col-md-7">Minimum Living:</label>
+		  <div class="col-md-5">
+			<select class="form-control input-sm" id="minimumLiving">
+			  <option>No</option>
+			  <option>Yes</option>
+			</select>
+		  </div>
+      </div>
+    </div>
+	
+	<div class="row">
+      <div class="form-group col-md-4">
+		  <label for="imburse" class="col-md-7">Imburse:</label>
+		  <div class="col-md-5">
+			<select class="form-control input-sm" id="imburse">
+			  <option>No</option>
+			  <option>Yes</option>
+			</select>
+		  </div>
+      </div>
+	  <div class="form-group col-md-4">
+		  <label for="onlyChild" class="col-md-7">Only Child:</label>
+		  <div class="col-md-5">
+			<select class="form-control input-sm" id="onlyChild">
+			  <option>Yes</option>
+			  <option>No</option>
+			</select>
+		  </div>
+      </div>
+	  <div class="form-group col-md-4">
+		  <label for="pathography" class="col-md-7">Pathography:</label>
+		  <div class="col-md-5">
+			<select class="form-control input-sm" id="pathography">
+			  <option>No</option>
+			  <option>Yes</option>
+			</select>
+		  </div>
+      </div>
+    </div>
+	
+	<div class="row">
+      <div class="form-group col-md-3">
+		  <label for="fatherName" class="col-md-4">Father Name:</label>
+		  <div class="col-md-8">
+			<input type="text" class="form-control input-sm" id="fatherName">
+		  </div>
+      </div>
+	  <div class="form-group col-md-3 no-gutter">
+		  <label for="fatherWorkUnit" class="col-md-4">Work Unit:</label>
+		  <div class="col-md-8">
+			<input type="text" class="form-control input-sm" id="fatherWorkUnit">
+		  </div>
+      </div>
+	  <div class="form-group col-md-3 no-gutter">
+		  <label for="fatherTel" class="col-md-4">Tel:</label>
+		  <div class="col-md-8">
+			<input type="text" class="form-control input-sm" id="fatherTel">
+		  </div>
+      </div>
+	  <div class="form-group col-md-3">
+		  <label for="fatherID" class="col-md-3">ID:</label>
+		  <div class="col-md-9">
+			<input type="text" class="form-control input-sm" id="fatherID">
+		  </div>
+        </div>
+    </div>
+	
+	<div class="row">
+      <div class="form-group col-md-3">
+		  <label for="motherName" class="col-md-4">Mother Name:</label>
+		  <div class="col-md-8">
+			<input type="text" class="form-control input-sm" id="motherName">
+		  </div>
+      </div>
+	  <div class="form-group col-md-3 no-gutter">
+		  <label for="motherWorkUnit" class="col-md-4">Work Unit:</label>
+		  <div class="col-md-8">
+			<input type="text" class="form-control input-sm" id="motherWorkUnit">
+		  </div>
+      </div>
+	  <div class="form-group col-md-3 no-gutter">
+		  <label for="motherTel" class="col-md-4">Tel:</label>
+		  <div class="col-md-8">
+			<input type="text" class="form-control input-sm" id="motherTel">
+		  </div>
+      </div>
+	  <div class="form-group col-md-3">
+		  <label for="motherID" class="col-md-3">ID:</label>
+		  <div class="col-md-9">
+			<input type="text" class="form-control input-sm" id="motherID">
+		  </div>
+        </div>
+    </div>
+	
+	<div class="row">
+	  <div class="form-group col-md-6">
+		  <label for="liveAddress" class="col-md-3">Live Addr:</label>
+		  <div class="col-md-9">
+			<input type="text" class="form-control input-sm" id="liveAddress">
+		  </div>
+      </div>
+	  <div class="form-group col-md-6">
+		  <label for="otherContact" class="col-md-3">Other Contact:</label>
+		  <div class="col-md-9">
+			<textarea class="form-control input-sm" rows="2" id="otherContact" placeholder="Phone, QQ, Email or others"></textarea>
+		  </div>
+      </div>
+	</div>
+	
+	<div class="row">
+	  <div class="form-group col-md-12">
+		  <label class="col-md-2">Doff-don Capacity:</label>
+		  <div class="col-md-10">
+			<label class="radio-inline">
+              <input type="radio" name="doffRadioOptions" id="doffRadio1" value="option1"> Skillful
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="doffRadioOptions" id="doffRadio2" value="option2"> A little
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="doffRadioOptions" id="doffRadio3" value="option3"> Unable
+            </label>
+		  </div>
+      </div>
+	</div>
+	
+	<div class="row">
+	  <div class="form-group col-md-12">
+		  <label for="eatingAbility" class="col-md-2">Eating:</label>
+		  <div class="col-md-10">
+			<label class="radio-inline">
+              <input type="radio" name="eatingRadioOptions" id="eatingRadio1" value="option1"> Skillful
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="eatingRadioOptions" id="eatingRadio2" value="option2"> A little
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="eatingRadioOptions" id="eatingRadio3" value="option3"> Unable
+            </label>
+		  </div>
+      </div>
+	</div>
+	
+	<div class="row">
+	  <div class="form-group col-md-12">
+		  <label for="eatingAbility" class="col-md-2">Toileting Self Care:</label>
+		  <div class="col-md-10">
+			<label class="radio-inline">
+              <input type="radio" name="toiletingRadioOptions" id="toiletingRadio1" value="option1"> Unable
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="toiletingRadioOptions" id="toiletingRadio2" value="option2"> Cannot clean the ass
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="toiletingRadioOptions" id="toiletingRadio3" value="option3"> Can ask for help if has micturition desire
+            </label>
+			<label class="radio-inline">
+              <input type="radio" name="toiletingRadioOptions" id="toiletingRadio4" value="option4"> Need adult's help
+            </label>
+		  </div>
+      </div>
+	</div>
+	
+	<div class="row">
+	  <div class="form-group col-md-12">
+		  <label for="eatingAbility" class="col-md-2">Sleeping Ability:</label>
+		  <div class="col-md-10">
+			<label class="radio-inline">
+              <input type="radio" name="sleepingRadioOptions" id="sleepingRadio1" value="option1"> Sleep Stand Alone
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="sleepingRadioOptions" id="sleepingRadio2" value="option2"> Need adult's Chaperoning
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="sleepingRadioOptions" id="sleepingRadio3" value="option3"> Special Habit
+			  <input type="text" id="specialHabitText">
+            </label>
+		  </div>
+      </div>
+	</div>
+	
+	<div class="row">
+	  <div class="form-group col-md-12">
+		  <label class="col-md-2">Eating Speed:</label>
+		  <div class="col-md-10">
+			<label class="radio-inline">
+              <input type="radio" name="eatingSpeedRadioOptions" id="eatingSpeedRadio1" value="option1"> Fast
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="eatingSpeedRadioOptions" id="eatingSpeedRadio2" value="option2"> Slow
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="eatingSpeedRadioOptions" id="eatingSpeedRadio3" value="option3"> Normal
+            </label>
+		  </div>
+      </div>
+	</div>
+	
+	<div class="row">
+	  <div class="form-group col-md-12">
+		  <label for="eatingAbility" class="col-md-2">Appetite:</label>
+		  <div class="col-md-10">
+			<label class="radio-inline">
+              <input type="radio" name="appetiteRadioOptions" id="appetiteRadio1" value="option1"> Few
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="appetiteRadioOptions" id="appetiteRadio2" value="option2"> Much
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="appetiteRadioOptions" id="appetiteRadio3" value="option3"> Normal
+            </label>
+		  </div>
+      </div>
+	</div>
+	
+	<div class="row">
+	  <div class="form-group col-md-12">
+		  <label for="eatingAbility" class="col-md-2">Picky Eating:</label>
+		  <div class="col-md-10">
+			<label class="radio-inline">
+              <input type="radio" name="pickEatingRadioOptions" id="pickyEatingRadio1" value="option1"> No
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="pickEatingRadioOptions" id="pickyEatingRadio2" value="option2"> Yes &nbsp;&nbsp;&nbsp;&nbsp;such as:
+			  <input type="text" id="pickyEatingText">
+            </label>
+		  </div>
+      </div>
+	</div>
+	
+	<div class="row">
+	  <div class="form-group col-md-12">
+		  <label for="eatingAbility" class="col-md-2">Eating Ability:</label>
+		  <div class="col-md-10">
+			<label class="radio-inline">
+              <input type="radio" name="eatingAbilityRadioOptions" id="eatingAbilityRadio1" value="option1"> Eat by self and using cutlery
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="eatingAbilityRadioOptions" id="eatingAbilityRadio2" value="option2"> Can't eat by self and using cutlery
+            </label>
+		  </div>
+      </div>
+	</div>
+	
+	<div class="row">
+	  <div class="form-group col-md-12">
+		  <label for="eatingAbility" class="col-md-2">Food Allergy:</label>
+		  <div class="col-md-10">
+			<label class="radio-inline">
+              <input type="radio" name="foodAllergyRadioOptions" id="foodAllergyRadio1" value="option1"> No
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="foodAllergyRadioOptions" id="foodAllergyRadio2" value="option2"> Yes
+			  <input type="text" id="foodAllergyText">
+            </label>
+		  </div>
+      </div>
+	</div>
+	
+	<div class="row">
+	  <div class="form-group col-md-12">
+		  <label for="eatingAbility" class="col-md-2">Health Status:</label>
+		  <div class="col-md-10">
+			<label class="radio-inline">
+              <input type="radio" name="healthStatusRadioOptions" id="healthStatusRadio1" value="option1"> Strong, hard to fall sick
+            </label>
+            <label class="radio-inline">
+              <input type="radio" name="healthStatusRadioOptions" id="healthStatusRadio2" value="option2"> Normal, fall sick sometimes
+            </label>
+			<label class="radio-inline">
+              <input type="radio" name="healthStatusRadioOptions" id="healthStatusRadio2" value="option2"> Weak, fall sick often
+            </label>
+			<label class="radio-inline">
+              <input type="radio" name="healthStatusRadioOptions" id="healthStatusRadio2" value="option2"> Very weak, need to be token care of
+            </label>
+		  </div>
+      </div>
+	</div>
+	
+	<div class="row">
+	  <div class="form-group col-md-12">
+	    <label for="otherContact" class="col-md-2">Distinct Abilities:</label>
+		<div class="col-md-10">
+		  <textarea class="form-control input-sm" rows="3" id="otherContact" placeholder="(Such as special ability, interest, hobby)"></textarea>
+		</div>
+	  </div>
+	</div>
+    
+	<div class="row">
+	  <div class="form-group col-md-12">
+	    <label for="otherContact" class="col-md-2">Special Case Illustration:</label>
+		<div class="col-md-10">
+		  <textarea class="form-control input-sm" rows="3" id="otherContact" placeholder="Some other exceptional situation"></textarea>
+		</div>
+	  </div>
+	</div>
+    
+	
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+  </div>
+</div>
+</html>
