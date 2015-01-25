@@ -1,11 +1,14 @@
 package com.yuale01.mis.po;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Child 
 {
 	private BasicInfo basicInfo;
 	private ContactInfo contactInfo;
 	private BodyInfo bodyInfo;
-	private long id;
+	private Long id;
 	
 	public BasicInfo getBasicInfo() {
 		return basicInfo;
@@ -25,10 +28,10 @@ public class Child
 	public void setContactInfo(ContactInfo contactInfo) {
 		this.contactInfo = contactInfo;
 	}
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	

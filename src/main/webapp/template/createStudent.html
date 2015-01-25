@@ -8,29 +8,29 @@
   
     <div class="row">
       <div class="form-group col-md-3">
-		  <label for="name" class="col-md-4" style="font-weight: normal">Name:</label>
+		  <label for="name" class="col-md-4">Name:</label>
 		  <div class="col-md-8">
-			<input type="text" class="form-control input-sm" id="name">
+			<input ng-model="child.basicInfo.name" type="text" class="form-control input-sm" id="name">
 		  </div>
       </div>
 	  <div class="form-group col-md-3">
 		  <label for="grade" class="col-md-4">Grade:</label>
 		  <div class="col-md-8">
-			<input type="text" class="form-control input-sm" id="grade">
+			<input ng-model="child.basicInfo.grade" type="text" class="form-control input-sm" id="grade">
 		  </div>
       </div>
 	  <div class="form-group col-md-3">
 		  <label for="class" class="col-md-4">Class:</label>
 		  <div class="col-md-8">
-			<input type="text" class="form-control input-sm" id="class">
+			<input ng-model="child.basicInfo.className" type="text" class="form-control input-sm" id="class">
 		  </div>
       </div>
 	  <div class="form-group col-md-3">
-		  <label for="sex" class="col-md-4">Sex:</label>
+		  <label for="gender" class="col-md-4">Gender:</label>
 		  <div class="col-md-8">
-			<select class="form-control input-sm" id="sex">
-			  <option>male</option>
-			  <option>female</option>
+			<select  ng-model="child.basicInfo.gender" ng-init="child.basicInfo.gender='0'" class="form-control input-sm" id="gender">
+			  <option value="0">male</option>
+			  <option value="1">female</option>
 			</select>
 		  </div>
         </div>
@@ -40,13 +40,13 @@
       <div class="form-group col-md-3">
 		  <label for="nation" class="col-md-4">Nation:</label>
 		  <div class="col-md-8">
-			<input type="text" class="form-control input-sm" id="nation">
+			<input ng-model="child.basicInfo.nation" type="text" class="form-control input-sm" id="nation">
 		  </div>
       </div>
 	  <div class="form-group col-md-4">
 		  <label for="birthday" class="col-md-4">Birthday:</label>
 		  <div class="input-group col-md-8">
-            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2020-12-31'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+            <input ng-model="child.basicInfo.birthday" ng-init="child.basicInfo.birthday='2015-01-01'" type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2020-12-31'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-disabled="true" />
             <span class="input-group-btn">
               <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
             </span>
@@ -56,7 +56,7 @@
 	  <div class="form-group col-md-5">
 		  <label for="id" class="col-md-3">ID Crad:</label>
 		  <div class="col-md-9">
-			<input type="text" class="form-control input-sm" id="id">
+			<input ng-model="child.basicInfo.idCradNo" type="text" class="form-control input-sm" id="id">
 		  </div>
       </div>
     </div>
@@ -65,16 +65,16 @@
       <div class="form-group col-md-3">
 		  <label for="hukou" class="col-md-4">Hukou:</label>
 		  <div class="col-md-8">
-			<select class="form-control input-sm" id="hukou">
-			  <option>Country</option>
-			  <option>City</option>
+			<select ng-model="child.basicInfo.huKou" ng-init="child.basicInfo.huKou='0'" class="form-control input-sm" id="hukou">
+			  <option value="0">Country</option>
+			  <option value="1">City</option>
 			</select>
 		  </div>
       </div>
 	  <div class="form-group col-md-9">
 		  <label for="registrationAddr" class="col-md-3">Registration Addr:</label>
 		  <div class="col-md-9">
-			<input type="text" class="form-control input-sm" id="registrationAddr">
+			<input ng-model="child.basicInfo.huKouAddr" type="text" class="form-control input-sm" id="registrationAddr">
 		  </div>
       </div>
     </div>
@@ -83,27 +83,27 @@
       <div class="form-group col-md-4">
 		  <label for="migrantChildren" class="col-md-7">Migrant Children:</label>
 		  <div class="col-md-5">
-			<select class="form-control input-sm" id="migrantChildren">
-			  <option>No</option>
-			  <option>Yes</option>
+			<select ng-model="child.basicInfo.migration" ng-init="child.basicInfo.migration='false'" class="form-control input-sm" id="migrantChildren">
+			  <option value="false">No</option>
+			  <option value="true">Yes</option>
 			</select>
 		  </div>
       </div>
 	  <div class="form-group col-md-4">
 		  <label for="orphanhood" class="col-md-7">Orphanhood:</label>
 		  <div class="col-md-5">
-			<select class="form-control input-sm" id="orphanhood">
-			  <option>No</option>
-			  <option>Yes</option>
+			<select ng-model="child.basicInfo.orphan" ng-init="child.basicInfo.orphan='false'" class="form-control input-sm" id="orphanhood">
+			  <option value="false">No</option>
+			  <option value="true">Yes</option>
 			</select>
 		  </div>
       </div>
 	  <div class="form-group col-md-4">
 		  <label for="minimumLiving" class="col-md-7">Minimum Living:</label>
 		  <div class="col-md-5">
-			<select class="form-control input-sm" id="minimumLiving">
-			  <option>No</option>
-			  <option>Yes</option>
+			<select ng-model="child.basicInfo.minLiving" ng-init="child.basicInfo.minLiving='false'" class="form-control input-sm" id="minimumLiving">
+			  <option value="false">No</option>
+			  <option value="true">Yes</option>
 			</select>
 		  </div>
       </div>
@@ -113,27 +113,27 @@
       <div class="form-group col-md-4">
 		  <label for="imburse" class="col-md-7">Imburse:</label>
 		  <div class="col-md-5">
-			<select class="form-control input-sm" id="imburse">
-			  <option>No</option>
-			  <option>Yes</option>
+			<select ng-model="child.basicInfo.imburse" ng-init="child.basicInfo.imburse='false'" class="form-control input-sm" id="imburse">
+			  <option value="false">No</option>
+			  <option value="true">Yes</option>
 			</select>
 		  </div>
       </div>
 	  <div class="form-group col-md-4">
 		  <label for="onlyChild" class="col-md-7">Only Child:</label>
 		  <div class="col-md-5">
-			<select class="form-control input-sm" id="onlyChild">
-			  <option>Yes</option>
-			  <option>No</option>
+			<select ng-model="child.basicInfo.onlyChild" ng-init="child.basicInfo.onlyChild='true'" class="form-control input-sm" id="onlyChild">
+			  <option value="false">No</option>
+			  <option value="true">Yes</option>
 			</select>
 		  </div>
       </div>
 	  <div class="form-group col-md-4">
 		  <label for="pathography" class="col-md-7">Pathography:</label>
 		  <div class="col-md-5">
-			<select class="form-control input-sm" id="pathography">
-			  <option>No</option>
-			  <option>Yes</option>
+			<select ng-model="child.basicInfo.pathography" ng-init="child.basicInfo.pathography='false'" class="form-control input-sm" id="pathography">
+			  <option value="false">No</option>
+			  <option value="true">Yes</option>
 			</select>
 		  </div>
       </div>
@@ -143,25 +143,25 @@
       <div class="form-group col-md-3">
 		  <label for="fatherName" class="col-md-4">Father Name:</label>
 		  <div class="col-md-8">
-			<input type="text" class="form-control input-sm" id="fatherName">
+			<input ng-model="child.contactInfo.fatherName" type="text" class="form-control input-sm" id="fatherName">
 		  </div>
       </div>
 	  <div class="form-group col-md-3 no-gutter">
 		  <label for="fatherWorkUnit" class="col-md-4">Work Unit:</label>
 		  <div class="col-md-8">
-			<input type="text" class="form-control input-sm" id="fatherWorkUnit">
+			<input ng-model="child.contactInfo.fatherCompany" type="text" class="form-control input-sm" id="fatherWorkUnit">
 		  </div>
       </div>
 	  <div class="form-group col-md-3 no-gutter">
 		  <label for="fatherTel" class="col-md-4">Tel:</label>
 		  <div class="col-md-8">
-			<input type="text" class="form-control input-sm" id="fatherTel">
+			<input ng-model="child.contactInfo.fatherContact" type="text" class="form-control input-sm" id="fatherTel">
 		  </div>
       </div>
 	  <div class="form-group col-md-3">
 		  <label for="fatherID" class="col-md-3">ID:</label>
 		  <div class="col-md-9">
-			<input type="text" class="form-control input-sm" id="fatherID">
+			<input ng-model="child.contactInfo.fatherIdCard" type="text" class="form-control input-sm" id="fatherID">
 		  </div>
         </div>
     </div>
@@ -170,25 +170,25 @@
       <div class="form-group col-md-3">
 		  <label for="motherName" class="col-md-4">Mother Name:</label>
 		  <div class="col-md-8">
-			<input type="text" class="form-control input-sm" id="motherName">
+			<input ng-model="child.contactInfo.motherName" type="text" class="form-control input-sm" id="motherName">
 		  </div>
       </div>
 	  <div class="form-group col-md-3 no-gutter">
 		  <label for="motherWorkUnit" class="col-md-4">Work Unit:</label>
 		  <div class="col-md-8">
-			<input type="text" class="form-control input-sm" id="motherWorkUnit">
+			<input ng-model="child.contactInfo.motherCompany" type="text" class="form-control input-sm" id="motherWorkUnit">
 		  </div>
       </div>
 	  <div class="form-group col-md-3 no-gutter">
 		  <label for="motherTel" class="col-md-4">Tel:</label>
 		  <div class="col-md-8">
-			<input type="text" class="form-control input-sm" id="motherTel">
+			<input ng-model="child.contactInfo.motherContact" type="text" class="form-control input-sm" id="motherTel">
 		  </div>
       </div>
 	  <div class="form-group col-md-3">
 		  <label for="motherID" class="col-md-3">ID:</label>
 		  <div class="col-md-9">
-			<input type="text" class="form-control input-sm" id="motherID">
+			<input ng-model="child.contactInfo.motherIdCard" type="text" class="form-control input-sm" id="motherID">
 		  </div>
         </div>
     </div>
@@ -197,13 +197,13 @@
 	  <div class="form-group col-md-6">
 		  <label for="liveAddress" class="col-md-3">Live Addr:</label>
 		  <div class="col-md-9">
-			<input type="text" class="form-control input-sm" id="liveAddress">
+			<input ng-model="child.contactInfo.livingAddr" type="text" class="form-control input-sm" id="liveAddress">
 		  </div>
       </div>
 	  <div class="form-group col-md-6">
 		  <label for="otherContact" class="col-md-3">Other Contact:</label>
 		  <div class="col-md-9">
-			<textarea class="form-control input-sm" rows="2" id="otherContact" placeholder="Phone, QQ, Email or others"></textarea>
+			<textarea ng-model="child.contactInfo.otherContact" class="form-control input-sm" rows="2" id="otherContact" placeholder="Phone, QQ, Email or others"></textarea>
 		  </div>
       </div>
 	</div>
@@ -213,13 +213,13 @@
 		  <label class="col-md-2">Doff-don Capacity:</label>
 		  <div class="col-md-10">
 			<label class="radio-inline">
-              <input type="radio" name="doffRadioOptions" id="doffRadio1" value="option1"> Skillful
+              <input ng-model="child.bodyInfo.doffDon"  ng-init="child.bodyInfo.doffDon='0'" type="radio" name="doffRadioOptions" id="doffRadio1" value="0"> Skillful
             </label>
             <label class="radio-inline">
-              <input type="radio" name="doffRadioOptions" id="doffRadio2" value="option2"> A little
+              <input ng-model="child.bodyInfo.doffDon" type="radio" name="doffRadioOptions" id="doffRadio2" value="1"> A little
             </label>
             <label class="radio-inline">
-              <input type="radio" name="doffRadioOptions" id="doffRadio3" value="option3"> Unable
+              <input ng-model="child.bodyInfo.doffDon" type="radio" name="doffRadioOptions" id="doffRadio3" value="2"> Unable
             </label>
 		  </div>
       </div>
@@ -227,16 +227,16 @@
 	
 	<div class="row">
 	  <div class="form-group col-md-12">
-		  <label for="eatingAbility" class="col-md-2">Eating:</label>
+		  <label class="col-md-2">Eating:</label>
 		  <div class="col-md-10">
 			<label class="radio-inline">
-              <input type="radio" name="eatingRadioOptions" id="eatingRadio1" value="option1"> Skillful
+              <input ng-model="child.bodyInfo.eating" ng-init="child.bodyInfo.eating='0'" type="radio" name="eatingRadioOptions" id="eatingRadio1" value="0"> Skillful
             </label>
             <label class="radio-inline">
-              <input type="radio" name="eatingRadioOptions" id="eatingRadio2" value="option2"> A little
+              <input ng-model="child.bodyInfo.eating" type="radio" name="eatingRadioOptions" id="eatingRadio2" value="1"> A little
             </label>
             <label class="radio-inline">
-              <input type="radio" name="eatingRadioOptions" id="eatingRadio3" value="option3"> Unable
+              <input ng-model="child.bodyInfo.eating" type="radio" name="eatingRadioOptions" id="eatingRadio3" value="2"> Unable
             </label>
 		  </div>
       </div>
@@ -244,19 +244,19 @@
 	
 	<div class="row">
 	  <div class="form-group col-md-12">
-		  <label for="eatingAbility" class="col-md-2">Toileting Self Care:</label>
+		  <label class="col-md-2">Toileting Self Care:</label>
 		  <div class="col-md-10">
 			<label class="radio-inline">
-              <input type="radio" name="toiletingRadioOptions" id="toiletingRadio1" value="option1"> Unable
+              <input ng-model="child.bodyInfo.toileting" ng-init="child.bodyInfo.toileting='0'" type="radio" name="toiletingRadioOptions" id="toiletingRadio1" value="0"> Unable
             </label>
             <label class="radio-inline">
-              <input type="radio" name="toiletingRadioOptions" id="toiletingRadio2" value="option2"> Cannot clean the ass
+              <input ng-model="child.bodyInfo.toileting" type="radio" name="toiletingRadioOptions" id="toiletingRadio2" value="1"> Cannot clean the ass
             </label>
             <label class="radio-inline">
-              <input type="radio" name="toiletingRadioOptions" id="toiletingRadio3" value="option3"> Can ask for help if has micturition desire
+              <input ng-model="child.bodyInfo.toileting" type="radio" name="toiletingRadioOptions" id="toiletingRadio3" value="2"> Can ask for help if has micturition desire
             </label>
 			<label class="radio-inline">
-              <input type="radio" name="toiletingRadioOptions" id="toiletingRadio4" value="option4"> Need adult's help
+              <input ng-model="child.bodyInfo.toileting" type="radio" name="toiletingRadioOptions" id="toiletingRadio4" value="3"> Need adult's help
             </label>
 		  </div>
       </div>
@@ -264,17 +264,17 @@
 	
 	<div class="row">
 	  <div class="form-group col-md-12">
-		  <label for="eatingAbility" class="col-md-2">Sleeping Ability:</label>
+		  <label class="col-md-2">Sleeping Ability:</label>
 		  <div class="col-md-10">
 			<label class="radio-inline">
-              <input type="radio" name="sleepingRadioOptions" id="sleepingRadio1" value="option1"> Sleep Stand Alone
+              <input ng-model="child.bodyInfo.sleeping" ng-init="child.bodyInfo.sleeping='0'" type="radio" name="sleepingRadioOptions" id="sleepingRadio1" value="0"> Sleep Stand Alone
             </label>
             <label class="radio-inline">
-              <input type="radio" name="sleepingRadioOptions" id="sleepingRadio2" value="option2"> Need adult's Chaperoning
+              <input ng-model="child.bodyInfo.sleeping" type="radio" name="sleepingRadioOptions" id="sleepingRadio2" value="1"> Need adult's Chaperoning
             </label>
             <label class="radio-inline">
-              <input type="radio" name="sleepingRadioOptions" id="sleepingRadio3" value="option3"> Special Habit
-			  <input type="text" id="specialHabitText">
+              <input ng-model="child.bodyInfo.sleeping" type="radio" name="sleepingRadioOptions" id="sleepingRadio3" value="2"> Special Habit
+			  <input ng-model="child.bodyInfo.sleepingInfo" type="text" id="specialHabitText">
             </label>
 		  </div>
       </div>
@@ -285,13 +285,13 @@
 		  <label class="col-md-2">Eating Speed:</label>
 		  <div class="col-md-10">
 			<label class="radio-inline">
-              <input type="radio" name="eatingSpeedRadioOptions" id="eatingSpeedRadio1" value="option1"> Fast
+              <input ng-model="child.bodyInfo.eatingSpeed" ng-init="child.bodyInfo.eatingSpeed='0'" type="radio" name="eatingSpeedRadioOptions" id="eatingSpeedRadio1" value="0"> Fast
             </label>
             <label class="radio-inline">
-              <input type="radio" name="eatingSpeedRadioOptions" id="eatingSpeedRadio2" value="option2"> Slow
+              <input ng-model="child.bodyInfo.eatingSpeed" type="radio" name="eatingSpeedRadioOptions" id="eatingSpeedRadio2" value="1"> Slow
             </label>
             <label class="radio-inline">
-              <input type="radio" name="eatingSpeedRadioOptions" id="eatingSpeedRadio3" value="option3"> Normal
+              <input ng-model="child.bodyInfo.eatingSpeed" type="radio" name="eatingSpeedRadioOptions" id="eatingSpeedRadio3" value="2"> Normal
             </label>
 		  </div>
       </div>
@@ -299,16 +299,16 @@
 	
 	<div class="row">
 	  <div class="form-group col-md-12">
-		  <label for="eatingAbility" class="col-md-2">Appetite:</label>
+		  <label class="col-md-2">Appetite:</label>
 		  <div class="col-md-10">
 			<label class="radio-inline">
-              <input type="radio" name="appetiteRadioOptions" id="appetiteRadio1" value="option1"> Few
+              <input ng-model="child.bodyInfo.appetite" ng-init="child.bodyInfo.appetite='0'" type="radio" name="appetiteRadioOptions" id="appetiteRadio1" value="0"> Few
             </label>
             <label class="radio-inline">
-              <input type="radio" name="appetiteRadioOptions" id="appetiteRadio2" value="option2"> Much
+              <input ng-model="child.bodyInfo.appetite" type="radio" name="appetiteRadioOptions" id="appetiteRadio2" value="1"> Much
             </label>
             <label class="radio-inline">
-              <input type="radio" name="appetiteRadioOptions" id="appetiteRadio3" value="option3"> Normal
+              <input ng-model="child.bodyInfo.appetite" type="radio" name="appetiteRadioOptions" id="appetiteRadio3" value="2"> Normal
             </label>
 		  </div>
       </div>
@@ -316,14 +316,14 @@
 	
 	<div class="row">
 	  <div class="form-group col-md-12">
-		  <label for="eatingAbility" class="col-md-2">Picky Eating:</label>
+		  <label class="col-md-2">Picky Eating:</label>
 		  <div class="col-md-10">
 			<label class="radio-inline">
-              <input type="radio" name="pickEatingRadioOptions" id="pickyEatingRadio1" value="option1"> No
+              <input ng-model="child.bodyInfo.pickyEating" ng-init="child.bodyInfo.pickyEating='0'" type="radio" name="pickEatingRadioOptions" id="pickyEatingRadio1" value="0"> No
             </label>
             <label class="radio-inline">
-              <input type="radio" name="pickEatingRadioOptions" id="pickyEatingRadio2" value="option2"> Yes &nbsp;&nbsp;&nbsp;&nbsp;such as:
-			  <input type="text" id="pickyEatingText">
+              <input ng-model="child.bodyInfo.pickyEating" type="radio" name="pickEatingRadioOptions" id="pickyEatingRadio2" value="1"> Yes &nbsp;&nbsp;&nbsp;&nbsp;such as:
+			  <input ng-model="child.bodyInfo.pickyEatingInfo" type="text" id="pickyEatingText">
             </label>
 		  </div>
       </div>
@@ -331,13 +331,13 @@
 	
 	<div class="row">
 	  <div class="form-group col-md-12">
-		  <label for="eatingAbility" class="col-md-2">Eating Ability:</label>
+		  <label class="col-md-2">Eating Ability:</label>
 		  <div class="col-md-10">
 			<label class="radio-inline">
-              <input type="radio" name="eatingAbilityRadioOptions" id="eatingAbilityRadio1" value="option1"> Eat by self and using cutlery
+              <input ng-model="child.bodyInfo.eatingAbility" ng-init="child.bodyInfo.eatingAbility='0'" type="radio" name="eatingAbilityRadioOptions" id="eatingAbilityRadio1" value="0"> Eat by self and using cutlery
             </label>
             <label class="radio-inline">
-              <input type="radio" name="eatingAbilityRadioOptions" id="eatingAbilityRadio2" value="option2"> Can't eat by self and using cutlery
+              <input ng-model="child.bodyInfo.eatingAbility" type="radio" name="eatingAbilityRadioOptions" id="eatingAbilityRadio2" value="1"> Can't eat by self and using cutlery
             </label>
 		  </div>
       </div>
@@ -345,14 +345,14 @@
 	
 	<div class="row">
 	  <div class="form-group col-md-12">
-		  <label for="eatingAbility" class="col-md-2">Food Allergy:</label>
+		  <label class="col-md-2">Food Allergy:</label>
 		  <div class="col-md-10">
 			<label class="radio-inline">
-              <input type="radio" name="foodAllergyRadioOptions" id="foodAllergyRadio1" value="option1"> No
+              <input ng-model="child.bodyInfo.foodAllergy" ng-init="child.bodyInfo.foodAllergy='0'" type="radio" name="foodAllergyRadioOptions" id="foodAllergyRadio1" value="0"> No
             </label>
             <label class="radio-inline">
-              <input type="radio" name="foodAllergyRadioOptions" id="foodAllergyRadio2" value="option2"> Yes
-			  <input type="text" id="foodAllergyText">
+              <input ng-model="child.bodyInfo.foodAllergy" type="radio" name="foodAllergyRadioOptions" id="foodAllergyRadio2" value="1"> Yes
+			  <input ng-model="child.bodyInfo.foodAllergyInfo" type="text" id="foodAllergyText">
             </label>
 		  </div>
       </div>
@@ -360,19 +360,19 @@
 	
 	<div class="row">
 	  <div class="form-group col-md-12">
-		  <label for="eatingAbility" class="col-md-2">Health Status:</label>
+		  <label class="col-md-2">Health Status:</label>
 		  <div class="col-md-10">
 			<label class="radio-inline">
-              <input type="radio" name="healthStatusRadioOptions" id="healthStatusRadio1" value="option1"> Strong, hard to fall sick
+              <input ng-model="child.bodyInfo.healthStatus" ng-init="child.bodyInfo.healthStatus='0'" type="radio" name="healthStatusRadioOptions" id="healthStatusRadio1" value="0"> Strong, hard to fall sick
             </label>
             <label class="radio-inline">
-              <input type="radio" name="healthStatusRadioOptions" id="healthStatusRadio2" value="option2"> Normal, fall sick sometimes
+              <input ng-model="child.bodyInfo.healthStatus" type="radio" name="healthStatusRadioOptions" id="healthStatusRadio2" value="1"> Normal, fall sick sometimes
             </label>
 			<label class="radio-inline">
-              <input type="radio" name="healthStatusRadioOptions" id="healthStatusRadio2" value="option2"> Weak, fall sick often
+              <input ng-model="child.bodyInfo.healthStatus" type="radio" name="healthStatusRadioOptions" id="healthStatusRadio2" value="2"> Weak, fall sick often
             </label>
 			<label class="radio-inline">
-              <input type="radio" name="healthStatusRadioOptions" id="healthStatusRadio2" value="option2"> Very weak, need to be token care of
+              <input ng-model="child.bodyInfo.healthStatus" type="radio" name="healthStatusRadioOptions" id="healthStatusRadio2" value="3"> Very weak, need to be token care of
             </label>
 		  </div>
       </div>
@@ -380,23 +380,22 @@
 	
 	<div class="row">
 	  <div class="form-group col-md-12">
-	    <label for="otherContact" class="col-md-2">Distinct Abilities:</label>
+	    <label for="specialPerformance" class="col-md-2">Distinct Abilities:</label>
 		<div class="col-md-10">
-		  <textarea class="form-control input-sm" rows="3" id="otherContact" placeholder="(Such as special ability, interest, hobby)"></textarea>
+		  <textarea ng-model="child.basicInfo.specialPerformance" class="form-control input-sm" rows="3" id="specialPerformance" placeholder="(Such as special ability, interest, hobby)"></textarea>
 		</div>
 	  </div>
 	</div>
     
 	<div class="row">
 	  <div class="form-group col-md-12">
-	    <label for="otherContact" class="col-md-2">Special Case Illustration:</label>
+	    <label for="otherAnnouncement" class="col-md-2">Special Case Illustration:</label>
 		<div class="col-md-10">
-		  <textarea class="form-control input-sm" rows="3" id="otherContact" placeholder="Some other exceptional situation"></textarea>
+		  <textarea ng-model="child.basicInfo.otherAnnouncement" class="form-control input-sm" rows="3" id="otherAnnouncement" placeholder="Some other exceptional situation"></textarea>
 		</div>
 	  </div>
 	</div>
     
-	
   </div>
   <div class="modal-footer">
     <button class="btn btn-primary" ng-click="ok()">OK</button>

@@ -49,8 +49,5 @@ public class Constants {
 	public static String BODY_INFO_HEALTH_STATUS = "health_status";
 	public static String BODY_INFO_TIMESTAMP = "timestamp";
 	
-	public synchronized static long getCurrentLongTime()
-	{
-		return System.currentTimeMillis();
-	}
+	public static String TIME_FORMAT = "yyyy-MM-dd";
 }

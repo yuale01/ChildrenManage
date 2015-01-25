@@ -23,6 +23,7 @@ import com.yuale01.mis.po.BodyInfo;
 import com.yuale01.mis.po.Child;
 import com.yuale01.mis.po.ContactInfo;
 import com.yuale01.mis.utils.Constants;
+import com.yuale01.mis.utils.Tools;
 
 public class ChildDAO  implements IChildDAO
 {
@@ -61,9 +62,9 @@ public class ChildDAO  implements IChildDAO
 				basicInfo.setClassName(result.getString(Constants.BASIC_INFO_CLASS_NAME));
 				basicInfo.setGender(result.getInt(Constants.BASIC_INFO_GENDER));
 				basicInfo.setNation(result.getString(Constants.BASIC_INFO_NATION));
-				basicInfo.setBirthday(result.getString(Constants.BASIC_INFO_BIRTHDAY));
+				basicInfo.setBirthday(Tools.convertLongTimeToStr(result.getLong(Constants.BASIC_INFO_BIRTHDAY)));
 				basicInfo.setIdCardNo(result.getString(Constants.BASIC_INFO_ID_CARD_NO));
-				basicInfo.setHuKou(result.getString(Constants.BASIC_INFO_HUKOU));
+				basicInfo.setHuKou(result.getInt(Constants.BASIC_INFO_HUKOU));
 				basicInfo.setHuKouAddr(result.getString(Constants.BASIC_INFO_HUKOU_ADDR));
 				basicInfo.setMigration(result.getBoolean(Constants.BASIC_INFO_MIGRATION));
 				basicInfo.setOnlyChild(result.getBoolean(Constants.BASIC_INFO_MIGRATION));
@@ -132,6 +133,10 @@ public class ChildDAO  implements IChildDAO
 				conn = null;
 			}
 		}
+		
+		if (child == null)
+			throw new NotFoundException(ErrorCode.not_found_child, "Child: " + id + " Not Exist.");
+		
 		return child;
 	}
 	
@@ -166,9 +171,9 @@ public class ChildDAO  implements IChildDAO
 				basicInfo.setClassName(result.getString(Constants.BASIC_INFO_CLASS_NAME));
 				basicInfo.setGender(result.getInt(Constants.BASIC_INFO_GENDER));
 				basicInfo.setNation(result.getString(Constants.BASIC_INFO_NATION));
-				basicInfo.setBirthday(result.getString(Constants.BASIC_INFO_BIRTHDAY));
+				basicInfo.setBirthday(Tools.convertLongTimeToStr(result.getLong(Constants.BASIC_INFO_BIRTHDAY)));
 				basicInfo.setIdCardNo(result.getString(Constants.BASIC_INFO_ID_CARD_NO));
-				basicInfo.setHuKou(result.getString(Constants.BASIC_INFO_HUKOU));
+				basicInfo.setHuKou(result.getInt(Constants.BASIC_INFO_HUKOU));
 				basicInfo.setHuKouAddr(result.getString(Constants.BASIC_INFO_HUKOU_ADDR));
 				basicInfo.setMigration(result.getBoolean(Constants.BASIC_INFO_MIGRATION));
 				basicInfo.setOnlyChild(result.getBoolean(Constants.BASIC_INFO_MIGRATION));
@@ -242,7 +247,7 @@ public class ChildDAO  implements IChildDAO
 	}
 	
 	@Override
-	public Child updateChild(Child child) throws CommonException
+	public Child updateChild(Child child, Long id) throws CommonException
 	{
 		if (child == null)
 			throw new BadRequestException(ErrorCode.bad_input_child_body, "child information isempty, cannot update");
@@ -250,14 +255,11 @@ public class ChildDAO  implements IChildDAO
 		BasicInfo basicInfo = child.getBasicInfo();
 		ContactInfo contactInfo = child.getContactInfo();
 		BodyInfo bodyInfo = child.getBodyInfo();
-		Long id = child.getId();
 		
 		if ((basicInfo == null && contactInfo == null && bodyInfo == null) || id == null)
 			throw new BadRequestException(ErrorCode.bad_input_child_body, "lack of child information, cannot update");
 		
 		Child originChild = getChild(id);
-		if (originChild == null)
-			throw new NotFoundException(ErrorCode.not_found_child, "Child: " + id + " Not Exist.");
 		
 		ComboPooledDataSource ds = null;
 		Connection conn = null;
@@ -270,8 +272,8 @@ public class ChildDAO  implements IChildDAO
 			
 			if (basicInfo != null)
 			{
-				if (!basicInfo.getTimeStamp().equals(originChild.getBasicInfo().getTimeStamp()))
-					throw new ConflictException(ErrorCode.child_info_conflict, "basin info is not the latest.");
+				if (basicInfo.getTimeStamp() == null || !basicInfo.getTimeStamp().equals(originChild.getBasicInfo().getTimeStamp()))
+					throw new ConflictException(ErrorCode.child_info_conflict, "basic info is not the latest.");
 				
 				StringBuffer sqlBuffer = new StringBuffer("update basic_info set ");
 				if (basicInfo.getIdCardNo() != null)
@@ -287,7 +289,12 @@ public class ChildDAO  implements IChildDAO
 				if (basicInfo.getNation() != null)
 					sqlBuffer.append(Constants.BASIC_INFO_NATION).append("='").append(basicInfo.getNation()).append("', ");
 				if (basicInfo.getBirthday() != null)
-					sqlBuffer.append(Constants.BASIC_INFO_BIRTHDAY).append("='").append(basicInfo.getBirthday()).append("', ");
+				{
+					Long time = Tools.parseTimeFromStr(basicInfo.getBirthday());
+					if (time == null)
+						throw new BadRequestException(ErrorCode.bad_input_child_body, "Birthday is not recognized.");
+					sqlBuffer.append(Constants.BASIC_INFO_BIRTHDAY).append("='").append(time).append("', ");
+				}
 				if (basicInfo.getHuKou() != null)
 					sqlBuffer.append(Constants.BASIC_INFO_HUKOU).append("='").append(basicInfo.getHuKou()).append("', ");
 				if (basicInfo.getHuKouAddr() != null)
@@ -321,7 +328,7 @@ public class ChildDAO  implements IChildDAO
 			
 			if (contactInfo != null)
 			{
-				if (!contactInfo.getTimeStamp().equals(originChild.getContactInfo().getTimeStamp()))
+				if (contactInfo.getTimeStamp() == null || !contactInfo.getTimeStamp().equals(originChild.getContactInfo().getTimeStamp()))
 					throw new ConflictException(ErrorCode.child_info_conflict, "contact info is not the latest.");
 				
 				StringBuffer sqlBuffer = new StringBuffer("update contact_info set ");
@@ -358,7 +365,7 @@ public class ChildDAO  implements IChildDAO
 			
 			if (bodyInfo != null)
 			{
-				if (!bodyInfo.getTimeStamp().equals(originChild.getBodyInfo().getTimeStamp()))
+				if (bodyInfo.getTimeStamp() == null || !bodyInfo.getTimeStamp().equals(originChild.getBodyInfo().getTimeStamp()))
 					throw new ConflictException(ErrorCode.child_info_conflict, "body info is not the latest.");
 				
 				StringBuffer sqlBuffer = new StringBuffer("update body_info set ");
@@ -518,7 +525,7 @@ public class ChildDAO  implements IChildDAO
 	@Override
 	public Child createChild(Child child) throws CommonException
 	{
-		long id = Constants.getCurrentLongTime();
+		long id = Tools.getCurrentLongTime();
 		BasicInfo basicInfo = child.getBasicInfo();
 		ContactInfo contactInfo = child.getContactInfo();
 		BodyInfo bodyInfo = child.getBodyInfo();
@@ -549,9 +556,12 @@ public class ChildDAO  implements IChildDAO
 			prestat1.setString(4, basicInfo.getClassName());
 			prestat1.setInt(5, basicInfo.getGender() == null ? 0 : basicInfo.getGender());
 			prestat1.setString(6, basicInfo.getNation());
-			prestat1.setString(7, basicInfo.getBirthday());
+			Long time = Tools.parseTimeFromStr(basicInfo.getBirthday());
+			if (time == null)
+				throw new BadRequestException(ErrorCode.bad_input_child_body, "Birthday is not recognized.");
+			prestat1.setLong(7, time);
 			prestat1.setString(8, basicInfo.getIdCardNo());
-			prestat1.setString(9, basicInfo.getHuKou());
+			prestat1.setInt(9, basicInfo.getHuKou());
 			prestat1.setString(10, basicInfo.getHuKouAddr());
 			prestat1.setBoolean(11, basicInfo.getMigration() == null ? false : basicInfo.getMigration());
 			prestat1.setBoolean(12, basicInfo.getOnlyChild() == null ? false : basicInfo.getOnlyChild());
@@ -652,6 +662,71 @@ public class ChildDAO  implements IChildDAO
 				conn = null;
 			}
 		} 
+	}
+
+	@Override
+	public void deleteChild(Long id) throws CommonException {
+		
+		ComboPooledDataSource ds = null;
+		Connection conn = null;
+		PreparedStatement prestat = null;
+		try
+		{
+			ds = ConnectionPoolManager.getDataSource();
+			conn = ds.getConnection();
+			conn.setAutoCommit(false);
+			String sql = "delete from basic_info where id = ?";
+			prestat = conn.prepareStatement(sql);
+			prestat.setLong(1, id);
+			prestat.executeUpdate();
+			prestat.close();
+			
+			sql = "delete from contact_info where id = ?";
+			prestat = conn.prepareStatement(sql);
+			prestat.setLong(1, id);
+			prestat.executeUpdate();
+			prestat.close();
+			
+			sql = "delete from body_info where id = ?";
+			prestat = conn.prepareStatement(sql);
+			prestat.setLong(1, id);
+			prestat.executeUpdate();
+			prestat.close();
+			
+			conn.commit();
+
+		}  catch (Exception e) {
+			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			if (e instanceof CommonException)
+				throw (CommonException)e;
+			else
+				throw new InternalServerErrorException(ErrorCode.error_delete_children, e.getMessage());
+		}
+		finally
+		{
+			if (prestat != null) {
+				try {
+					prestat.close();
+				} catch (SQLException e) {
+				}
+				prestat = null;
+			}
+			if (conn != null) {
+				try {
+					conn.setAutoCommit(true);
+					conn.close();
+				} catch (SQLException e) {
+				}
+				conn = null;
+			}
+		} 
+		
 	}
 
 }

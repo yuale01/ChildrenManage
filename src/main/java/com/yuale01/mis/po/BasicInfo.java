@@ -1,5 +1,8 @@
 package com.yuale01.mis.po;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class BasicInfo 
 {
 	private Long id;
@@ -10,7 +13,7 @@ public class BasicInfo
 	private String nation;
 	private String birthday;
 	private String idCardNo;
-	private String huKou;
+	private Integer huKou;
 	private String huKouAddr;
 	private Boolean migration;
 	private Boolean onlyChild;
@@ -70,10 +73,10 @@ public class BasicInfo
 	public void setIdCardNo(String idCardNo) {
 		this.idCardNo = idCardNo;
 	}
-	public String getHuKou() {
+	public Integer getHuKou() {
 		return huKou;
 	}
-	public void setHuKou(String huKou) {
+	public void setHuKou(Integer huKou) {
 		this.huKou = huKou;
 	}
 	public String getHuKouAddr() {

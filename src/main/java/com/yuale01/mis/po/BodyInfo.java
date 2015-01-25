@@ -1,5 +1,8 @@
 package com.yuale01.mis.po;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class BodyInfo 
 {
 	private Long id;

@@ -19,7 +19,7 @@ import com.yuale01.mis.exception.ErrorMessage;
 import com.yuale01.mis.po.Child;
 
 @Path("Children")
-public class Children 
+public class ChildrenResource 
 {
 	private IChildDAO childDAO = DAOFactory.getChildDAO();
 	
@@ -91,12 +91,30 @@ public class Children
 	@Path("/{childID}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updateChild(Child child)
+	public Response updateChild(Child child, @PathParam("childID") Long childID)
 	{
 		Response res = null;
 		try 
 		{
-			childDAO.updateChild(child);
+			childDAO.updateChild(child, childID);
+			res = Response.ok("{\"success\": true}").build();//need return modified child body.
+		} catch (CommonException e) {
+			ErrorMessage em = new ErrorMessage(e.getStatusCode(), e.getErrorCode(), e.getMessage());
+			res = Response.status(e.getStatusCode()).entity(em).build();
+		}
+		return res;
+	}
+	
+	@DELETE
+	@Path("/{childID}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response deleteChild(@PathParam("childID") Long childID)
+	{
+		Response res = null;
+		try 
+		{
+			childDAO.deleteChild(childID);
 			res = Response.ok("{\"success\": true}").build();//need return modified child body.
 		} catch (CommonException e) {
 			ErrorMessage em = new ErrorMessage(e.getStatusCode(), e.getErrorCode(), e.getMessage());

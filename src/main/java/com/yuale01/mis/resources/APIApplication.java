@@ -9,7 +9,7 @@ public class APIApplication extends ResourceConfig
 {
 	public APIApplication ()
 	{
-		register(MyResource.class);
+		register(ChildrenResource.class);
 		
 		register(JacksonJsonProvider.class);
 		
