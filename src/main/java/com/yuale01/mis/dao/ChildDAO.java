@@ -114,7 +114,7 @@ public class ChildDAO  implements IChildDAO
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			throw new InternalServerErrorException(ErrorCode.error_get_child, e.getMessage());
+			throw new InternalServerErrorException(ErrorCode.error_child_get, e.getMessage());
 		}
 		finally
 		{
@@ -135,7 +135,7 @@ public class ChildDAO  implements IChildDAO
 		}
 		
 		if (child == null)
-			throw new NotFoundException(ErrorCode.not_found_child, "Child: " + id + " Not Exist.");
+			throw new NotFoundException(ErrorCode.error_child_common_invalidid, "Child: " + id + " Not Exist.");
 		
 		return child;
 	}
@@ -224,7 +224,7 @@ public class ChildDAO  implements IChildDAO
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			throw new InternalServerErrorException(ErrorCode.error_get_children, e.getMessage());
+			throw new InternalServerErrorException(ErrorCode.error_children_get, e.getMessage());
 		}
 		finally
 		{
@@ -250,14 +250,14 @@ public class ChildDAO  implements IChildDAO
 	public Child updateChild(Child child, Long id) throws CommonException
 	{
 		if (child == null)
-			throw new BadRequestException(ErrorCode.bad_input_child_body, "child information isempty, cannot update");
+			throw new BadRequestException(ErrorCode.error_child_update_badinput, "child information isempty, cannot update");
 		
 		BasicInfo basicInfo = child.getBasicInfo();
 		ContactInfo contactInfo = child.getContactInfo();
 		BodyInfo bodyInfo = child.getBodyInfo();
 		
 		if ((basicInfo == null && contactInfo == null && bodyInfo == null) || id == null)
-			throw new BadRequestException(ErrorCode.bad_input_child_body, "lack of child information, cannot update");
+			throw new BadRequestException(ErrorCode.error_child_update_badinput, "lack of child information, cannot update");
 		
 		Child originChild = getChild(id);
 		
@@ -273,7 +273,7 @@ public class ChildDAO  implements IChildDAO
 			if (basicInfo != null)
 			{
 				if (basicInfo.getTimeStamp() == null || !basicInfo.getTimeStamp().equals(originChild.getBasicInfo().getTimeStamp()))
-					throw new ConflictException(ErrorCode.child_info_conflict, "basic info is not the latest.");
+					throw new ConflictException(ErrorCode.error_child_update_conflict, "basic info is not the latest.");
 				
 				StringBuffer sqlBuffer = new StringBuffer("update basic_info set ");
 				if (basicInfo.getIdCardNo() != null)
@@ -292,7 +292,7 @@ public class ChildDAO  implements IChildDAO
 				{
 					Long time = Tools.parseTimeFromStr(basicInfo.getBirthday());
 					if (time == null)
-						throw new BadRequestException(ErrorCode.bad_input_child_body, "Birthday is not recognized.");
+						throw new BadRequestException(ErrorCode.error_child_update_badinput, "Birthday is not recognized.");
 					sqlBuffer.append(Constants.BASIC_INFO_BIRTHDAY).append("='").append(time).append("', ");
 				}
 				if (basicInfo.getHuKou() != null)
@@ -329,7 +329,7 @@ public class ChildDAO  implements IChildDAO
 			if (contactInfo != null)
 			{
 				if (contactInfo.getTimeStamp() == null || !contactInfo.getTimeStamp().equals(originChild.getContactInfo().getTimeStamp()))
-					throw new ConflictException(ErrorCode.child_info_conflict, "contact info is not the latest.");
+					throw new ConflictException(ErrorCode.error_child_update_conflict, "contact info is not the latest.");
 				
 				StringBuffer sqlBuffer = new StringBuffer("update contact_info set ");
 				if (contactInfo.getMotherName() != null)
@@ -366,7 +366,7 @@ public class ChildDAO  implements IChildDAO
 			if (bodyInfo != null)
 			{
 				if (bodyInfo.getTimeStamp() == null || !bodyInfo.getTimeStamp().equals(originChild.getBodyInfo().getTimeStamp()))
-					throw new ConflictException(ErrorCode.child_info_conflict, "body info is not the latest.");
+					throw new ConflictException(ErrorCode.error_child_update_conflict, "body info is not the latest.");
 				
 				StringBuffer sqlBuffer = new StringBuffer("update body_info set ");
 				if (bodyInfo.getDoffDon() != null)
@@ -421,7 +421,7 @@ public class ChildDAO  implements IChildDAO
 			if (e instanceof CommonException)
 				throw (CommonException)e;
 			else
-				throw new InternalServerErrorException(ErrorCode.error_update_child, e.getMessage());
+				throw new InternalServerErrorException(ErrorCode.error_child_update, e.getMessage());
 		}
 		finally
 		{
@@ -446,6 +446,8 @@ public class ChildDAO  implements IChildDAO
 	@Override
 	public void deleteChildren(Long[] ids) throws CommonException
 	{
+		if (ids == null)
+			throw new BadRequestException(ErrorCode.error_children_delete_idsnull, "Children IDs are null.");
 		ComboPooledDataSource ds = null;
 		Connection conn = null;
 		PreparedStatement prestat = null;
@@ -491,7 +493,7 @@ public class ChildDAO  implements IChildDAO
 			
 			if (!errorIds.isEmpty())
 			{
-				throw new InternalServerErrorException(ErrorCode.error_delete_children, StringUtils.join(errorIds, ","));
+				throw new InternalServerErrorException(ErrorCode.error_children_delete, StringUtils.join(errorIds, ","));
 			}
 
 		}  catch (Exception e) {
@@ -499,7 +501,7 @@ public class ChildDAO  implements IChildDAO
 			if (e instanceof CommonException)
 				throw (CommonException)e;
 			else
-				throw new InternalServerErrorException(ErrorCode.error_delete_children, e.getMessage());
+				throw new InternalServerErrorException(ErrorCode.error_children_delete, e.getMessage());
 		}
 		finally
 		{
@@ -536,8 +538,12 @@ public class ChildDAO  implements IChildDAO
 		PreparedStatement prestat3 = null;
 		try
 		{
-			if (basicInfo == null || contactInfo == null || bodyInfo == null)
-				throw new BadRequestException(ErrorCode.bad_input_child_body, "lack of child information, cannot create");
+			if (basicInfo == null)
+				throw new BadRequestException(ErrorCode.error_child_create_badinput, "lack of child information, cannot create");
+			if (contactInfo == null)
+				contactInfo = new ContactInfo();
+			if (bodyInfo == null)
+				bodyInfo = new BodyInfo();
 			basicInfo.setId(id);
 			contactInfo.setId(id);
 			bodyInfo.setId(id);
@@ -558,7 +564,7 @@ public class ChildDAO  implements IChildDAO
 			prestat1.setString(6, basicInfo.getNation());
 			Long time = Tools.parseTimeFromStr(basicInfo.getBirthday());
 			if (time == null)
-				throw new BadRequestException(ErrorCode.bad_input_child_body, "Birthday is not recognized.");
+				throw new BadRequestException(ErrorCode.error_child_create_badinput, "Birthday is not recognized.");
 			prestat1.setLong(7, time);
 			prestat1.setString(8, basicInfo.getIdCardNo());
 			prestat1.setInt(9, basicInfo.getHuKou());
@@ -628,7 +634,7 @@ public class ChildDAO  implements IChildDAO
 			if (e instanceof CommonException)
 				throw (CommonException)e;
 			else
-				throw new InternalServerErrorException(ErrorCode.error_create_child, e.getMessage());
+				throw new InternalServerErrorException(ErrorCode.error_child_create, e.getMessage());
 		}
 		finally
 		{
@@ -665,8 +671,11 @@ public class ChildDAO  implements IChildDAO
 	}
 
 	@Override
-	public void deleteChild(Long id) throws CommonException {
+	public void deleteChild(Long id) throws CommonException 
+	{
 		
+		if (id == null)
+			throw new BadRequestException(ErrorCode.error_child_delete_idnull, "Child id is null.");
 		ComboPooledDataSource ds = null;
 		Connection conn = null;
 		PreparedStatement prestat = null;
@@ -706,7 +715,7 @@ public class ChildDAO  implements IChildDAO
 			if (e instanceof CommonException)
 				throw (CommonException)e;
 			else
-				throw new InternalServerErrorException(ErrorCode.error_delete_children, e.getMessage());
+				throw new InternalServerErrorException(ErrorCode.error_child_delete, e.getMessage());
 		}
 		finally
 		{

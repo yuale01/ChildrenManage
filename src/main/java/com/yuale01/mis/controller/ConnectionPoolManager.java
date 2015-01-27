@@ -26,9 +26,12 @@ public class ConnectionPoolManager
 				
 				cpds.setMaxStatements( 180 );
 				
-				cpds.setMinPoolSize(5);                                     
-				cpds.setAcquireIncrement(5);
-				cpds.setMaxPoolSize(20);
+				cpds.setMinPoolSize(3);                                     
+				cpds.setAcquireIncrement(3);
+				cpds.setMaxPoolSize(15);
+				
+				cpds.setIdleConnectionTestPeriod(14400);
+				cpds.setPreferredTestQuery("SELECT 1");
 				
 			} catch (PropertyVetoException e) {
 				// TODO Auto-generated catch block

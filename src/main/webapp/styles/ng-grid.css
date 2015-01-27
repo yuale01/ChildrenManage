@@ -17,22 +17,28 @@
   right: 0px;
   width: auto;
   height: auto;
+  overflow: hidden;
+}
+
+.alert {
+  margin-right: 20px;
+  margin-left: 20px;
+  margin-bottom: 0px;
 }
 
 .button {
   margin-top: 20px;
-  margin-bottom: 0px;
+  margin-bottom: 20px;
   margin-right: 20px;
   margin-left: 20px;
-  float:right;
+  float: right;
 }
 
 .grid {
   height: 850px;
-  margin-top: 75px;
-  margin-bottom: 20px;
   margin-right: 20px;
   margin-left: 20px;
+  clear: both;
   text-align: center;
 }
 

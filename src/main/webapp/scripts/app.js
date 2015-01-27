@@ -1,62 +1,24 @@
 var app = angular.module('MyApp', ['ngTouch', 'ui.grid', 'ui.grid.paging', 'ui.grid.exporter', 'ui.grid.selection', 'ui.bootstrap', 'ui.grid.resizeColumns']);
  
 app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiGridConstants', function ($scope, $interval, $q, $modal, $http, uiGridConstants) {
- 
-  $scope.students = [{
-	"basicInfo": {
-		"id": 1422075036178,
-		"name": "test",
-		"grade": "grade1",
-		"className": "class1",
-		"gender": 0,
-		"nation": "",
-		"birthday": "1987-08-22",
-		"idCardNo": "130303198708222110",
-		"huKou": "",
-		"huKouAddr": "",
-		"migration": true,
-		"onlyChild": true,
-		"minLiving": false,
-		"imburse": false,
-		"orphan": false,
-		"pathography": false,
-		"specialPerformance": "this is special",
-		"otherAnnouncement": "",
-		"timeStamp": 1421909589000
-	},
-	"contactInfo": {
-		"id": 1422075036178,
-		"motherName": "wang",
-		"motherCompany": "comp",
-		"motherContact": "afdsfdf",
-		"motherIdCard": "mother_id_card",
-		"fatherName": "fang",
-		"fatherCompany": "comp",
-		"fatherContact": "afdsfdf",
-		"fatherIdCard": "father_id_card",
-		"livingAddr": "",
-		"otherContact": "",
-		"timeStamp": 1421909589000
-	},
-	"bodyInfo": {
-		"id": 1422075036178,
-		"doffDon": 0,
-		"eating": 1,
-		"toileting": 0,
-		"sleeping": 2,
-		"sleepingInfo": "sleeping info",
-		"eatingSpeed": 0,
-		"appetite": 0,
-		"pickyEating": 0,
-		"pickyEatingInfo": "",
-		"eatingAbility": 0,
-		"foodAllergy": 0,
-		"foodAllergyInfo": "",
-		"healthStatus": 0,
-		"timeStamp": 1421909589000
-	},
-	"id": 1421748057732
-}];
+  
+  $scope.alert = {
+		  'type': '',
+		  'msg': '',
+		  'show': false
+  };
+  
+  var showAlert = function(type, msg) {
+	    $scope.alert.type = type;
+	    $scope.alert.msg = msg;
+	    $scope.alert.show = true;
+  };
+
+  $scope.closeAlert = function() {
+	    $scope.alert.type = '';
+	    $scope.alert.msg = '';
+	    $scope.alert.show = false;
+  };
   
   $scope.data = []; 
    
@@ -120,16 +82,29 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
 	  { field: 'contactInfo.fatherContact',
 	    displayName: 'Father Phone',
 	    enableFiltering: false
-	  },
-	  { field: 'id',
-        displayName: 'ID',
-        visible: false
 	  }
     ]
   };
   $scope.gridOptions.data = 'data';
   
+  $scope.gridOptions.onRegisterApi = function(gridApi){
+      //set gridApi on scope
+      $scope.gridApi = gridApi;
+      /*gridApi.selection.on.rowSelectionChanged($scope,function(row){
+        var msg = 'row selected ' + row.isSelected;
+        $log.log(msg);
+      });
+ 
+      gridApi.selection.on.rowSelectionChangedBatch($scope,function(rows){
+        var msg = 'rows changed ' + rows.length;
+        $log.log(msg);
+      });*/
+    };
+  
   var loadData = function() {
+	  
+	  $("#grid").mask({spinner: { lines: 10, length: 6, width: 3, radius: 5}, delay: 0, label: 'Loading...'});
+	  $scope.closeAlert();
 	  $http.get("/ChildrenManage/webapi/Children").
 	  	success(function(data) {
 	  		for (var i=0;i<data.length;i++)
@@ -137,9 +112,11 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
 	  				data[i].basicInfo.translatedGender = data[i].basicInfo.gender == 0 ? 'male' : 'female';
 	  			}
 	  		$scope.data = data;
+	  		$("#grid").unmask();
 	  	}).
 	  	error(function(data) {
-	  		
+	  		$("#grid").unmask();
+	  		showAlert('danger','Failed to load data: '+data);
 	  	});
   }; 
   
@@ -161,7 +138,15 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
 	  templateUrl: 'template/createStudent.html',
 	  controller: 'CreateStudentCtrl',
 	  //backdrop: 'static',
-	  size: 'lg'
+	  size: 'lg',
+	  resolve: {
+		  child: function() {
+			  return {};
+		  },
+          mode: function() {
+        	return 'create';  
+          }
+	  }
 	});
 	modalInstance.result.then(function () {
       //$log.info('Modal OK at: ' + new Date());
@@ -170,5 +155,64 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
       //$log.info('Modal dismissed at: ' + new Date());
     });
   };
+  
+  $scope.refresh = function() {
+	  loadData();
+  }
+  
+  $scope.deleteChildren = function() {
+	  var rows = $scope.gridApi.selection.getSelectedRows();
+	  if (rows.length == 0)
+	  {
+		  showAlert('danger','No item(s) selected. Please select at least on item.');
+		  return;
+	  }
+	  var ids = JSON.parse('[]');
+	  for (var i=0; i<rows.length; i++)
+		  ids.push(rows[i].id);
+	  
+	  $http({
+		url: '/ChildrenManage/webapi/Children',
+		method: 'DELETE',
+		data: ids,
+		headers: {'Content-Type': "application/json;charset=UTF-8"}
+	  }).
+	    success(function(data) {
+	  		loadData();
+	  	}).
+	  	error(function(data) {
+	  		showAlert('danger', 'Fail to delete item: '+data);
+	  	});
+  }
+  
+  $scope.edit = function() {
+	  var rows = $scope.gridApi.selection.getSelectedRows();
+	  if (rows.length !== 1)
+	  {
+		  showAlert('danger', 'Please select only one item to edit.');
+		  return;
+	  }
+	  var child = rows[0];
+	  var modalInstance = $modal.open({
+		  templateUrl: 'template/createStudent.html',
+		  controller: 'CreateStudentCtrl',
+		  //backdrop: 'static',
+		  size: 'lg',
+		  resolve: {
+			  child: function() {
+				  return child;
+			  },
+	          mode: function() {
+	        	return 'update';  
+	          }
+		  }
+		});
+		modalInstance.result.then(function () {
+	      //$log.info('Modal OK at: ' + new Date());
+		  loadData();
+	    }, function () {
+	      //$log.info('Modal dismissed at: ' + new Date());
+	    });
+  }
   
 }]);

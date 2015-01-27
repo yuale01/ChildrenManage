@@ -1,33 +1,48 @@
 'use strict';
 
 angular.module('MyApp')
-  .controller('CreateStudentCtrl', function ($scope, $modalInstance, $http) {
+  .controller('CreateStudentCtrl', function ($scope, $modalInstance, $http, child, mode) {
   
-    $scope.child = {
-		"basicInfo": {},
-		"contactInfo": {},
-		"bodyInfo": {}
-	};
+    $scope.child = child;
+    
+    $scope.editable = mode === 'view' ? 'false' : 'true';
 	
 	$scope.ok = function () {
 		//mask();
-		//var aa = this.child;
-		$http.post('/ChildrenManage/webapi/Children', this.child).
-			success(function(data, status, headers, config) {
-				//unmask();
-				//add succes  info;
-				$modalInstance.close();
-			}).
-			error(function(data, status, headers, config) {
-				//unmask
-				//add error info
-				$modalInstance.close();
-			});
+		if (mode === 'create')
+		{
+			$http.post('/ChildrenManage/webapi/Children', $scope.child).
+				success(function(data, status, headers, config) {
+					//unmask();
+					//add succes  info;
+					$modalInstance.close();
+				}).
+				error(function(data, status, headers, config) {
+					//unmask
+					//add error info
+					//$modalInstance.close();
+				});
+		}
+		else if (mode === 'update')
+		{
+			$http.put('/ChildrenManage/webapi/Children/'+$scope.child.id, $scope.child).
+				success(function(data, status, headers, config) {
+					$modalInstance.close();
+				}).
+				error(function(data, status, headers, config) {
+					
+				})
+		}
+		else if (mode === 'view')
+		{
+			$modalInstance.dismiss('cancel');
+		}
     };
 
     $scope.cancel = function () {
       $modalInstance.dismiss('cancel');
     };
+    
 	$scope.open = function($event) {
       $event.preventDefault();
       $event.stopPropagation();
