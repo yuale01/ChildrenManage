@@ -5,7 +5,9 @@ angular.module('MyApp')
   
     $scope.child = child;
     
-    $scope.editable = mode === 'view' ? 'false' : 'true';
+    $scope.disable = mode === 'view' ? 'true' : 'false';
+    
+    var originData = child;
 	
 	$scope.ok = function () {
 		//mask();

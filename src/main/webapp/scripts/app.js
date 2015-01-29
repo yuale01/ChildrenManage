@@ -82,6 +82,11 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
 	  { field: 'contactInfo.fatherContact',
 	    displayName: 'Father Phone',
 	    enableFiltering: false
+	  },
+	  { field: 'contactInfo.livingAddr',
+		displayName: 'Living Address',
+		enableFiltering: false,
+		visible: false
 	  }
     ]
   };
@@ -102,9 +107,8 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
     };
   
   var loadData = function() {
-	  
-	  $("#grid").mask({spinner: { lines: 10, length: 6, width: 3, radius: 5}, delay: 0, label: 'Loading...'});
 	  $scope.closeAlert();
+	  $("#grid").mask({spinner: { lines: 10, length: 6, width: 3, radius: 5}, delay: 0, label: 'Loading...'});
 	  $http.get("/ChildrenManage/webapi/Children").
 	  	success(function(data) {
 	  		for (var i=0;i<data.length;i++)
@@ -134,6 +138,7 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
   });
   
   $scope.create = function() {
+	$scope.closeAlert();
     var modalInstance = $modal.open({
 	  templateUrl: 'template/createStudent.html',
 	  controller: 'CreateStudentCtrl',
@@ -161,6 +166,7 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
   }
   
   $scope.deleteChildren = function() {
+	  $scope.closeAlert();
 	  var rows = $scope.gridApi.selection.getSelectedRows();
 	  if (rows.length == 0)
 	  {
@@ -186,6 +192,7 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
   }
   
   $scope.edit = function() {
+	  $scope.closeAlert();
 	  var rows = $scope.gridApi.selection.getSelectedRows();
 	  if (rows.length !== 1)
 	  {
