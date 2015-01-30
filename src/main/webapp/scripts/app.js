@@ -120,7 +120,7 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
 	  	}).
 	  	error(function(data) {
 	  		$("#grid").unmask();
-	  		showAlert('danger','Failed to load data: '+data);
+	  		showAlert('danger','Failed to load data: '+data.msg);
 	  	});
   }; 
   
@@ -146,7 +146,32 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
 	  size: 'lg',
 	  resolve: {
 		  child: function() {
-			  return {};
+			  return {
+					"basicInfo": {
+						"gender": 0,
+						"birthday": "2015-01-01",
+						"huKou": 0,
+						"migration": 0,
+						"onlyChild": 1,
+						"minLiving": 0,
+						"imburse": 0,
+						"orphan": 0,
+						"pathography": 0
+					},
+					"contactInfo": {},
+					"bodyInfo": {
+						"doffDon": 0,
+						"eating": 0,
+						"toileting": 0,
+						"sleeping": 0,
+						"eatingSpeed": 0,
+						"appetite": 0,
+						"pickyEating": 0,
+						"eatingAbility": 0,
+						"foodAllergy": 0,
+						"healthStatus": 0
+					}
+				}; // used to init the create page
 		  },
           mode: function() {
         	return 'create';  
@@ -187,7 +212,7 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
 	  		loadData();
 	  	}).
 	  	error(function(data) {
-	  		showAlert('danger', 'Fail to delete item: '+data);
+	  		showAlert('danger', 'Fail to delete item: '+data.msg);
 	  	});
   }
   

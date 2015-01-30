@@ -7,7 +7,49 @@ angular.module('MyApp')
     
     $scope.disable = mode === 'view' ? 'true' : 'false';
     
-    var originData = child;
+    var originChild = JSON.parse(JSON.stringify(child));
+    
+    var childStructure = [
+                          {
+                        	  category: 'basicInfo',
+                        	  fields: ['name', 'grade', 'className', 'gender', 'nation', 'birthday',
+                        	           'idCardNo', 'huKou', 'huKouAddr', 'migration', 'onlyChild', 'minLiving',
+                        	           'imburse', 'orphan', 'pathography', 'specialPerformance', 'otherAnnouncement']
+                          },
+                          {
+                        	  category: 'contactInfo',
+                        	  fields: ['motherName', 'motherCompany', 'motherContact', 'motherIdCard',
+                        	           'fatherName', 'fatherCompany', 'fatherContact', 'fatherIdCard',
+                        	           'livingAddr', 'otherContact']
+                          },
+                          {
+                        	  category: 'bodyInfo',
+                        	  fields: ['doffDon', 'eating', 'toileting', 'sleeping', 'sleepingInfo', 'eatingSpeed', 'appetite', 'pickyEating',
+                        	           'pickyEatingInfo', 'eatingAbility', 'foodAllergy', 'foodAllergyInfo', 'healthdStatus']
+                          }];
+    
+    var getChangedData = function() {
+    	var changedChild = {};
+    	var currentChild = $scope.child;
+    	for (var i=0; i<childStructure.length; i++)
+    	{
+    		var category = childStructure[i].category;
+    		var fields = childStructure[i].fields;
+    		
+    		for (var j=0; j<fields.length; j++)
+    		{
+    			var field = fields[j];
+    			if (currentChild[category][field] != originChild[category][field])
+    			{
+    				if (changedChild[category] == undefined)
+    					changedChild[category] = {};
+    				changedChild[category][field] = currentChild[category][field];
+    			}
+    				
+    		}
+    	}
+    	return changedChild;
+    }
 	
 	$scope.ok = function () {
 		//mask();
@@ -42,16 +84,17 @@ angular.module('MyApp')
     };
 
     $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
+    	getChangedData();
+    	$scope.child = originChild;
+    	$modalInstance.dismiss('cancel');
     };
     
-	$scope.open = function($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      $scope.opened = true;
-    };
-	
 	$scope.format = 'yyyy-MM-dd';
+	$scope.open = function($event) {
+		$event.preventDefault();
+		$event.stopPropagation();
+
+		$scope.opened = true;
+    };
 	
   });

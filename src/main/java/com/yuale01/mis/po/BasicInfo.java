@@ -15,12 +15,12 @@ public class BasicInfo
 	private String idCardNo;
 	private Integer huKou;
 	private String huKouAddr;
-	private Boolean migration;
-	private Boolean onlyChild;
-	private Boolean minLiving;
-	private Boolean imburse;
-	private Boolean orphan;
-	private Boolean pathography;
+	private Integer migration;
+	private Integer onlyChild;
+	private Integer minLiving;
+	private Integer imburse;
+	private Integer orphan;
+	private Integer pathography;
 	private String specialPerformance;
 	private String otherAnnouncement;
 	private Long timeStamp;
@@ -82,43 +82,43 @@ public class BasicInfo
 	public String getHuKouAddr() {
 		return huKouAddr;
 	}
-	public Boolean getMigration() {
+	public Integer getMigration() {
 		return migration;
 	}
-	public void setMigration(Boolean migration) {
+	public void setMigration(Integer migration) {
 		this.migration = migration;
 	}
-	public Boolean getOnlyChild() {
+	public Integer getOnlyChild() {
 		return onlyChild;
 	}
-	public void setOnlyChild(Boolean onlyChild) {
+	public void setOnlyChild(Integer onlyChild) {
 		this.onlyChild = onlyChild;
 	}
-	public Boolean getMinLiving() {
+	public Integer getMinLiving() {
 		return minLiving;
 	}
-	public void setMinLiving(Boolean minLiving) {
+	public void setMinLiving(Integer minLiving) {
 		this.minLiving = minLiving;
 	}
-	public Boolean getImburse() {
+	public Integer getImburse() {
 		return imburse;
 	}
-	public void setImburse(Boolean imburse) {
+	public void setImburse(Integer imburse) {
 		this.imburse = imburse;
 	}
-	public Boolean getOrphan() {
+	public Integer getOrphan() {
 		return orphan;
 	}
-	public void setOrphan(Boolean orphan) {
+	public void setOrphan(Integer orphan) {
 		this.orphan = orphan;
 	}
-	public Boolean getPathography() {
+	public Integer getPathography() {
 		return pathography;
 	}
 	public void setHuKouAddr(String huKouAddr) {
 		this.huKouAddr = huKouAddr;
 	}
-	public void setPathography(Boolean pathography) {
+	public void setPathography(Integer pathography) {
 		this.pathography = pathography;
 	}
 	public String getSpecialPerformance() {
