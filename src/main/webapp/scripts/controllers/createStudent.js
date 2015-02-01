@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('MyApp')
-  .controller('CreateStudentCtrl', function ($scope, $modalInstance, $http, child, mode) {
+  .controller('CreateStudentCtrl', function ($scope, $modalInstance, $modal, $http, child, mode) {
   
-    $scope.child = child;
+    $scope.child = JSON.parse(JSON.stringify(child));
     
     $scope.disable = mode === 'view' ? 'true' : 'false';
     
@@ -28,6 +28,24 @@ angular.module('MyApp')
                         	           'pickyEatingInfo', 'eatingAbility', 'foodAllergy', 'foodAllergyInfo', 'healthdStatus']
                           }];
     
+    $scope.alert = {
+    		  'type': '',
+    		  'msg': '',
+    		  'show': false
+      };
+      
+      var showAlert = function(type, msg) {
+    	    $scope.alert.type = type;
+    	    $scope.alert.msg = msg;
+    	    $scope.alert.show = true;
+      };
+
+      $scope.closeAlert = function() {
+    	    $scope.alert.type = '';
+    	    $scope.alert.msg = '';
+    	    $scope.alert.show = false;
+      };
+    
     var getChangedData = function() {
     	var changedChild = {};
     	var currentChild = $scope.child;
@@ -42,40 +60,77 @@ angular.module('MyApp')
     			if (currentChild[category][field] != originChild[category][field])
     			{
     				if (changedChild[category] == undefined)
+    				{
     					changedChild[category] = {};
+    					changedChild[category].timeStamp = originChild[category].timeStamp;
+    				}
+    					
     				changedChild[category][field] = currentChild[category][field];
     			}
     				
     		}
     	}
     	return changedChild;
-    }
+    };
 	
+    var openMessageDialog = function (messageType, message, okCallBack, cancleCallBack){
+    	var modalInstance = $modal.open({
+    		scope: $scope,
+			templateUrl: 'template/msgDialog.html',
+			controller: 'MsgDialogCtrl',
+			//size: 'lg',
+			resolve: {
+				messageType: function() {
+					return messageType;
+				},
+		        message: function() {
+		        	return message;  
+		        }
+			}
+		});
+		modalInstance.result.then(function () {
+		      //$log.info('Modal OK at: ' + new Date());
+			if (okCallBack != undefined && okCallBack != null)	
+				okCallBack();
+			}, function () {
+		      //$log.info('Modal dismissed at: ' + new Date());
+			if (cancleCallBack != undefined && cancleCallBack != null)	
+				cancleCallBack();
+		});
+    };
+    
 	$scope.ok = function () {
 		//mask();
+		$scope.closeAlert();
 		if (mode === 'create')
 		{
+			$("#create-student-dialog").mask({spinner: { lines: 10, length: 6, width: 3, radius: 5}, delay: 0, label: 'Creating...'});
 			$http.post('/ChildrenManage/webapi/Children', $scope.child).
 				success(function(data, status, headers, config) {
-					//unmask();
+					$("#create-student-dialog").unmask();
 					//add succes  info;
 					$modalInstance.close();
 				}).
 				error(function(data, status, headers, config) {
-					//unmask
-					//add error info
-					//$modalInstance.close();
+					$("#create-student-dialog").unmask();
+					showAlert('danger', data.message);
 				});
 		}
 		else if (mode === 'update')
 		{
-			$http.put('/ChildrenManage/webapi/Children/'+$scope.child.id, $scope.child).
+			$("#create-student-dialog").mask({spinner: { lines: 10, length: 6, width: 3, radius: 5}, delay: 0, label: 'Updating...'});
+			var result = getChangedData();
+			if (JSON.stringify(result) == "{}")
+				$modalInstance.dismiss('cancel');
+			$http.put('/ChildrenManage/webapi/Children/'+$scope.child.id, result).
 				success(function(data, status, headers, config) {
+					$("#create-student-dialog").unmask();
 					$modalInstance.close();
 				}).
 				error(function(data, status, headers, config) {
-					
-				})
+					$("#create-student-dialog").unmask();
+					showAlert('danger', data.message);
+				});
 		}
 		else if (mode === 'view')
 		{
@@ -84,9 +139,51 @@ angular.module('MyApp')
     };
 
     $scope.cancel = function () {
-    	getChangedData();
-    	$scope.child = originChild;
-    	$modalInstance.dismiss('cancel');
+    	if (mode == 'view')
+    	{
+    		$modalInstance.dismiss('cancel');
+    	}
+    	else if (mode == 'create')
+    	{
+    		var okCallBack = function() {
+    			$modalInstance.dismiss('cancel');
+    		};
+    		var cancleCallBack = function() {
+    			//Do nothing.
+    		};
+    		var messageType = 'Warning';
+    		var message = 'Are you sure to drop creating page?';
+    		openMessageDialog(messageType, message, okCallBack, cancleCallBack);
+    	}
+    	var result = getChangedData();
+    	if (JSON.stringify(result) == "{}")
+    	{
+        	$modalInstance.dismiss('cancel');
+    	}
+    	else
+    	{
+    		var modalInstance = $modal.open({
+    			  templateUrl: 'template/createStudent.html',
+    			  controller: 'CreateStudentCtrl',
+    			  backdrop: 'static',
+    			  size: 'lg',
+    			  resolve: {
+    				  child: function() {
+    					  return child;
+    				  },
+    		          mode: function() {
+    		        	return 'update';  
+    		          }
+    			  }
+    			});
+    			modalInstance.result.then(function () {
+    		      //$log.info('Modal OK at: ' + new Date());
+    			  loadData();
+    		    }, function () {
+    		      //$log.info('Modal dismissed at: ' + new Date());
+    		    });
+    		alert("data changed");
+    	}
     };
     
 	$scope.format = 'yyyy-MM-dd';

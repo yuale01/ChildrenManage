@@ -34,12 +34,13 @@
     <script src="http://ui-grid.info/docs/grunt-scripts/vfs_fonts.js"></script-->
     <script src="scripts/app.js"></script>
 	<script src="scripts/controllers/createStudent.js"></script>
+	<script src="scripts/controllers/msgDialog.js"></script>
 	
   </head>
   <body class="body">
     <div id="main" class="main" ng-controller="MainCtrl">
       <div>
-        <alert type="{{alert.type}}" close="closeAlert()" class="alert" ng-show="alert.show">{{alert.msg}}</alert>
+        <alert type="{{alert.type}}" close="closeAlert()" class="alertGrid" ng-show="alert.show">{{alert.msg}}</alert>
       </div>
 	  <div id="button" class="button">
 	    <button type="button" id="create" class="btn btn-success" ng-click="create()">Create</button>

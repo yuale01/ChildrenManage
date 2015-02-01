@@ -120,7 +120,7 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
 	  	}).
 	  	error(function(data) {
 	  		$("#grid").unmask();
-	  		showAlert('danger','Failed to load data: '+data.msg);
+	  		showAlert('danger','Failed to load data: '+data.message);
 	  	});
   }; 
   
@@ -130,7 +130,7 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
 		deferred.resolve();
 	}, timeout, 1);
 	return deferred.promise;
-  }
+  };
   
   var promise = deferFun(500);
   promise.then(function() {
@@ -140,9 +140,10 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
   $scope.create = function() {
 	$scope.closeAlert();
     var modalInstance = $modal.open({
+      scope: $scope,
 	  templateUrl: 'template/createStudent.html',
 	  controller: 'CreateStudentCtrl',
-	  //backdrop: 'static',
+	  backdrop: 'static',
 	  size: 'lg',
 	  resolve: {
 		  child: function() {
@@ -188,7 +189,7 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
   
   $scope.refresh = function() {
 	  loadData();
-  }
+  };
   
   $scope.deleteChildren = function() {
 	  $scope.closeAlert();
@@ -212,9 +213,9 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
 	  		loadData();
 	  	}).
 	  	error(function(data) {
-	  		showAlert('danger', 'Fail to delete item: '+data.msg);
+	  		showAlert('danger', 'Fail to delete item: '+data.message);
 	  	});
-  }
+  };
   
   $scope.edit = function() {
 	  $scope.closeAlert();
@@ -226,9 +227,10 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
 	  }
 	  var child = rows[0];
 	  var modalInstance = $modal.open({
+		  scope: $scope,
 		  templateUrl: 'template/createStudent.html',
 		  controller: 'CreateStudentCtrl',
-		  //backdrop: 'static',
+		  backdrop: 'static',
 		  size: 'lg',
 		  resolve: {
 			  child: function() {
@@ -245,6 +247,6 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
 	    }, function () {
 	      //$log.info('Modal dismissed at: ' + new Date());
 	    });
-  }
+  };
   
 }]);
