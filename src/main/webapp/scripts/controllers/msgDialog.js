@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('MyApp')
+angular.module('MsgDialog', ['ui.bootstrap'])
   .controller('MsgDialogCtrl', function ($scope, $modalInstance, messageType, message) {
 	  
 	  $scope.messageType = messageType;

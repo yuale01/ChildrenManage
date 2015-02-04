@@ -1,7 +1,7 @@
-var app = angular.module('MyApp', ['ngTouch', 'ui.grid', 'ui.grid.paging', 'ui.grid.exporter', 'ui.grid.selection', 'ui.bootstrap', 'ui.grid.resizeColumns']);
+var app = angular.module('MyApp', ['MsgDialog', 'CreateChild', 'ngTouch', 'ui.grid', 'ui.grid.paging', 'ui.grid.exporter', 'ui.grid.selection', 'ui.bootstrap', 'ui.grid.resizeColumns']);
  
 app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiGridConstants', function ($scope, $interval, $q, $modal, $http, uiGridConstants) {
-  
+	
   $scope.alert = {
 		  'type': '',
 		  'msg': '',
@@ -140,7 +140,8 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
   $scope.create = function() {
 	$scope.closeAlert();
     var modalInstance = $modal.open({
-      scope: $scope,
+      //scope: $scope,
+      windowTemplateUrl: 'template/modalDialogWindow.html',
 	  templateUrl: 'template/createStudent.html',
 	  controller: 'CreateStudentCtrl',
 	  backdrop: 'static',
@@ -199,22 +200,44 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
 		  showAlert('danger','No item(s) selected. Please select at least on item.');
 		  return;
 	  }
-	  var ids = JSON.parse('[]');
-	  for (var i=0; i<rows.length; i++)
-		  ids.push(rows[i].id);
 	  
-	  $http({
-		url: '/ChildrenManage/webapi/Children',
-		method: 'DELETE',
-		data: ids,
-		headers: {'Content-Type': "application/json;charset=UTF-8"}
-	  }).
-	    success(function(data) {
-	  		loadData();
-	  	}).
-	  	error(function(data) {
-	  		showAlert('danger', 'Fail to delete item: '+data.message);
-	  	});
+	  var modalInstance = $modal.open({
+  		    windowTemplateUrl: 'template/modalDialogWindow.html',
+			templateUrl: 'template/msgDialog.html',
+			controller: 'MsgDialogCtrl',
+			backdrop: 'static',
+			//size: 'lg',
+			resolve: {
+				messageType: function() {
+					return 'Warning';
+				},
+		        message: function() {
+		        	return 'Are you sure to delete?';  
+		        }
+			}
+		});
+		modalInstance.result.then(function () {
+		      //$log.info('Modal OK at: ' + new Date());
+			  var ids = JSON.parse('[]');
+			  for (var i=0; i<rows.length; i++)
+				  ids.push(rows[i].id);
+			  
+			  $http({
+				url: '/ChildrenManage/webapi/Children',
+				method: 'DELETE',
+				data: ids,
+				headers: {'Content-Type': "application/json;charset=UTF-8"}
+			  }).
+			    success(function(data) {
+			  		loadData();
+			  	}).
+			  	error(function(data) {
+			  		showAlert('danger', 'Fail to delete item: '+data.message);
+			  	});
+			}, function () {
+		      //$log.info('Modal dismissed at: ' + new Date());
+		});
+	  
   };
   
   $scope.edit = function() {
@@ -227,7 +250,7 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiG
 	  }
 	  var child = rows[0];
 	  var modalInstance = $modal.open({
-		  scope: $scope,
+		  //scope: $scope,
 		  templateUrl: 'template/createStudent.html',
 		  controller: 'CreateStudentCtrl',
 		  backdrop: 'static',

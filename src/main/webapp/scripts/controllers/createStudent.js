@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('MyApp')
+angular.module('CreateChild', ['ui.bootstrap'])
   .controller('CreateStudentCtrl', function ($scope, $modalInstance, $modal, $http, child, mode) {
   
     $scope.child = JSON.parse(JSON.stringify(child));
@@ -74,10 +74,19 @@ angular.module('MyApp')
     };
 	
     var openMessageDialog = function (messageType, message, okCallBack, cancleCallBack){
+    	
+    	/*bootbox.confirm("Are you sure?", function(result) {
+    		  if (result == true)
+    			  okCallBack();
+    		  else
+    			  cancleCallBack();
+    		});*/
+    	
     	var modalInstance = $modal.open({
-    		scope: $scope,
+    		windowTemplateUrl: 'template/modalDialogWindow.html',
 			templateUrl: 'template/msgDialog.html',
 			controller: 'MsgDialogCtrl',
+			backdrop: 'static',
 			//size: 'lg',
 			resolve: {
 				messageType: function() {
@@ -155,35 +164,27 @@ angular.module('MyApp')
     		var message = 'Are you sure to drop creating page?';
     		openMessageDialog(messageType, message, okCallBack, cancleCallBack);
     	}
-    	var result = getChangedData();
-    	if (JSON.stringify(result) == "{}")
+    	else if (mode == 'update')
     	{
-        	$modalInstance.dismiss('cancel');
+    		var result = getChangedData();
+        	if (JSON.stringify(result) == "{}")
+        	{
+            	$modalInstance.dismiss('cancel');
+        	}
+        	else
+        	{
+        		var okCallBack = function() {
+        			$modalInstance.dismiss('cancel');
+        		};
+        		var cancleCallBack = function() {
+        			//Do nothing.
+        		};
+        		var messageType = 'Warning';
+        		var message = 'Children has been changed, are you sure to drop this?';
+        		openMessageDialog(messageType, message, okCallBack, cancleCallBack);
+        	}
     	}
-    	else
-    	{
-    		var modalInstance = $modal.open({
-    			  templateUrl: 'template/createStudent.html',
-    			  controller: 'CreateStudentCtrl',
-    			  backdrop: 'static',
-    			  size: 'lg',
-    			  resolve: {
-    				  child: function() {
-    					  return child;
-    				  },
-    		          mode: function() {
-    		        	return 'update';  
-    		          }
-    			  }
-    			});
-    			modalInstance.result.then(function () {
-    		      //$log.info('Modal OK at: ' + new Date());
-    			  loadData();
-    		    }, function () {
-    		      //$log.info('Modal dismissed at: ' + new Date());
-    		    });
-    		alert("data changed");
-    	}
+    	
     };
     
 	$scope.format = 'yyyy-MM-dd';
