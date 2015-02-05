@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('MsgDialog', ['ui.bootstrap'])
-  .controller('MsgDialogCtrl', function ($scope, $modalInstance, messageType, message) {
+angular.module('app.children.controllers')
+  .controller('MsgDialogCtrl', ['$scope', '$modalInstance', 'messageType', 'message', function ($scope, $modalInstance, messageType, message) {
 	  
 	  $scope.messageType = messageType;
 	  $scope.message = message;
@@ -15,4 +15,4 @@ angular.module('MsgDialog', ['ui.bootstrap'])
 		  $modalInstance.dismiss();
 	  };
    
-  });
+  }]);

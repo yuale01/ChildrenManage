@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="MyApp">
+<html ng-app="app">
   <head>
     <!--script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-touch.js"></script>
@@ -8,38 +8,41 @@
     <script src="http://ui-grid.info/docs/grunt-scripts/pdfmake.js"></script>
     <script src="http://ui-grid.info/docs/grunt-scripts/vfs_fonts.js"></script>
 	<script src="bower_components/angular-ui-grid/ui-grid.js"></script-->
-	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-	<link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.css" />
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.min.css" />
 	<link rel="stylesheet" href="bower_components/jquery.loadmask.spin/jquery.loadmask.spin.css" />
 	<link rel="stylesheet" href="styles/ng-grid.css">
     <!--script src="3.0.0-rc.16/ui-grid.js"></script>
     <script src="3.0.0-rc.16/ui-grid.css"></script-->
-	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-touch/angular-touch.js"></script>
-	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-	<script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
-	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-	<script src="bower_components/angular-ui-grid/ui-grid.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.min.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
 	<script src="bower_components/jquery.loadmask.spin/jquery.loadmask.spin.js"></script>
 	<script src="bower_components/spin.js/spin.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.min.js"></script>
+    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+    
 	<!--  script src="http://ui-grid.info/docs/grunt-scripts/csv.js"></script>
     <script src="http://ui-grid.info/docs/grunt-scripts/pdfmake.js"></script>
     <script src="http://ui-grid.info/docs/grunt-scripts/vfs_fonts.js"></script-->
     <script src="scripts/app.js"></script>
 	<script src="scripts/controllers/createStudent.js"></script>
 	<script src="scripts/controllers/msgDialog.js"></script>
-    <script src="misc/bootbox.min.js"></script>
+    
 	
   </head>
   <body class="body">
-    <div id="main" class="main" ng-controller="MainCtrl">
+    <div id="main" ng-controller="MainCtrl">
       <div>
         <alert type="{{alert.type}}" close="closeAlert()" class="alertGrid" ng-show="alert.show">{{alert.msg}}</alert>
       </div>

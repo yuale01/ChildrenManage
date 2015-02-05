@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('CreateChild', ['ui.bootstrap'])
-  .controller('CreateStudentCtrl', function ($scope, $modalInstance, $modal, $http, child, mode) {
+angular.module('app.children.controllers', ['ui.bootstrap'])
+  .controller('CreateStudentCtrl', ['$scope', '$modalInstance', '$modal', '$http', 'child', 'mode', function ($scope, $modalInstance, $modal, $http, child, mode) {
   
     $scope.child = JSON.parse(JSON.stringify(child));
     
@@ -127,10 +127,15 @@ angular.module('CreateChild', ['ui.bootstrap'])
 		}
 		else if (mode === 'update')
 		{
-			$("#create-student-dialog").mask({spinner: { lines: 10, length: 6, width: 3, radius: 5}, delay: 0, label: 'Updating...'});
 			var result = getChangedData();
 			if (JSON.stringify(result) == "{}")
+			{
 				$modalInstance.dismiss('cancel');
+				return;
+			}
+			
+			$("#create-student-dialog").mask({spinner: { lines: 10, length: 6, width: 3, radius: 5}, delay: 0, label: 'Updating...'});
+				
 			$http.put('/ChildrenManage/webapi/Children/'+$scope.child.id, result).
 				success(function(data, status, headers, config) {
 					$("#create-student-dialog").unmask();
@@ -195,4 +200,4 @@ angular.module('CreateChild', ['ui.bootstrap'])
 		$scope.opened = true;
     };
 	
-  });
+  }]);

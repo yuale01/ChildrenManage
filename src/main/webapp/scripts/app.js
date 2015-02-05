@@ -1,11 +1,34 @@
-var app = angular.module('MyApp', ['MsgDialog', 'CreateChild', 'ngTouch', 'ui.grid', 'ui.grid.paging', 'ui.grid.exporter', 'ui.grid.selection', 'ui.bootstrap', 'ui.grid.resizeColumns']);
+var app = angular.module('app', ['app.children.controllers', 'pascalprecht.translate', 'ngTouch', 'ui.grid', 'ui.grid.paging', 'ui.grid.exporter', 'ui.grid.selection', 'ui.bootstrap', 'ui.grid.resizeColumns']);
+
+app.config(['$translateProvider', function ($translateProvider){
+	
+  var getLocale = function () {
+		 var nav    = window.navigator;	    
+		 var tokens = (nav.language || nav.browserLanguage || nav.systemLanguage || nav.userLanguage || '').split('-');
+			
+		 if (tokens > 1)
+		 {
+			tokens[1] = tokens[1].toUpperCase();
+		 }
+			
+		 return tokens.join('_');
+  };
  
-app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', 'uiGridConstants', function ($scope, $interval, $q, $modal, $http, uiGridConstants) {
+  $translateProvider.useStaticFilesLoader({
+	    prefix: 'locale-',
+	    suffix: '.json'
+  });
+ 
+  $translateProvider.preferredLanguage(getLocale());
+	
+}]);
+
+app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', '$translate', 'uiGridConstants', function ($scope, $interval, $q, $modal, $http, $translate, uiGridConstants) {
 	
   $scope.alert = {
-		  'type': '',
-		  'msg': '',
-		  'show': false
+		'type': '',
+		'msg': '',
+		'show': false
   };
   
   var showAlert = function(type, msg) {
