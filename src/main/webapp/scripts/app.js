@@ -15,11 +15,12 @@ app.config(['$translateProvider', function ($translateProvider){
   };
  
   $translateProvider.useStaticFilesLoader({
-	    prefix: 'locale-',
+	    prefix: 'i18n/locale-',
 	    suffix: '.json'
   });
  
   $translateProvider.preferredLanguage(getLocale());
+  $translateProvider.fallbackLanguage('en_US');
 	
 }]);
 
@@ -44,7 +45,7 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', '$tr
   };
   
   $scope.data = []; 
-   
+  
   $scope.gridOptions = {
 	enableColumnResizing: true,
     enableFiltering: true,
@@ -54,31 +55,38 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', '$tr
 	pagingPageSize: 25,
 	columnDefs: [
       { field: 'basicInfo.name',
-	    displayName: 'Name',
+    	headerCellFilter: 'translate',
+	    displayName: $translate.instant('NAME'),
 	    filters: [{condition: uiGridConstants.filter.CONTAINS}]
 	  },
 	  { field: 'basicInfo.idCardNo',
-		displayName: 'ID Card No.',
+		headerCellFilter: 'translate',
+		displayName: $translate.instant('ID_CARD_NO.'),
 	    filters: [{condition: uiGridConstants.filter.CONTAINS}]
 	  },
 	  { field: 'basicInfo.grade',
-		displayName: 'Grade',
+		headerCellFilter: 'translate',
+		displayName: $translate.instant('GRADE'),
 		filters: [{condition: uiGridConstants.filter.CONTAINS}]
 	  },
       { field: 'basicInfo.className',
-	    displayName: 'Class',
+		headerCellFilter: 'translate',
+	    displayName: $translate.instant('CLASS'),
 	    filters: [{condition: uiGridConstants.filter.CONTAINS}]
 	  },
       { field: 'basicInfo.translatedGender',
-	    displayName: 'Gender',
+		headerCellFilter: 'translate',
+	    displayName: $translate.instant('GENDER'),
 	    filters: [{condition: uiGridConstants.filter.CONTAINS}]
 	  },
       { field: 'basicInfo.nation',
-	    displayName: 'Nation',
+		headerCellFilter: 'translate',
+	    displayName: $translate.instant('NATION'),
 	    filters: [{condition: uiGridConstants.filter.CONTAINS}]
 	  },
       { field: 'basicInfo.birthday',
-		displayName: 'Birthday',
+		headerCellFilter: 'translate',
+		displayName: $translate.instant('BIRTHDAY'),
 		filters: [
 		          {
 		            condition: uiGridConstants.filter.GREATER_THAN,
@@ -91,23 +99,28 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', '$tr
 		        ]
 	  },
 	  { field: 'contactInfo.motherName',
-		displayName: 'Mother Name',
+		headerCellFilter: 'translate',
+		displayName: $translate.instant('MOTHER_NAME'),
 		enableFiltering: false
 	  },
       { field: 'contactInfo.motherContact',
-	    displayName: 'Mother Phone',
+		headerCellFilter: 'translate',
+	    displayName: $translate.instant('MOTHER_PHONE'),
 	    enableFiltering: false
 	  },
 	  { field: 'contactInfo.fatherName',
-		displayName: 'Father Name',
+		headerCellFilter: 'translate',
+		displayName: $translate.instant('FATHER_NAME'),
 		enableFiltering: false,
 	  },
 	  { field: 'contactInfo.fatherContact',
-	    displayName: 'Father Phone',
+		headerCellFilter: 'translate',
+	    displayName: $translate.instant('FATHER_PHONE'),
 	    enableFiltering: false
 	  },
 	  { field: 'contactInfo.livingAddr',
-		displayName: 'Living Address',
+		headerCellFilter: 'translate',
+		displayName: $translate.instant('LIVING_ADDR'),
 		enableFiltering: false,
 		visible: false
 	  }
@@ -130,6 +143,7 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', '$tr
     };
   
   var loadData = function() {
+	  var aa = $translate.instant('NAME');
 	  $scope.closeAlert();
 	  $("#grid").mask({spinner: { lines: 10, length: 6, width: 3, radius: 5}, delay: 0, label: 'Loading...'});
 	  $http.get("/ChildrenManage/webapi/Children").

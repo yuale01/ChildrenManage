@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('app.children.controllers', ['ui.bootstrap'])
-  .controller('CreateStudentCtrl', ['$scope', '$modalInstance', '$modal', '$http', 'child', 'mode', function ($scope, $modalInstance, $modal, $http, child, mode) {
-  
-    $scope.child = JSON.parse(JSON.stringify(child));
+  .controller('CreateStudentCtrl', ['$scope', '$modalInstance', '$modal', '$http', '$translate', 'child', 'mode', function ($scope, $modalInstance, $modal, $http, $translate, child, mode) {
+    
+	$scope.child = JSON.parse(JSON.stringify(child));
     
     $scope.disable = mode === 'view' ? 'true' : 'false';
     

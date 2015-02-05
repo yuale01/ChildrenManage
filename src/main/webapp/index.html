@@ -47,10 +47,10 @@
         <alert type="{{alert.type}}" close="closeAlert()" class="alertGrid" ng-show="alert.show">{{alert.msg}}</alert>
       </div>
 	  <div id="button" class="button">
-	    <button type="button" id="create" class="btn btn-success" ng-click="create()">Create</button>
-        <button type="button" id="edit" class="btn btn-success" ng-click="edit()">Edit</button>
-        <button type="button" id="delete" class="btn btn-success" ng-click="deleteChildren()">Delete</button>
-        <button type="button" id="refresh" class="btn btn-success" ng-click="refresh()">Refresh</button>
+	    <button type="button" id="create" class="btn btn-success" ng-click="create()">{{ 'CREATE' | translate }}</button>
+        <button type="button" id="edit" class="btn btn-success" ng-click="edit()">{{ 'EDIT' | translate }}</button>
+        <button type="button" id="delete" class="btn btn-success" ng-click="deleteChildren()">{{ 'DELETE' | translate }}</button>
+        <button type="button" id="refresh" class="btn btn-success" ng-click="refresh()">{{ 'REFRESH' | translate }}</button>
 	  </div>
       <div id="grid" ui-grid="gridOptions" ui-grid-paging ui-grid-exporter ui-grid-selection class="grid"></div>
     </div>
