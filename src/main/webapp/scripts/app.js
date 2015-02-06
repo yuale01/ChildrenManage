@@ -145,19 +145,19 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', '$tr
   var loadData = function() {
 	  var aa = $translate.instant('NAME');
 	  $scope.closeAlert();
-	  $("#grid").mask({spinner: { lines: 10, length: 6, width: 3, radius: 5}, delay: 0, label: 'Loading...'});
+	  $("#grid").mask({spinner: { lines: 10, length: 6, width: 3, radius: 5}, delay: 0, label: $translate.instant('LOADING')});
 	  $http.get("/ChildrenManage/webapi/Children").
 	  	success(function(data) {
 	  		for (var i=0;i<data.length;i++)
 	  			{
-	  				data[i].basicInfo.translatedGender = data[i].basicInfo.gender == 0 ? 'male' : 'female';
+	  				data[i].basicInfo.translatedGender = data[i].basicInfo.gender == 0 ? $translate.instant('GENDER_MALE') : $translate.instant('GENDER_FEMALE');
 	  			}
 	  		$scope.data = data;
 	  		$("#grid").unmask();
 	  	}).
 	  	error(function(data) {
 	  		$("#grid").unmask();
-	  		showAlert('danger','Failed to load data: '+data.message);
+	  		showAlert('danger', $translate.instant('FAIL_LOAD_DATA', {msg: data.message}));
 	  	});
   }; 
   
@@ -234,7 +234,7 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', '$tr
 	  var rows = $scope.gridApi.selection.getSelectedRows();
 	  if (rows.length == 0)
 	  {
-		  showAlert('danger','No item(s) selected. Please select at least on item.');
+		  showAlert('danger', $translate.instant('NO_ITEM_SELECTED'));
 		  return;
 	  }
 	  
@@ -246,10 +246,10 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', '$tr
 			//size: 'lg',
 			resolve: {
 				messageType: function() {
-					return 'Warning';
+					return $translate.instant('TYPE_WARNING');
 				},
 		        message: function() {
-		        	return 'Are you sure to delete?';  
+		        	return $translate.instant('CONFIRM_DELETE');  
 		        }
 			}
 		});
@@ -269,7 +269,7 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', '$tr
 			  		loadData();
 			  	}).
 			  	error(function(data) {
-			  		showAlert('danger', 'Fail to delete item: '+data.message);
+			  		showAlert('danger', $translate.instant('FAIl_DELETE_ITEMS', {msg: data.message}));
 			  	});
 			}, function () {
 		      //$log.info('Modal dismissed at: ' + new Date());
@@ -282,7 +282,7 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', '$tr
 	  var rows = $scope.gridApi.selection.getSelectedRows();
 	  if (rows.length !== 1)
 	  {
-		  showAlert('danger', 'Please select only one item to edit.');
+		  showAlert('danger', $translate.instant('MULTI_ITEMS_SELECTED_EDIT'));
 		  return;
 	  }
 	  var child = rows[0];

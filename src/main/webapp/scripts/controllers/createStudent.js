@@ -113,7 +113,7 @@ angular.module('app.children.controllers', ['ui.bootstrap'])
 		$scope.closeAlert();
 		if (mode === 'create')
 		{
-			$("#create-student-dialog").mask({spinner: { lines: 10, length: 6, width: 3, radius: 5}, delay: 0, label: 'Creating...'});
+			$("#create-student-dialog").mask({spinner: { lines: 10, length: 6, width: 3, radius: 5}, delay: 0, label: $translate.instant('CREATING')});
 			$http.post('/ChildrenManage/webapi/Children', $scope.child).
 				success(function(data, status, headers, config) {
 					$("#create-student-dialog").unmask();
@@ -122,7 +122,7 @@ angular.module('app.children.controllers', ['ui.bootstrap'])
 				}).
 				error(function(data, status, headers, config) {
 					$("#create-student-dialog").unmask();
-					showAlert('danger', data.message);
+					showAlert('danger', $translate.instant('FAIl_CREATE_ITEMS', {msg: data.message}));
 				});
 		}
 		else if (mode === 'update')
@@ -134,7 +134,7 @@ angular.module('app.children.controllers', ['ui.bootstrap'])
 				return;
 			}
 			
-			$("#create-student-dialog").mask({spinner: { lines: 10, length: 6, width: 3, radius: 5}, delay: 0, label: 'Updating...'});
+			$("#create-student-dialog").mask({spinner: { lines: 10, length: 6, width: 3, radius: 5}, delay: 0, label: $translate.instant('UPDATING')});
 				
 			$http.put('/ChildrenManage/webapi/Children/'+$scope.child.id, result).
 				success(function(data, status, headers, config) {
@@ -143,7 +143,7 @@ angular.module('app.children.controllers', ['ui.bootstrap'])
 				}).
 				error(function(data, status, headers, config) {
 					$("#create-student-dialog").unmask();
-					showAlert('danger', data.message);
+					showAlert('danger', $translate.instant('FAIl_UPDATE_ITEMS', {msg: data.message}));
 				});
 		}
 		else if (mode === 'view')
@@ -165,8 +165,8 @@ angular.module('app.children.controllers', ['ui.bootstrap'])
     		var cancleCallBack = function() {
     			//Do nothing.
     		};
-    		var messageType = 'Warning';
-    		var message = 'Are you sure to drop creating page?';
+    		var messageType = $translate.instant('WARNING');
+    		var message = $translate.instant('CONFIRM_DROP_CREATE');
     		openMessageDialog(messageType, message, okCallBack, cancleCallBack);
     	}
     	else if (mode == 'update')
@@ -184,8 +184,8 @@ angular.module('app.children.controllers', ['ui.bootstrap'])
         		var cancleCallBack = function() {
         			//Do nothing.
         		};
-        		var messageType = 'Warning';
-        		var message = 'Children has been changed, are you sure to drop this?';
+        		var messageType = $translate.instant('WARNING');
+        		var message = $translate.instant('CONFIRM_DROP_UPDATE');
         		openMessageDialog(messageType, message, okCallBack, cancleCallBack);
         	}
     	}

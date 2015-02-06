@@ -79,5 +79,18 @@
 	"DISTINCT_ABILITIES": "Distinct Abilities",
 	"DISTINCT_ABILITIES_PLACE_HOLDER": "(Such as special ability, interest, hobby)",
 	"SPECIAL_CASE_ILLUSTRATION": "Special Case Illustration",
-	"SPECIAL_CASE_ILLUSTRATION_PLACE_HOLDER": "Some other exceptional situation"
+	"SPECIAL_CASE_ILLUSTRATION_PLACE_HOLDER": "Some other exceptional situation",
+	"CREATING": "Creating...",
+	"UPDATING": "Updating...",
+	"LOADING": "Loading...",
+	"FAIL_LOAD_DATA": "Failed to load data: {msg}",
+	"NO_ITEM_SELECTED": "No item(s) selected. Please select at least on item.",
+	"TYPE_WARNING": "Warning",
+	"CONFIRM_DELETE": "Are you sure to delete?",
+	"CONFIRM_DROP_CREATE": "Are you sure to drop creating page?",
+	"CONFIRM_DROP_UPDATE": "Children has been changed, are you sure to drop this?",
+	"FAIl_DELETE_ITEMS": "Fail to delete item: {msg}",
+	"FAIl_CREATE_ITEMS": "Fail to create item: {msg}",
+	"FAIl_UPDATE_ITEMS": "Fail to edit item: {msg}",
+	"MULTI_ITEMS_SELECTED_EDIT": "Please select only one item to edit."
 }
