@@ -90,11 +90,11 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', '$tr
 		filters: [
 		          {
 		            condition: uiGridConstants.filter.GREATER_THAN,
-		            placeholder: 'greater than'
+		            placeholder: $translate.instant('CONDITION_PLACE_HOLDER_GREATER_THAN')
 		          },
 		          {
 		            condition: uiGridConstants.filter.LESS_THAN,
-		            placeholder: 'less than'
+		            placeholder: $translate.instant('CONDITION_PLACE_HOLDER_LESS_THAN')
 		          }
 		        ]
 	  },

@@ -165,7 +165,7 @@ angular.module('app.children.controllers', ['ui.bootstrap'])
     		var cancleCallBack = function() {
     			//Do nothing.
     		};
-    		var messageType = $translate.instant('WARNING');
+    		var messageType = $translate.instant('TYPE_WARNING');
     		var message = $translate.instant('CONFIRM_DROP_CREATE');
     		openMessageDialog(messageType, message, okCallBack, cancleCallBack);
     	}
@@ -184,7 +184,7 @@ angular.module('app.children.controllers', ['ui.bootstrap'])
         		var cancleCallBack = function() {
         			//Do nothing.
         		};
-        		var messageType = $translate.instant('WARNING');
+        		var messageType = $translate.instant('TYPE_WARNING');
         		var message = $translate.instant('CONFIRM_DROP_UPDATE');
         		openMessageDialog(messageType, message, okCallBack, cancleCallBack);
         	}
