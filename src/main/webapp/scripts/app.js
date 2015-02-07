@@ -1,7 +1,7 @@
 var app = angular.module('app', ['app.children.controllers', 'pascalprecht.translate', 'ngTouch', 'ui.grid', 'ui.grid.paging', 'ui.grid.exporter', 'ui.grid.selection', 'ui.bootstrap', 'ui.grid.resizeColumns']);
 
 app.config(['$translateProvider', function ($translateProvider){
-	
+  
   var getLocale = function () {
 		 var nav    = window.navigator;	    
 		 var tokens = (nav.language || nav.browserLanguage || nav.systemLanguage || nav.userLanguage || '').split('-');
@@ -20,12 +20,12 @@ app.config(['$translateProvider', function ($translateProvider){
   });
  
   $translateProvider.preferredLanguage(getLocale());
-  $translateProvider.fallbackLanguage('en_US');
+  $translateProvider.fallbackLanguage('en');
 	
 }]);
 
-app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', '$translate', 'uiGridConstants', function ($scope, $interval, $q, $modal, $http, $translate, uiGridConstants) {
-	
+app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal', '$http', '$translate', 'uiGridConstants', function ($rootScope, $scope, $interval, $q, $modal, $http, $translate, uiGridConstants) {
+
   $scope.alert = {
 		'type': '',
 		'msg': '',
@@ -90,11 +90,11 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', '$tr
 		filters: [
 		          {
 		            condition: uiGridConstants.filter.GREATER_THAN,
-		            placeholder: $translate.instant('CONDITION_PLACE_HOLDER_GREATER_THAN')
+		            //placeholder: 'aa'
 		          },
 		          {
 		            condition: uiGridConstants.filter.LESS_THAN,
-		            placeholder: $translate.instant('CONDITION_PLACE_HOLDER_LESS_THAN')
+		            //placeholder: {{'CONDITION_PLACE_HOLDER_LESS_THAN' | translate}}
 		          }
 		        ]
 	  },
@@ -126,6 +126,7 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', '$tr
 	  }
     ]
   };
+  
   $scope.gridOptions.data = 'data';
   
   $scope.gridOptions.onRegisterApi = function(gridApi){
@@ -143,7 +144,6 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', '$tr
     };
   
   var loadData = function() {
-	  var aa = $translate.instant('NAME');
 	  $scope.closeAlert();
 	  $("#grid").mask({spinner: { lines: 10, length: 6, width: 3, radius: 5}, delay: 0, label: $translate.instant('LOADING')});
 	  $http.get("/ChildrenManage/webapi/Children").
@@ -218,10 +218,8 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', '$tr
 	  }
 	});
 	modalInstance.result.then(function () {
-      //$log.info('Modal OK at: ' + new Date());
 	  loadData();
     }, function () {
-      //$log.info('Modal dismissed at: ' + new Date());
     });
   };
   
@@ -254,7 +252,6 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', '$tr
 			}
 		});
 		modalInstance.result.then(function () {
-		      //$log.info('Modal OK at: ' + new Date());
 			  var ids = JSON.parse('[]');
 			  for (var i=0; i<rows.length; i++)
 				  ids.push(rows[i].id);
@@ -272,7 +269,6 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', '$tr
 			  		showAlert('danger', $translate.instant('FAIl_DELETE_ITEMS', {msg: data.message}));
 			  	});
 			}, function () {
-		      //$log.info('Modal dismissed at: ' + new Date());
 		});
 	  
   };
@@ -287,7 +283,6 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', '$tr
 	  }
 	  var child = rows[0];
 	  var modalInstance = $modal.open({
-		  //scope: $scope,
 		  templateUrl: 'template/createStudent.html',
 		  controller: 'CreateStudentCtrl',
 		  backdrop: 'static',
@@ -302,11 +297,18 @@ app.controller('MainCtrl', ['$scope', '$interval', '$q', '$modal', '$http', '$tr
 		  }
 		});
 		modalInstance.result.then(function () {
-	      //$log.info('Modal OK at: ' + new Date());
 		  loadData();
 	    }, function () {
-	      //$log.info('Modal dismissed at: ' + new Date());
 	    });
   };
+  
+  /*angular.forEach($scope.gridOptions.columnDefs, function(value){
+	  $translate(value.displayName).then(function(data){value.displayName = data;});
+	  });*/
+  
+  $translate(['CONDITION_PLACE_HOLDER_GREATER_THAN', 'CONDITION_PLACE_HOLDER_LESS_THAN']).then(function (translations) {
+	  $scope.gridOptions.columnDefs[6].filters[0].placeholder = translations.CONDITION_PLACE_HOLDER_GREATER_THAN;
+	  $scope.gridOptions.columnDefs[6].filters[1].placeholder = translations.CONDITION_PLACE_HOLDER_LESS_THAN;
+  });
   
 }]);
