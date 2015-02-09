@@ -1,9 +1,15 @@
 {
 	"OK": "OK",
 	"CANCLE": "Cancel",
+	"PRINT": "Print",
+	"CLOSE": "Close",
 	"YES": "Yes",
 	"NO": "No",
+	"CURRENT": "Today",
+	"CLEAR": "Clear",
+	"DONE": "Close",
 	"CREATE": "Create",
+	"VIEW": "View",
 	"EDIT": "Edit",
 	"DELETE": "Delete",
 	"REFRESH": "Refresh",
@@ -92,7 +98,16 @@
 	"FAIl_DELETE_ITEMS": "Fail to delete item: {{msg}}",
 	"FAIl_CREATE_ITEMS": "Fail to create item: {{msg}}",
 	"FAIl_UPDATE_ITEMS": "Fail to edit item: {{msg}}",
-	"MULTI_ITEMS_SELECTED_EDIT": "Please select only one item to edit.",
+	"MULTI_ITEMS_SELECTED": "Please select only one item",
 	"CONDITION_PLACE_HOLDER_GREATER_THAN": "greater than",
-	"CONDITION_PLACE_HOLDER_LESS_THAN": "less than"
+	"CONDITION_PLACE_HOLDER_LESS_THAN": "less than",
+	"EMPTY_FIELD": "Cann't be empty",
+	"NAME_IS_EMPTY": "Name is empty",
+	"BIRTHDAY_IS_EMPTY": "Birthday is empty",
+	"FATHER_NAME_EMPTY": "Father name is empty",
+	"MOTHER_NAME_EMPTY": "Mother name is empty",
+	"FATHER_PHONE_EMPTY": "Father phone is empty",
+	"MOTHER_PHONE_EMPTY": "Mother phone is empty",
+	"LIVING_ADDR_EMPTY": "Living address is empty"
+	
 }

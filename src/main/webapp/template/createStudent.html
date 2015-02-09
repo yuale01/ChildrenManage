@@ -3,35 +3,36 @@
       <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
       <h4 class="modal-title">{{ 'CREATE_NEW_CHILD' | translate }}</h4>
   </div>
-  <div class="modal-body" id="modal-body">
-    <div class="row">
-       <div class="col-md-12">
+  <!--start_print-->
+  <div class="modal-body" id="modal-body" >
+    <div class="row hidden-print">
+       <div class="col-xs-12">
          <alert type="{{alert.type}}" close="closeAlert()" ng-show="alert.show">{{alert.msg}}</alert>
        </div>
     </div>
     <fieldset ng-disabled="{{disable}}">
-	    <div class="row">
-	      <div class="form-group col-md-3">
-			  <label for="name" class="col-md-4">{{ 'NAME' | translate }}:</label>
-			  <div class="col-md-8">
-				<input ng-model="child.basicInfo.name" type="text" class="form-control input-sm" id="name">
+	    <div class="row no-gutter">
+	      <div class="form-group col-xs-3">
+			  <label for="name" class="col-xs-4">{{ 'NAME' | translate }}:</label>
+			  <div class="col-xs-8">
+				<input ng-model="child.basicInfo.name" type="text" class="form-control input-sm" id="name" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}">
 			  </div>
 	      </div>
-		  <div class="form-group col-md-3">
-			  <label for="grade" class="col-md-4">{{ 'GRADE' | translate }}:</label>
-			  <div class="col-md-8">
+		  <div class="form-group col-xs-3">
+			  <label for="grade" class="col-xs-4">{{ 'GRADE' | translate }}:</label>
+			  <div class="col-xs-8">
 				<input ng-model="child.basicInfo.grade" type="text" class="form-control input-sm" id="grade">
 			  </div>
 	      </div>
-		  <div class="form-group col-md-3">
-			  <label for="class" class="col-md-4">{{ 'CLASS' | translate }}:</label>
-			  <div class="col-md-8">
+		  <div class="form-group col-xs-3">
+			  <label for="class" class="col-xs-4">{{ 'CLASS' | translate }}:</label>
+			  <div class="col-xs-8">
 				<input ng-model="child.basicInfo.className" type="text" class="form-control input-sm" id="class">
 			  </div>
 	      </div>
-		  <div class="form-group col-md-3">
-			  <label for="gender" class="col-md-4">{{ 'GENDER' | translate }}:</label>
-			  <div class="col-md-8">
+		  <div class="form-group col-xs-3">
+			  <label for="gender" class="col-xs-4">{{ 'GENDER' | translate }}:</label>
+			  <div class="col-xs-8">
 				<select  ng-model="child.basicInfo.gender" class="form-control input-sm" id="gender">
 				  <option value="0">{{ 'GENDER_MALE' | translate }}</option>
 				  <option value="1">{{ 'GENDER_FEMALE' | translate }}</option>
@@ -40,71 +41,71 @@
 	        </div>
 	    </div>
 		
-		<div class="row">
-	      <div class="form-group col-md-3">
-			  <label for="nation" class="col-md-4">{{ 'NATION' | translate }}:</label>
-			  <div class="col-md-8">
+		<div class="row  no-gutter">
+	      <div class="form-group col-xs-3">
+			  <label for="nation" class="col-xs-4">{{ 'NATION' | translate }}:</label>
+			  <div class="col-xs-8">
 				<input ng-model="child.basicInfo.nation" type="text" class="form-control input-sm" id="nation">
 			  </div>
 	      </div>
-		  <div class="form-group col-md-4">
-			  <label for="birthday" class="col-md-4">{{ 'BIRTHDAY' | translate }}:</label>
-			  <div class="input-group col-md-8">
-	            <input ng-model="child.basicInfo.birthday" type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2020-12-31'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" ng-disabled="true" />
+		  <div class="form-group col-xs-4">
+			  <label for="birthday" class="col-xs-4">{{ 'BIRTHDAY' | translate }}:</label>
+			  <div class="input-group col-xs-8">
+	            <input ng-model="child.basicInfo.birthday" type="text" class="form-control" datepicker-popup="{{datepicker.format}}" is-open="datepicker.opened" min-date="datepicker.minDate" max-date="datepicker.maxDate" date-disabled="disabled(date, mode)" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}" ng-disabled="true" close-text="{{ 'DONE' | translate }}" current-text="{{ 'CURRENT' | translate }}" clear-text="{{ 'CLEAR' | translate }}" />
 	            <span class="input-group-btn">
-	              <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-	            </span>
+                <button type="button" class="btn btn-default" ng-click="datepicker.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
 			  </div>
 			  
 	      </div>
-		  <div class="form-group col-md-5">
-			  <label for="id" class="col-md-3">{{ 'ID_CARD_NO.' | translate }}:</label>
-			  <div class="col-md-9">
+		  <div class="form-group col-xs-5">
+			  <label for="id" class="col-xs-4">{{ 'ID_CARD_NO.' | translate }}:</label>
+			  <div class="col-xs-8">
 				<input ng-model="child.basicInfo.idCardNo" type="text" class="form-control input-sm" id="id">
 			  </div>
 	      </div>
 	    </div>
 		
-		<div class="row">
-	      <div class="form-group col-md-3">
-			  <label for="hukou" class="col-md-4">{{ 'HUKOU' | translate }}:</label>
-			  <div class="col-md-8">
+		<div class="row no-gutter">
+	      <div class="form-group col-xs-3">
+			  <label for="hukou" class="col-xs-4">{{ 'HUKOU' | translate }}:</label>
+			  <div class="col-xs-8">
 				<select ng-model="child.basicInfo.huKou" class="form-control input-sm" id="hukou">
 				  <option value="0">{{ 'HUKOU_CONTRY' | translate }}</option>
 				  <option value="1">{{ 'HUKOU_CITY' | translate }}</option>
 				</select>
 			  </div>
 	      </div>
-		  <div class="form-group col-md-9">
-			  <label for="registrationAddr" class="col-md-3">{{ 'REGISTRY_ADDR' | translate }}:</label>
-			  <div class="col-md-9">
+		  <div class="form-group col-xs-9">
+			  <label for="registrationAddr" class="col-xs-3">{{ 'REGISTRY_ADDR' | translate }}:</label>
+			  <div class="col-xs-9">
 				<input ng-model="child.basicInfo.huKouAddr" type="text" class="form-control input-sm" id="registrationAddr">
 			  </div>
 	      </div>
 	    </div>
 		
-		<div class="row">
-	      <div class="form-group col-md-4">
-			  <label for="migrantChildren" class="col-md-7">{{ 'MIGRATION_CHILD' | translate }}:</label>
-			  <div class="col-md-5">
+		<div class="row no-gutter">
+	      <div class="form-group col-xs-4">
+			  <label for="migrantChildren" class="col-xs-6">{{ 'MIGRATION_CHILD' | translate }}:</label>
+			  <div class="col-xs-6">
 				<select ng-model="child.basicInfo.migration" class="form-control input-sm" id="migrantChildren">
 				  <option value="0">{{ 'NO' | translate }}</option>
 				  <option value="1">{{ 'YES' | translate }}</option>
 				</select>
 			  </div>
 	      </div>
-		  <div class="form-group col-md-4">
-			  <label for="orphanhood" class="col-md-7">{{ 'ORPHANHOOD' | translate }}:</label>
-			  <div class="col-md-5">
+		  <div class="form-group col-xs-4">
+			  <label for="orphanhood" class="col-xs-6">{{ 'ORPHANHOOD' | translate }}:</label>
+			  <div class="col-xs-6">
 				<select ng-model="child.basicInfo.orphan" class="form-control input-sm" id="orphanhood">
 				  <option value="0">{{ 'NO' | translate }}</option>
 				  <option value="1">{{ 'YES' | translate }}</option>
 				</select>
 			  </div>
 	      </div>
-		  <div class="form-group col-md-4">
-			  <label for="minimumLiving" class="col-md-7">{{ 'MIN_LIVING' | translate }}:</label>
-			  <div class="col-md-5">
+		  <div class="form-group col-xs-4">
+			  <label for="minimumLiving" class="col-xs-6">{{ 'MIN_LIVING' | translate }}:</label>
+			  <div class="col-xs-6">
 				<select ng-model="child.basicInfo.minLiving" class="form-control input-sm" id="minimumLiving">
 				  <option value="0">{{ 'NO' | translate }}</option>
 				  <option value="1">{{ 'YES' | translate }}</option>
@@ -113,28 +114,28 @@
 	      </div>
 	    </div>
 		
-		<div class="row">
-	      <div class="form-group col-md-4">
-			  <label for="imburse" class="col-md-7">{{ 'IMBURSE' | translate }}:</label>
-			  <div class="col-md-5">
+		<div class="row no-gutter">
+	      <div class="form-group col-xs-4">
+			  <label for="imburse" class="col-xs-6">{{ 'IMBURSE' | translate }}:</label>
+			  <div class="col-xs-6">
 				<select ng-model="child.basicInfo.imburse" class="form-control input-sm" id="imburse">
 				  <option value="0">{{ 'NO' | translate }}</option>
 				  <option value="1">{{ 'YES' | translate }}</option>
 				</select>
 			  </div>
 	      </div>
-		  <div class="form-group col-md-4">
-			  <label for="onlyChild" class="col-md-7">{{ 'ONLY_CHILD' | translate }}:</label>
-			  <div class="col-md-5">
+		  <div class="form-group col-xs-4">
+			  <label for="onlyChild" class="col-xs-6">{{ 'ONLY_CHILD' | translate }}:</label>
+			  <div class="col-xs-6">
 				<select ng-model="child.basicInfo.onlyChild" class="form-control input-sm" id="onlyChild">
 				  <option value="0">{{ 'NO' | translate }}</option>
 				  <option value="1">{{ 'YES' | translate }}</option>
 				</select>
 			  </div>
 	      </div>
-		  <div class="form-group col-md-4">
-			  <label for="pathography" class="col-md-7">{{ 'PATHOGRAPHY' | translate }}:</label>
-			  <div class="col-md-5">
+		  <div class="form-group col-xs-4">
+			  <label for="pathography" class="col-xs-6">{{ 'PATHOGRAPHY' | translate }}:</label>
+			  <div class="col-xs-6">
 				<select ng-model="child.basicInfo.pathography" class="form-control input-sm" id="pathography">
 				  <option value="0">{{ 'NO' | translate }}</option>
 				  <option value="1">{{ 'YES' | translate }}</option>
@@ -144,78 +145,78 @@
 	    </div>
 		
 		<div class="row">
-	      <div class="form-group col-md-3">
-			  <label for="fatherName" class="col-md-4">{{ 'FATHER_NAME' | translate }}:</label>
-			  <div class="col-md-8">
-				<input ng-model="child.contactInfo.fatherName" type="text" class="form-control input-sm" id="fatherName">
+	      <div class="form-group col-xs-3 no-gutter">
+			  <label for="fatherName" class="col-xs-4 no-gutter">{{ 'FATHER_NAME' | translate }}:</label>
+			  <div class="col-xs-8 no-gutter">
+				<input ng-model="child.contactInfo.fatherName" type="text" class="form-control input-sm" id="fatherName" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}">
 			  </div>
 	      </div>
-		  <div class="form-group col-md-3 no-gutter">
-			  <label for="fatherWorkUnit" class="col-md-4">{{ 'WORK_UNIT' | translate }}:</label>
-			  <div class="col-md-8">
+		  <div class="form-group col-xs-3 no-gutter">
+			  <label for="fatherWorkUnit" class="col-xs-4 no-gutter">{{ 'WORK_UNIT' | translate }}:</label>
+			  <div class="col-xs-8 no-gutter">
 				<input ng-model="child.contactInfo.fatherCompany" type="text" class="form-control input-sm" id="fatherWorkUnit">
 			  </div>
 	      </div>
-		  <div class="form-group col-md-3 no-gutter">
-			  <label for="fatherTel" class="col-md-4">{{ 'TEL' | translate }}:</label>
-			  <div class="col-md-8">
-				<input ng-model="child.contactInfo.fatherContact" type="text" class="form-control input-sm" id="fatherTel">
+		  <div class="form-group col-xs-3 no-gutter">
+			  <label for="fatherTel" class="col-xs-4 no-gutter">{{ 'TEL' | translate }}:</label>
+			  <div class="col-xs-8 no-gutter">
+				<input ng-model="child.contactInfo.fatherContact" type="text" class="form-control input-sm" id="fatherTel" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}">
 			  </div>
 	      </div>
-		  <div class="form-group col-md-3">
-			  <label for="fatherID" class="col-md-3">{{ 'ID' | translate }}:</label>
-			  <div class="col-md-9">
+		  <div class="form-group col-xs-3 no-gutter">
+			  <label for="fatherID" class="col-xs-3 no-gutter">{{ 'ID' | translate }}:</label>
+			  <div class="col-xs-9 no-gutter">
 				<input ng-model="child.contactInfo.fatherIdCard" type="text" class="form-control input-sm" id="fatherID">
 			  </div>
 	        </div>
 	    </div>
 		
 		<div class="row">
-	      <div class="form-group col-md-3">
-			  <label for="motherName" class="col-md-4">{{ 'MOTHER_NAME' | translate }}:</label>
-			  <div class="col-md-8">
-				<input ng-model="child.contactInfo.motherName" type="text" class="form-control input-sm" id="motherName">
+	      <div class="form-group col-xs-3 no-gutter">
+			  <label for="motherName" class="col-xs-4 no-gutter">{{ 'MOTHER_NAME' | translate }}:</label>
+			  <div class="col-xs-8 no-gutter">
+				<input ng-model="child.contactInfo.motherName" type="text" class="form-control input-sm" id="motherName" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}">
 			  </div>
 	      </div>
-		  <div class="form-group col-md-3 no-gutter">
-			  <label for="motherWorkUnit" class="col-md-4">{{ 'WORK_UNIT' | translate }}:</label>
-			  <div class="col-md-8">
+		  <div class="form-group col-xs-3 no-gutter">
+			  <label for="motherWorkUnit" class="col-xs-4 no-gutter">{{ 'WORK_UNIT' | translate }}:</label>
+			  <div class="col-xs-8 no-gutter">
 				<input ng-model="child.contactInfo.motherCompany" type="text" class="form-control input-sm" id="motherWorkUnit">
 			  </div>
 	      </div>
-		  <div class="form-group col-md-3 no-gutter">
-			  <label for="motherTel" class="col-md-4">{{ 'TEL' | translate }}:</label>
-			  <div class="col-md-8">
-				<input ng-model="child.contactInfo.motherContact" type="text" class="form-control input-sm" id="motherTel">
+		  <div class="form-group col-xs-3 no-gutter">
+			  <label for="motherTel" class="col-xs-4 no-gutter">{{ 'TEL' | translate }}:</label>
+			  <div class="col-xs-8 no-gutter">
+				<input ng-model="child.contactInfo.motherContact" type="text" class="form-control input-sm" id="motherTel" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}">
 			  </div>
 	      </div>
-		  <div class="form-group col-md-3">
-			  <label for="motherID" class="col-md-3">{{ 'ID' | translate }}:</label>
-			  <div class="col-md-9">
+		  <div class="form-group col-xs-3 no-gutter">
+			  <label for="motherID" class="col-xs-3 no-gutter">{{ 'ID' | translate }}:</label>
+			  <div class="col-xs-9 no-gutter">
 				<input ng-model="child.contactInfo.motherIdCard" type="text" class="form-control input-sm" id="motherID">
 			  </div>
 	        </div>
 	    </div>
 		
-		<div class="row">
-		  <div class="form-group col-md-6">
-			  <label for="liveAddress" class="col-md-3">{{ 'LIVING_ADDR' | translate }}:</label>
-			  <div class="col-md-9">
-				<input ng-model="child.contactInfo.livingAddr" type="text" class="form-control input-sm" id="liveAddress">
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-6">
+			  <label for="liveAddress" class="col-xs-3">{{ 'LIVING_ADDR' | translate }}:</label>
+			  <div class="col-xs-9">
+				<input ng-model="child.contactInfo.livingAddr" type="text" class="form-control input-sm" id="liveAddress" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}">
 			  </div>
 	      </div>
-		  <div class="form-group col-md-6">
-			  <label for="otherContact" class="col-md-3">{{ 'OTHER_CONTACT' | translate }}:</label>
-			  <div class="col-md-9">
+		  <div class="form-group col-xs-6">
+			  <label for="otherContact" class="col-xs-4">{{ 'OTHER_CONTACT' | translate }}:</label>
+			  <div class="col-xs-8">
 				<textarea ng-model="child.contactInfo.otherContact" class="form-control input-sm" rows="2" id="otherContact" placeholder="{{ 'OTHER_CONTACT_PLACE_HOLDER' | translate }}"></textarea>
 			  </div>
 	      </div>
 		</div>
 		
-		<div class="row">
-		  <div class="form-group col-md-12">
-			  <label class="col-md-2">{{ 'DOFF_DON_CAPACITY' | translate }}:</label>
-			  <div class="col-md-10">
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+			  <label class="col-xs-2">{{ 'DOFF_DON_CAPACITY' | translate }}:</label>
+			  <div class="col-xs-10">
 				<label class="radio-inline">
 	              <input ng-model="child.bodyInfo.doffDon" type="radio" name="doffRadioOptions" id="doffRadio1" value="0"> {{ 'DOFF_DON_CAPACITY_0' | translate }}
 	            </label>
@@ -229,10 +230,10 @@
 	      </div>
 		</div>
 		
-		<div class="row">
-		  <div class="form-group col-md-12">
-			  <label class="col-md-2">{{ 'EATING' | translate }}:</label>
-			  <div class="col-md-10">
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+			  <label class="col-xs-2">{{ 'EATING' | translate }}:</label>
+			  <div class="col-xs-10">
 				<label class="radio-inline">
 	              <input ng-model="child.bodyInfo.eating" type="radio" name="eatingRadioOptions" id="eatingRadio1" value="0"> {{ 'EATING_0' | translate }}
 	            </label>
@@ -246,10 +247,10 @@
 	      </div>
 		</div>
 		
-		<div class="row">
-		  <div class="form-group col-md-12">
-			  <label class="col-md-2">{{ 'TOILETING_SELF_CARE' | translate }}:</label>
-			  <div class="col-md-10">
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+			  <label class="col-xs-2">{{ 'TOILETING_SELF_CARE' | translate }}:</label>
+			  <div class="col-xs-10">
 				<label class="radio-inline">
 	              <input ng-model="child.bodyInfo.toileting" type="radio" name="toiletingRadioOptions" id="toiletingRadio1" value="0"> {{ 'TOILETING_SELF_CARE_0' | translate }}
 	            </label>
@@ -266,10 +267,10 @@
 	      </div>
 		</div>
 		
-		<div class="row">
-		  <div class="form-group col-md-12">
-			  <label class="col-md-2">{{ 'SLEEPING_ABIlITY' | translate }}:</label>
-			  <div class="col-md-10">
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+			  <label class="col-xs-2">{{ 'SLEEPING_ABILITY' | translate }}:</label>
+			  <div class="col-xs-10">
 				<label class="radio-inline">
 	              <input ng-model="child.bodyInfo.sleeping" type="radio" name="sleepingRadioOptions" id="sleepingRadio1" value="0"> {{ 'SLEEPING_ABIlITY_0' | translate }}
 	            </label>
@@ -284,10 +285,10 @@
 	      </div>
 		</div>
 		
-		<div class="row">
-		  <div class="form-group col-md-12">
-			  <label class="col-md-2">{{ 'EATING_SPEED' | translate }}:</label>
-			  <div class="col-md-10">
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+			  <label class="col-xs-2">{{ 'EATING_SPEED' | translate }}:</label>
+			  <div class="col-xs-10">
 				<label class="radio-inline">
 	              <input ng-model="child.bodyInfo.eatingSpeed" type="radio" name="eatingSpeedRadioOptions" id="eatingSpeedRadio1" value="0"> {{ 'EATING_SPEED_0' | translate }}
 	            </label>
@@ -301,10 +302,10 @@
 	      </div>
 		</div>
 		
-		<div class="row">
-		  <div class="form-group col-md-12">
-			  <label class="col-md-2">{{ 'APPETITE' | translate }}:</label>
-			  <div class="col-md-10">
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+			  <label class="col-xs-2">{{ 'APPETITE' | translate }}:</label>
+			  <div class="col-xs-10">
 				<label class="radio-inline">
 	              <input ng-model="child.bodyInfo.appetite" type="radio" name="appetiteRadioOptions" id="appetiteRadio1" value="0"> {{ 'APPETITE_0' | translate }}
 	            </label>
@@ -318,25 +319,25 @@
 	      </div>
 		</div>
 		
-		<div class="row">
-		  <div class="form-group col-md-12">
-			  <label class="col-md-2">{{ 'PICKY_EATING' | translate }}:</label>
-			  <div class="col-md-10">
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+			  <label class="col-xs-2">{{ 'PICKY_EATING' | translate }}:</label>
+			  <div class="col-xs-10">
 				<label class="radio-inline">
 	              <input ng-model="child.bodyInfo.pickyEating" type="radio" name="pickEatingRadioOptions" id="pickyEatingRadio1" value="0"> {{ 'PICKY_EATING_0' | translate }}
 	            </label>
 	            <label class="radio-inline">
-	              <input ng-model="child.bodyInfo.pickyEating" type="radio" name="pickEatingRadioOptions" id="pickyEatingRadio2" value="1"> {{ 'PICKY_EATING_1' | translate }}:
+	              <input ng-model="child.bodyInfo.pickyEating" type="radio" name="pickEatingRadioOptions" id="pickyEatingRadio2" value="1"> {{ 'PICKY_EATING_1' | translate }}
 				  <input ng-model="child.bodyInfo.pickyEatingInfo" type="text" id="pickyEatingText">
 	            </label>
 			  </div>
 	      </div>
 		</div>
 		
-		<div class="row">
-		  <div class="form-group col-md-12">
-			  <label class="col-md-2">{{ 'EATING_ABILITY' | translate }}:</label>
-			  <div class="col-md-10">
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+			  <label class="col-xs-2">{{ 'EATING_ABILITY' | translate }}:</label>
+			  <div class="col-xs-10">
 				<label class="radio-inline">
 	              <input ng-model="child.bodyInfo.eatingAbility" type="radio" name="eatingAbilityRadioOptions" id="eatingAbilityRadio1" value="0"> {{ 'EATING_ABILITY_0' | translate }}
 	            </label>
@@ -347,10 +348,10 @@
 	      </div>
 		</div>
 		
-		<div class="row">
-		  <div class="form-group col-md-12">
-			  <label class="col-md-2">{{ 'FOOD_ALLERGY' | translate }}:</label>
-			  <div class="col-md-10">
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+			  <label class="col-xs-2">{{ 'FOOD_ALLERGY' | translate }}:</label>
+			  <div class="col-xs-10">
 				<label class="radio-inline">
 	              <input ng-model="child.bodyInfo.foodAllergy" type="radio" name="foodAllergyRadioOptions" id="foodAllergyRadio1" value="0"> {{ 'FOOD_ALLERGY_0' | translate }}
 	            </label>
@@ -362,10 +363,10 @@
 	      </div>
 		</div>
 		
-		<div class="row">
-		  <div class="form-group col-md-12">
-			  <label class="col-md-2">{{ 'HEALTH_STATUS' | translate }}:</label>
-			  <div class="col-md-10">
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+			  <label class="col-xs-2">{{ 'HEALTH_STATUS' | translate }}:</label>
+			  <div class="col-xs-10">
 				<label class="radio-inline">
 	              <input ng-model="child.bodyInfo.healthStatus" type="radio" name="healthStatusRadioOptions" id="healthStatusRadio1" value="0"> {{ 'HEALTH_STATUS_0' | translate }}
 	            </label>
@@ -382,28 +383,29 @@
 	      </div>
 		</div>
 		
-		<div class="row">
-		  <div class="form-group col-md-12">
-		    <label for="specialPerformance" class="col-md-2">{{ 'DISTINCT_ABILITIES' | translate }}:</label>
-			<div class="col-md-10">
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+		    <label for="specialPerformance" class="col-xs-2">{{ 'DISTINCT_ABILITIES' | translate }}:</label>
+			<div class="col-xs-10">
 			  <textarea ng-model="child.basicInfo.specialPerformance" class="form-control input-sm" rows="3" id="specialPerformance" placeholder="{{ 'DISTINCT_ABILITIES_PLACE_HOLDER' | translate }}"></textarea>
 			</div>
 		  </div>
 		</div>
 	    
-		<div class="row">
-		  <div class="form-group col-md-12">
-		    <label for="otherAnnouncement" class="col-md-2">{{ 'SPECIAL_CASE_ILLUSTRATION' | translate }}:</label>
-			<div class="col-md-10">
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+		    <label for="otherAnnouncement" class="col-xs-2">{{ 'SPECIAL_CASE_ILLUSTRATION' | translate }}:</label>
+			<div class="col-xs-10">
 			  <textarea ng-model="child.basicInfo.otherAnnouncement" class="form-control input-sm" rows="3" id="otherAnnouncement" placeholder="{{ 'SPECIAL_CASE_ILLUSTRATION_PLACE_HOLDER' | translate }}"></textarea>
 			</div>
 		  </div>
 		</div>
     </fieldset>
   </div>
+  <!--end_print-->
   
   <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="ok()">{{ 'OK' | translate }}</button>
-    <button class="btn btn-warning" ng-click="cancel()">{{ 'CANCLE' | translate }}</button>
+    <button class="btn btn-primary" ng-click="ok()">{{okText}}</button>
+    <button class="btn btn-warning" ng-click="cancel()">{{cancleText}}</button>
   </div>
 </div>

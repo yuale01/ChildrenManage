@@ -7,7 +7,8 @@
 }
 
 .body {
-  
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 .alertGrid {
@@ -34,8 +35,8 @@
 }
 
 .no-gutter > [class*='col-'] {
-    padding-right:0;
-    padding-left:5px;
+    padding-right: 0;
+    padding-left: 1px;
 }
 
 .my-custom-menu {
@@ -57,4 +58,17 @@
   -ms-transform: rotate(180deg);
   -moz-transform: rotate(180deg);
   -o-transform: rotate(180deg);
+}
+
+input.ng-pristine {
+    background-color: white;
+}
+input.ng-dirty {
+    background-color: white;
+}
+input.ng-valid {
+    background-color: white;
+}
+input.ng-invalid {
+    border:1px solid #a94442;
 }

@@ -7,6 +7,9 @@ angular.module('app.children.controllers', ['ui.bootstrap'])
     
     $scope.disable = mode === 'view' ? 'true' : 'false';
     
+    $scope.okText = mode === 'view' ? $translate.instant('PRINT') : $translate.instant('OK');
+    $scope.cancleText = mode === 'view' ? $translate.instant('CLOSE') : $translate.instant('CANCLE');
+    
     var originChild = JSON.parse(JSON.stringify(child));
     
     var childStructure = [
@@ -75,13 +78,6 @@ angular.module('app.children.controllers', ['ui.bootstrap'])
 	
     var openMessageDialog = function (messageType, message, okCallBack, cancleCallBack){
     	
-    	/*bootbox.confirm("Are you sure?", function(result) {
-    		  if (result == true)
-    			  okCallBack();
-    		  else
-    			  cancleCallBack();
-    		});*/
-    	
     	var modalInstance = $modal.open({
     		windowTemplateUrl: 'template/modalDialogWindow.html',
 			templateUrl: 'template/msgDialog.html',
@@ -108,16 +104,56 @@ angular.module('app.children.controllers', ['ui.bootstrap'])
 		});
     };
     
+    var valideInput = function() {
+    	if ($scope.child.basicInfo.name == "" || $scope.child.basicInfo.name == undefined)
+    		return $translate.instant('NAME_IS_EMPTY');
+    	else if ($scope.child.basicInfo.birthday == "" || $scope.child.basicInfo.birthday == undefined)
+    		return $translate.instant('BIRTHDAY_IS_EMPTY');
+    	else if ($scope.child.contactInfo.fatherName == "" || $scope.child.contactInfo.fatherName == undefined)
+    		return $translate.instant('FATHER_NAME_EMPTY');
+    	else if ($scope.child.contactInfo.fatherContact == "" || $scope.child.contactInfo.fatherContact == undefined)
+    		return $translate.instant('FATHER_PHONE_EMPTY');
+    	else if ($scope.child.contactInfo.motherName == "" || $scope.child.contactInfo.motherName == undefined)
+    		return $translate.instant('MOTHER_NAME_EMPTY');
+    	else if ($scope.child.contactInfo.motherContact == "" || $scope.child.contactInfo.motherContact == undefined)
+    		return $translate.instant('MOTHER_PHONE_EMPTY');
+    	
+    	else
+    		return "";
+    };
+    
 	$scope.ok = function () {
-		//mask();
+		
 		$scope.closeAlert();
+		
+		if (mode === 'view')
+		{
+			var hdHTML = "<!doctype html><head>" +
+							"<link rel=\"stylesheet\" href=\"bower_components/bootstrap/dist/css/bootstrap.min.css\" type=\"text/css\"/>" +
+							"<link rel=\"stylesheet\" href=\"styles/ng-grid.css\" type=\"text/css\">" +
+						 "</head>";
+			var bodyHTML = "<body><div style=\"width: 800px;\">" + window.document.getElementById("modal-body").innerHTML + "</div><script>window.print();</script></body>";
+			var printWindow = window.open();
+			printWindow.document.write(hdHTML+bodyHTML);
+			printWindow.document.close();
+			printWindow.focus();
+			return;
+		}
+		
+		var required = valideInput();
+		
+		if (required != "")
+		{
+			showAlert('danger', required);
+			return;
+		}
+
 		if (mode === 'create')
 		{
 			$("#create-student-dialog").mask({spinner: { lines: 10, length: 6, width: 3, radius: 5}, delay: 0, label: $translate.instant('CREATING')});
 			$http.post('/ChildrenManage/webapi/Children', $scope.child).
 				success(function(data, status, headers, config) {
 					$("#create-student-dialog").unmask();
-					//add succes  info;
 					$modalInstance.close();
 				}).
 				error(function(data, status, headers, config) {
@@ -145,11 +181,8 @@ angular.module('app.children.controllers', ['ui.bootstrap'])
 					$("#create-student-dialog").unmask();
 					showAlert('danger', $translate.instant('FAIl_UPDATE_ITEMS', {msg: data.message}));
 				});
-		}
-		else if (mode === 'view')
-		{
-			$modalInstance.dismiss('cancel');
-		}
+		};
+		
     };
 
     $scope.cancel = function () {
@@ -192,12 +225,16 @@ angular.module('app.children.controllers', ['ui.bootstrap'])
     	
     };
     
-	$scope.format = 'yyyy-MM-dd';
-	$scope.open = function($event) {
-		$event.preventDefault();
-		$event.stopPropagation();
+	$scope.datepicker = {
+			format: 'yyyy-MM-dd',
+			maxDate: new Date(),
+			minDate: '2001-01-01',
+			open: function($event) {
+			    $event.preventDefault();
+			    $event.stopPropagation();
 
-		$scope.opened = true;
-    };
+			    $scope.datepicker.opened = true;
+			  }
+	};
 	
   }]);
