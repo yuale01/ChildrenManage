@@ -36,6 +36,8 @@ app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal',
   
   $scope.lang = 'zh-cn';
   
+  $scope.filterCollapsed = true;
+  
   var showAlert = function(type, msg) {
 	    $scope.alert.type = type;
 	    $scope.alert.msg = msg;
