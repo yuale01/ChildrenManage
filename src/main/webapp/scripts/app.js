@@ -55,7 +55,7 @@ app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal',
   $scope.gridOptions = {
 	enableColumnResizing: true,
 	enableSorting: true,
-    enableFiltering: true,
+    enableFiltering: false,
     exporterMenuCsv: false,
     exporterMenuPdf: false,
     enableGridMenu: true,

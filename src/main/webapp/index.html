@@ -46,55 +46,57 @@
 	  <div collapse="filterCollapsed" class="filter">
 		<div class="well well-lg">
 
-			<div class="form-inline row no-gutter-filter" style="margin-bottom: 20px;">
-		      <div class="form-group col-xs-2 no-gutter-filter">
+			<div class="form-inline row form-inline-margin-group" style="margin-bottom: 20px;">
+		      	<div class="form-group">
 				  <label for="filter_name">{{ 'NAME' | translate }}:</label>
-				  <input ng-model="child.basicInfo.name" type="text" class="form-control input-sm" id="filter_name" placeholder="{{ 'EMPTY_FIELD' | translate }}">
-		      </div>
-		      <div class="form-group col-xs-2 no-gutter-filter">
-				  <label for="filter_id">{{ 'ID_CARD_NO.' | translate }}:</label>
-					<input ng-model="child.basicInfo.name" type="text" class="form-control input-sm" id="filter_id" placeholder="{{ 'EMPTY_FIELD' | translate }}">
-		      </div>
-			  <div class="form-group col-xs-2 no-gutter-filter">
+				  <input ng-model="filter.name" type="text" class="form-control input-sm disable-clear-input" id="filter_name" placeholder="">
+				  <span id="searchclear" class="glyphicon glyphicon-remove-circle" ng-click="filter.name= ''" ng-show="!!filter.name"/>           
+		      	</div>
+			  	<div class="form-group">
 				  <label for="filter_grade">{{ 'GRADE' | translate }}:</label>
-					<input ng-model="child.basicInfo.grade" type="text" class="form-control input-sm" id="filter_grade">
-		      </div>
-			  <div class="form-group col-xs-2 no-gutter-filter">
+				  <input ng-model="filter.grade" type="text" class="form-control input-sm" id="filter_grade">
+		      	</div>
+			  	<div class="form-group">
 				  <label for="filter_class">{{ 'CLASS' | translate }}:</label>
-					<input ng-model="child.basicInfo.className" type="text" class="form-control input-sm" id="filter_class">
-		      </div>
-			  <div class="form-group col-xs-2 no-gutter-filter">
+				  <input ng-model="filter.className" type="text" class="form-control input-sm" id="filter_class">
+		      	</div>
+			  <div class="form-group">
 				  <label for="filter_gender">{{ 'GENDER' | translate }}:</label>
-					<select  ng-model="child.basicInfo.gender" class="form-control input-sm" id="filter_gender" style="width:auto">
+					<select  ng-model="filter.gender" class="form-control input-sm" id="filter_gender">
 					  <option value="0">{{ 'GENDER_MALE' | translate }}</option>
 					  <option value="1">{{ 'GENDER_FEMALE' | translate }}</option>
 					</select>
 	          </div>
-	          <div class="form-group col-xs-2 no-gutter-filter">
+	          <div class=" form-group">
+			     <label >{{ 'BIRTHDAY' | translate }}:</label>
+			     <label >{{ 'FROM' | translate }}</label>
+			     <div class="input-group">
+	                <input ng-model="filter.birthdayFrom" type="text" class="form-control" datepicker-popup="{{datepicker.format}}" is-open="datepicker.opened" min-date="datepicker.minDate" max-date="datepicker.maxDate" date-disabled="disabled(date, mode)" placeholder="" ng-disabled="true" close-text="{{ 'DONE' | translate }}" current-text="{{ 'CURRENT' | translate }}" clear-text="{{ 'CLEAR' | translate }}" style="width:100px;"/>
+	            	<span class="input-group-btn">
+                		<button type="button" class="btn btn-default" ng-click="datepicker.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                	</span>
+			  	 </div>
+			     <label >{{ 'TO' | translate }}</label>
+			     <div class="input-group">
+	                <input ng-model="filter.birthdayTo" type="text" class="form-control" datepicker-popup="{{datepicker.format}}" is-open="datepicker.opened" min-date="datepicker.minDate" max-date="datepicker.maxDate" date-disabled="disabled(date, mode)" placeholder="" ng-disabled="true" close-text="{{ 'DONE' | translate }}" current-text="{{ 'CURRENT' | translate }}" clear-text="{{ 'CLEAR' | translate }}" style="width:100px;"/>
+	            	<span class="input-group-btn">
+                		<button type="button" class="btn btn-default" ng-click="datepicker.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                	</span>
+			  	 </div> 	
+	          </div>
+	          <div class="form-group">
+				  <label for="filter_id">{{ 'ID_CARD_NO.' | translate }}:</label>
+				  <input ng-model="filter.id" type="text" class="form-control input-sm disable-clear-input" style="width:160px;" id="filter_id" placeholder="">
+				  <span id="searchclear" class="glyphicon glyphicon-remove-circle" ng-click="filter.id= ''" ng-show="!!filter.id"/>    
+		      </div>
+	          <!--div class="form-group col-xs-2 no-gutter-filter">
 				  <label for="filter_nation">{{ 'NATION' | translate }}:</label>
 					<input ng-model="child.basicInfo.className" type="text" class="form-control input-sm" id="filter_nation">
-		      </div>
+		      </div-->
 	        </div>
 
-	        <div class="row no-gutter-filter form-inline">
-	          <div class=" form-group  col-xs-6">
-			     <label >{{ 'BIRTHDAY' | translate }}:</label>
-			     <label >{{ 'FROM' | translate }}:</label>
-			     <div class="input-group">
-	                <input ng-model="child.basicInfo.birthday" type="text" class="form-control" datepicker-popup="{{datepicker.format}}" is-open="datepicker.opened" min-date="datepicker.minDate" max-date="datepicker.maxDate" date-disabled="disabled(date, mode)" placeholder="{{ 'EMPTY_FIELD' | translate }}" ng-disabled="true" close-text="{{ 'DONE' | translate }}" current-text="{{ 'CURRENT' | translate }}" clear-text="{{ 'CLEAR' | translate }}" />
-	            	<span class="input-group-btn">
-                		<button type="button" class="btn btn-default" ng-click="datepicker.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                	</span>
-			  	 </div>
-			     <label >{{ 'TO' | translate }}:</label>
-			     <div class="input-group">
-	                <input ng-model="child.basicInfo.birthday" type="text" class="form-control" datepicker-popup="{{datepicker.format}}" is-open="datepicker.opened" min-date="datepicker.minDate" max-date="datepicker.maxDate" date-disabled="disabled(date, mode)" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}" ng-disabled="true" close-text="{{ 'DONE' | translate }}" current-text="{{ 'CURRENT' | translate }}" clear-text="{{ 'CLEAR' | translate }}" />
-	            	<span class="input-group-btn">
-                		<button type="button" class="btn btn-default" ng-click="datepicker.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                	</span>
-			  	 </div>
-                	
-	          </div>
+	        <div class="row">    
+		      <button type="button" id="filter" class="btn btn-default" ng-click="doFilter" style="float: right;">{{ 'GO' | translate }}</button>
 	        </div>
 
 		</div> 
