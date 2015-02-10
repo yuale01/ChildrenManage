@@ -38,6 +38,54 @@ app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal',
   
   $scope.filterCollapsed = true;
   
+  var fullData = []; 
+  
+  $scope.data = [];
+  
+  $scope.filter= {
+		'name': '',
+		'grade': '',
+		'className': '',
+		'gender': '',
+		'birthdayFrom': '',
+		'birthdayTo': '',
+		'id': ''
+  };
+  
+  var isEmpty = function(data) {
+	  if (data == null || data == undefined || data == '' )
+		  return true;
+	  else 
+		  return false;
+  }
+  
+  var filterData = function(data) {
+	  var result = [];
+	  for (i = 0; i< data.length; i++)
+	  {
+		  if (!isEmpty($scope.filter.name) && data[i].basicInfo.name.indexOf($scope.filter.name)==-1)
+			  continue;
+		  if (!isEmpty($scope.filter.grade) && data[i].basicInfo.grade != $scope.filter.grade )
+			  continue;
+		  if (!isEmpty($scope.filter.className) && data[i].basicInfo.className != $scope.filter.className)
+			  continue;
+		  if (!isEmpty($scope.filter.gender) && data[i].basicInfo.gender != $scope.filter.gender )
+			  continue;
+		  if (!isEmpty($scope.filter.id) && data[i].basicInfo.idCardNo != $scope.filter.id )
+			  continue;
+		  if (!isEmpty($scope.filter.birthdayFrom) && new Date(data[i].basicInfo.birthday).getTime() < $scope.filter.birthdayFrom.getTime() )
+			  continue;
+		  if (!isEmpty($scope.filter.birthdayTo) && new Date(data[i].basicInfo.birthday).getTime() > $scope.filter.birthdayTo )
+			  continue;
+		  result.push(data[i]);
+	  }
+	  return result;
+  }
+  
+  $scope.doFilter = function() {
+	  $scope.data = filterData(fullData);
+  }
+  
   var showAlert = function(type, msg) {
 	    $scope.alert.type = type;
 	    $scope.alert.msg = msg;
@@ -49,8 +97,6 @@ app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal',
 	    $scope.alert.msg = '';
 	    $scope.alert.show = false;
   };
-  
-  $scope.data = []; 
   
   $scope.gridOptions = {
 	enableColumnResizing: true,
@@ -65,52 +111,52 @@ app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal',
 	columnDefs: [
       { field: 'basicInfo.name',
     	headerCellFilter: 'translate',
-	    displayName: $translate.instant('NAME'),
-	    filters: [{condition: uiGridConstants.filter.CONTAINS}],
+	    displayName: $translate.instant('NAME')
+	    /*filters: [{condition: uiGridConstants.filter.CONTAINS}],
 	    sort: {
 	    	direction: uiGridConstants.ASC,
 	    	priority: 1
 	    },
-	    suppressRemoveSort: true
+	    suppressRemoveSort: true*/
 	  },
 	  { field: 'basicInfo.idCardNo',
 		headerCellFilter: 'translate',
-		displayName: $translate.instant('ID_CARD_NO.'),
-	    filters: [{condition: uiGridConstants.filter.CONTAINS}],
-	    suppressRemoveSort: true
+		displayName: $translate.instant('ID_CARD_NO.')
+	    //filters: [{condition: uiGridConstants.filter.CONTAINS}],
+	    //suppressRemoveSort: true
 	  },
-	  { field: 'basicInfo.grade',
+	  { field: 'basicInfo.translatedGrade',
 		headerCellFilter: 'translate',
-		displayName: $translate.instant('GRADE'),
-		filters: [{condition: uiGridConstants.filter.CONTAINS}],
-		suppressRemoveSort: true
+		displayName: $translate.instant('GRADE')
+		//filters: [{condition: uiGridConstants.filter.CONTAINS}],
+		//suppressRemoveSort: true
 	  },
-      { field: 'basicInfo.className',
+      { field: 'basicInfo.translatedClassName',
 		headerCellFilter: 'translate',
-	    displayName: $translate.instant('CLASS'),
-	    filters: [{condition: uiGridConstants.filter.CONTAINS}],
-	    suppressRemoveSort: true
+	    displayName: $translate.instant('CLASS')
+	    //filters: [{condition: uiGridConstants.filter.CONTAINS}],
+	    //suppressRemoveSort: true
 	  },
       { field: 'basicInfo.translatedGender',
 		headerCellFilter: 'translate',
-	    displayName: $translate.instant('GENDER'),
-	    filters: [{condition: uiGridConstants.filter.CONTAINS}],
+	    displayName: $translate.instant('GENDER')
+	    /*filters: [{condition: uiGridConstants.filter.CONTAINS}],
 	    sort: {
 	    	direction: uiGridConstants.ASC,
 	    	priority: 0
 	    },
-	    suppressRemoveSort: true
+	    suppressRemoveSort: true*/
 	  },
       { field: 'basicInfo.nation',
 		headerCellFilter: 'translate',
-	    displayName: $translate.instant('NATION'),
-	    filters: [{condition: uiGridConstants.filter.CONTAINS}],
-	    suppressRemoveSort: true
+	    displayName: $translate.instant('NATION')
+	    /*filters: [{condition: uiGridConstants.filter.CONTAINS}],
+	    suppressRemoveSort: true*/
 	  },
       { field: 'basicInfo.birthday',
 		headerCellFilter: 'translate',
-		displayName: $translate.instant('BIRTHDAY'),
-		filters: [
+		displayName: $translate.instant('BIRTHDAY')
+		/*filters: [
 		          {
 		            condition: function(searchTerm, cellValue) {
 		            	var strippedValue = searchTerm.replace(/\\/g, '');
@@ -129,38 +175,38 @@ app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal',
 		            //placeholder: CONDITION_PLACE_HOLDER_LESS_THAN
 		          }
 		        ],
-	    suppressRemoveSort: true
+	    suppressRemoveSort: true*/
 	  },
 	  { field: 'contactInfo.motherName',
 		headerCellFilter: 'translate',
-		displayName: $translate.instant('MOTHER_NAME'),
-		enableFiltering: false,
-		suppressRemoveSort: true
+		displayName: $translate.instant('MOTHER_NAME')
+		//enableFiltering: false,
+		//suppressRemoveSort: true
 	  },
       { field: 'contactInfo.motherContact',
 		headerCellFilter: 'translate',
-	    displayName: $translate.instant('MOTHER_PHONE'),
-	    enableFiltering: false,
-	    suppressRemoveSort: true
+	    displayName: $translate.instant('MOTHER_PHONE')
+	    //enableFiltering: false,
+	    //suppressRemoveSort: true
 	  },
 	  { field: 'contactInfo.fatherName',
 		headerCellFilter: 'translate',
-		displayName: $translate.instant('FATHER_NAME'),
-		enableFiltering: false,
-		suppressRemoveSort: true
+		displayName: $translate.instant('FATHER_NAME')
+		//enableFiltering: false,
+		//suppressRemoveSort: true
 	  },
 	  { field: 'contactInfo.fatherContact',
 		headerCellFilter: 'translate',
-	    displayName: $translate.instant('FATHER_PHONE'),
-	    enableFiltering: false,
-	    suppressRemoveSort: true
+	    displayName: $translate.instant('FATHER_PHONE')
+	    //enableFiltering: false,
+	    //suppressRemoveSort: true
 	  },
 	  { field: 'contactInfo.livingAddr',
 		headerCellFilter: 'translate',
 		displayName: $translate.instant('LIVING_ADDR'),
-		enableFiltering: false,
-		visible: false,
-		suppressRemoveSort: true
+		//enableFiltering: false,
+		visible: false
+		//suppressRemoveSort: true
 	  }
     ]
   };
@@ -181,16 +227,35 @@ app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal',
       });*/
     };
   
+  var translateData = function(data) {
+	  for (var i=0;i<data.length;i++)
+	  {
+			data[i].basicInfo.translatedGender = data[i].basicInfo.gender == 0 ? $translate.instant('GENDER_MALE') : $translate.instant('GENDER_FEMALE');
+			
+			if (data[i].basicInfo.grade == 0)
+				data[i].basicInfo.translatedGrade = $translate.instant('GRADE_ONE');
+			else if (data[i].basicInfo.grade == 1)
+				data[i].basicInfo.translatedGrade = $translate.instant('GRADE_TWO');
+			else if (data[i].basicInfo.grade == 2)
+				data[i].basicInfo.translatedGrade = $translate.instant('GRADE_THREE');
+			
+			if (data[i].basicInfo.className == 0)
+				data[i].basicInfo.translatedClassName = $translate.instant('CLASS_ONE');
+			else if (data[i].basicInfo.className == 1)
+				data[i].basicInfo.translatedClassName = $translate.instant('CLASS_TWO');
+			else if (data[i].basicInfo.className == 2)
+				data[i].basicInfo.translatedClassName = $translate.instant('CLASS_THREE');
+	  }
+  }
+  
   var loadData = function() {
 	  $scope.closeAlert();
 	  $("#grid").mask({spinner: { lines: 10, length: 6, width: 3, radius: 5}, delay: 0, label: $translate.instant('LOADING')});
 	  $http.get("/ChildrenManage/webapi/Children").
 	  	success(function(data) {
-	  		for (var i=0;i<data.length;i++)
-	  			{
-	  				data[i].basicInfo.translatedGender = data[i].basicInfo.gender == 0 ? $translate.instant('GENDER_MALE') : $translate.instant('GENDER_FEMALE');
-	  			}
-	  		$scope.data = data;
+	  		
+	  		fullData = translateData(data);
+	  		$scope.data = filterData(data);
 	  		$("#grid").unmask();
 	  	}).
 	  	error(function(data) {
@@ -225,6 +290,8 @@ app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal',
 		  child: function() {
 			  return {
 					"basicInfo": {
+						"grade": 0,
+						"className": 0,
 						"gender": 0,
 						"birthday": new Date(),
 						"huKou": 0,
@@ -378,6 +445,24 @@ app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal',
   $rootScope.$on('$translateLoadingEnd', function(promise) {
 	  //$translate.refresh('CREATE');
   });
+  
+  $scope.datepicker = {
+			format: 'yyyy-MM-dd',
+			maxDate: new Date(),
+			minDate: '2001-01-01',
+			openFrom: function($event) {
+			    $event.preventDefault();
+			    $event.stopPropagation();
+
+			    $scope.datepicker.fromOpened = true;
+			  },
+			openTo: function($event) {
+				$event.preventDefault();
+				$event.stopPropagation();
+
+				$scope.datepicker.toOpened = true;
+			}
+	};
   
   
 }]);

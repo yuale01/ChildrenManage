@@ -54,33 +54,42 @@
 		      	</div>
 			  	<div class="form-group">
 				  <label for="filter_grade">{{ 'GRADE' | translate }}:</label>
-				  <input ng-model="filter.grade" type="text" class="form-control input-sm" id="filter_grade">
+                  <select  ng-model="filter.grade" class="form-control input-sm" id="filter.grade">
+                      <option value="0">{{ 'GRADE_ONE' | translate }}</option>
+                      <option value="1">{{ 'GRADE_TWO' | translate }}</option>
+                      <option value="2">{{ 'GRADE_THREE' | translate }}</option>
+                  </select>
 		      	</div>
 			  	<div class="form-group">
 				  <label for="filter_class">{{ 'CLASS' | translate }}:</label>
-				  <input ng-model="filter.className" type="text" class="form-control input-sm" id="filter_class">
+                  <select  ng-model="filter.className" class="form-control input-sm" id="filter.className">
+                      <option value="0">{{ 'CLASS_ONE' | translate }}</option>
+                      <option value="1">{{ 'CLASS_TWO' | translate }}</option>
+                      <option value="2">{{ 'CLASS_THREE' | translate }}</option>
+                      <!-- option value="3">{{ 'CLASS_FOUR' | translate }}</option -->
+                  </select>
 		      	</div>
 			  <div class="form-group">
 				  <label for="filter_gender">{{ 'GENDER' | translate }}:</label>
-					<select  ng-model="filter.gender" class="form-control input-sm" id="filter_gender">
+				  <select  ng-model="filter.gender" class="form-control input-sm" id="filter_gender">
 					  <option value="0">{{ 'GENDER_MALE' | translate }}</option>
 					  <option value="1">{{ 'GENDER_FEMALE' | translate }}</option>
-					</select>
+				  </select>
 	          </div>
 	          <div class=" form-group">
 			     <label >{{ 'BIRTHDAY' | translate }}:</label>
 			     <label >{{ 'FROM' | translate }}</label>
 			     <div class="input-group">
-	                <input ng-model="filter.birthdayFrom" type="text" class="form-control" datepicker-popup="{{datepicker.format}}" is-open="datepicker.opened" min-date="datepicker.minDate" max-date="datepicker.maxDate" date-disabled="disabled(date, mode)" placeholder="" ng-disabled="true" close-text="{{ 'DONE' | translate }}" current-text="{{ 'CURRENT' | translate }}" clear-text="{{ 'CLEAR' | translate }}" style="width:100px;"/>
+	                <input ng-model="filter.birthdayFrom" type="text" class="form-control" datepicker-popup="{{datepicker.format}}" is-open="datepicker.fromOpened" min-date="datepicker.minDate" max-date="datepicker.maxDate" date-disabled="disabled(date, mode)" placeholder="" ng-disabled="true" close-text="{{ 'DONE' | translate }}" current-text="{{ 'CURRENT' | translate }}" clear-text="{{ 'CLEAR' | translate }}" style="width:100px;"/>
 	            	<span class="input-group-btn">
-                		<button type="button" class="btn btn-default" ng-click="datepicker.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                		<button type="button" class="btn btn-default" ng-click="datepicker.openFrom($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                 	</span>
 			  	 </div>
 			     <label >{{ 'TO' | translate }}</label>
 			     <div class="input-group">
-	                <input ng-model="filter.birthdayTo" type="text" class="form-control" datepicker-popup="{{datepicker.format}}" is-open="datepicker.opened" min-date="datepicker.minDate" max-date="datepicker.maxDate" date-disabled="disabled(date, mode)" placeholder="" ng-disabled="true" close-text="{{ 'DONE' | translate }}" current-text="{{ 'CURRENT' | translate }}" clear-text="{{ 'CLEAR' | translate }}" style="width:100px;"/>
+	                <input ng-model="filter.birthdayTo" type="text" class="form-control" datepicker-popup="{{datepicker.format}}" is-open="datepicker.toOpened" min-date="datepicker.minDate" max-date="datepicker.maxDate" date-disabled="disabled(date, mode)" placeholder="" ng-disabled="true" close-text="{{ 'DONE' | translate }}" current-text="{{ 'CURRENT' | translate }}" clear-text="{{ 'CLEAR' | translate }}" style="width:100px;"/>
 	            	<span class="input-group-btn">
-                		<button type="button" class="btn btn-default" ng-click="datepicker.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                		<button type="button" class="btn btn-default" ng-click="datepicker.openTo($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                 	</span>
 			  	 </div> 	
 	          </div>
@@ -96,7 +105,7 @@
 	        </div>
 
 	        <div class="row">    
-		      <button type="button" id="filter" class="btn btn-default" ng-click="doFilter" style="float: right;">{{ 'GO' | translate }}</button>
+		      <button type="button" id="filter" class="btn btn-default" ng-click="doFilter()" style="float: right;">{{ 'GO' | translate }}</button>
 	        </div>
 
 		</div> 

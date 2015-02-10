@@ -7,8 +7,8 @@ DROP TABLE if EXISTS `basic_info`;
 CREATE TABLE `basic_info` (
   `id` bigint(11) NOT NULL,
   `name` varchar(20) NOT NULL,
-  `grade` varchar(20),
-  `class_name` varchar(20),
+  `grade` tinyint(1),
+  `class_name` tinyint(1),
   `gender` tinyint(1),
   `nation` varchar(10),
   `birthday` bigint(11),

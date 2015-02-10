@@ -21,13 +21,22 @@
 		  <div class="form-group col-xs-3">
 			  <label for="grade" class="col-xs-4">{{ 'GRADE' | translate }}:</label>
 			  <div class="col-xs-8">
-				<input ng-model="child.basicInfo.grade" type="text" class="form-control input-sm" id="grade">
+                <select  ng-model="child.basicInfo.grade" class="form-control input-sm" id="grade">
+                      <option value="0">{{ 'GRADE_ONE' | translate }}</option>
+                      <option value="1">{{ 'GRADE_TWO' | translate }}</option>
+                      <option value="2">{{ 'GRADE_THREE' | translate }}</option>
+                </select>
 			  </div>
 	      </div>
 		  <div class="form-group col-xs-3">
 			  <label for="class" class="col-xs-4">{{ 'CLASS' | translate }}:</label>
 			  <div class="col-xs-8">
-				<input ng-model="child.basicInfo.className" type="text" class="form-control input-sm" id="class">
+                <select  ng-model="child.basicInfo.className" class="form-control input-sm" id="class">
+                      <option value="0">{{ 'CLASS_ONE' | translate }}</option>
+                      <option value="1">{{ 'CLASS_TWO' | translate }}</option>
+                      <option value="2">{{ 'CLASS_THREE' | translate }}</option>
+                      <!-- option value="3">{{ 'CLASS_FOUR' | translate }}</option -->
+                </select>
 			  </div>
 	      </div>
 		  <div class="form-group col-xs-3">
@@ -272,14 +281,14 @@
 			  <label class="col-xs-2">{{ 'SLEEPING_ABILITY' | translate }}:</label>
 			  <div class="col-xs-10">
 				<label class="radio-inline">
-	              <input ng-model="child.bodyInfo.sleeping" type="radio" name="sleepingRadioOptions" id="sleepingRadio1" value="0"> {{ 'SLEEPING_ABIlITY_0' | translate }}
+	              <input ng-model="child.bodyInfo.sleeping" type="radio" name="sleepingRadioOptions" id="sleepingRadio1" value="0" ng-click="child.bodyInfo.sleepingInfo=''"> {{ 'SLEEPING_ABIlITY_0' | translate }}
 	            </label>
 	            <label class="radio-inline">
-	              <input ng-model="child.bodyInfo.sleeping" type="radio" name="sleepingRadioOptions" id="sleepingRadio2" value="1"> {{ 'SLEEPING_ABIlITY_1' | translate }}
+	              <input ng-model="child.bodyInfo.sleeping" type="radio" name="sleepingRadioOptions" id="sleepingRadio2" value="1" ng-click="child.bodyInfo.sleepingInfo=''"> {{ 'SLEEPING_ABIlITY_1' | translate }}
 	            </label>
 	            <label class="radio-inline">
 	              <input ng-model="child.bodyInfo.sleeping" type="radio" name="sleepingRadioOptions" id="sleepingRadio3" value="2"> {{ 'SLEEPING_ABIlITY_2' | translate }}
-				  <input ng-model="child.bodyInfo.sleepingInfo" type="text" id="specialHabitText">
+				  <input ng-model="child.bodyInfo.sleepingInfo" type="text" id="specialHabitText" ng-disabled="child.bodyInfo.sleeping != 2">
 	            </label>
 			  </div>
 	      </div>
@@ -324,11 +333,11 @@
 			  <label class="col-xs-2">{{ 'PICKY_EATING' | translate }}:</label>
 			  <div class="col-xs-10">
 				<label class="radio-inline">
-	              <input ng-model="child.bodyInfo.pickyEating" type="radio" name="pickEatingRadioOptions" id="pickyEatingRadio1" value="0"> {{ 'PICKY_EATING_0' | translate }}
+	              <input ng-model="child.bodyInfo.pickyEating" type="radio" name="pickEatingRadioOptions" id="pickyEatingRadio1" value="0" ng-click="child.bodyInfo.pickyEatingInfo=''"> {{ 'PICKY_EATING_0' | translate }}
 	            </label>
 	            <label class="radio-inline">
 	              <input ng-model="child.bodyInfo.pickyEating" type="radio" name="pickEatingRadioOptions" id="pickyEatingRadio2" value="1"> {{ 'PICKY_EATING_1' | translate }}
-				  <input ng-model="child.bodyInfo.pickyEatingInfo" type="text" id="pickyEatingText">
+				  <input ng-model="child.bodyInfo.pickyEatingInfo" type="text" id="pickyEatingText" ng-disabled="child.bodyInfo.pickyEating != 1">
 	            </label>
 			  </div>
 	      </div>
@@ -353,11 +362,11 @@
 			  <label class="col-xs-2">{{ 'FOOD_ALLERGY' | translate }}:</label>
 			  <div class="col-xs-10">
 				<label class="radio-inline">
-	              <input ng-model="child.bodyInfo.foodAllergy" type="radio" name="foodAllergyRadioOptions" id="foodAllergyRadio1" value="0"> {{ 'FOOD_ALLERGY_0' | translate }}
+	              <input ng-model="child.bodyInfo.foodAllergy" type="radio" name="foodAllergyRadioOptions" id="foodAllergyRadio1" value="0" ng-click="child.bodyInfo.foodAllergyInfo=''"> {{ 'FOOD_ALLERGY_0' | translate }}
 	            </label>
 	            <label class="radio-inline">
 	              <input ng-model="child.bodyInfo.foodAllergy" type="radio" name="foodAllergyRadioOptions" id="foodAllergyRadio2" value="1"> {{ 'FOOD_ALLERGY_1' | translate }}
-				  <input ng-model="child.bodyInfo.foodAllergyInfo" type="text" id="foodAllergyText">
+				  <input ng-model="child.bodyInfo.foodAllergyInfo" type="text" id="foodAllergyText" ng-disabled="child.bodyInfo.foodAllergy != 1">
 	            </label>
 			  </div>
 	      </div>

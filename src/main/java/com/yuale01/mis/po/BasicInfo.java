@@ -7,8 +7,8 @@ public class BasicInfo
 {
 	private Long id;
 	private String name;
-	private String grade;
-	private String className;
+	private Integer grade;
+	private Integer className;
 	private Integer gender;
 	private String nation;
 	private String birthday;
@@ -37,16 +37,16 @@ public class BasicInfo
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getGrade() {
+	public Integer getGrade() {
 		return grade;
 	}
-	public void setGrade(String grade) {
+	public void setGrade(Integer grade) {
 		this.grade = grade;
 	}
-	public String getClassName() {
+	public Integer getClassName() {
 		return className;
 	}
-	public void setClassName(String className) {
+	public void setClassName(Integer className) {
 		this.className = className;
 	}
 	public Integer getGender() {

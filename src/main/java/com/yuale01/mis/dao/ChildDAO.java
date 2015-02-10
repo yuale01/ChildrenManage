@@ -58,8 +58,8 @@ public class ChildDAO  implements IChildDAO
 				
 				basicInfo.setId(id);
 				basicInfo.setName(result.getString(Constants.BASIC_INFO_NAME));
-				basicInfo.setGrade(result.getString(Constants.BASIC_INFO_GRADE));
-				basicInfo.setClassName(result.getString(Constants.BASIC_INFO_CLASS_NAME));
+				basicInfo.setGrade(result.getInt(Constants.BASIC_INFO_GRADE));
+				basicInfo.setClassName(result.getInt(Constants.BASIC_INFO_CLASS_NAME));
 				basicInfo.setGender(result.getInt(Constants.BASIC_INFO_GENDER));
 				basicInfo.setNation(result.getString(Constants.BASIC_INFO_NATION));
 				basicInfo.setBirthday(Tools.convertLongTimeToStr(result.getLong(Constants.BASIC_INFO_BIRTHDAY)));
@@ -167,8 +167,8 @@ public class ChildDAO  implements IChildDAO
 				long id = result.getLong(Constants.BASIC_INFO_ID);
 				basicInfo.setId(id);
 				basicInfo.setName(result.getString(Constants.BASIC_INFO_NAME));
-				basicInfo.setGrade(result.getString(Constants.BASIC_INFO_GRADE));
-				basicInfo.setClassName(result.getString(Constants.BASIC_INFO_CLASS_NAME));
+				basicInfo.setGrade(result.getInt(Constants.BASIC_INFO_GRADE));
+				basicInfo.setClassName(result.getInt(Constants.BASIC_INFO_CLASS_NAME));
 				basicInfo.setGender(result.getInt(Constants.BASIC_INFO_GENDER));
 				basicInfo.setNation(result.getString(Constants.BASIC_INFO_NATION));
 				basicInfo.setBirthday(Tools.convertLongTimeToStr(result.getLong(Constants.BASIC_INFO_BIRTHDAY)));
@@ -558,8 +558,8 @@ public class ChildDAO  implements IChildDAO
 			prestat1 = conn.prepareStatement(basicSql);
 			prestat1.setLong(1, id);
 			prestat1.setString(2, basicInfo.getName());
-			prestat1.setString(3, basicInfo.getGrade());
-			prestat1.setString(4, basicInfo.getClassName());
+			prestat1.setInt(3, basicInfo.getGrade() == null ? 0 : basicInfo.getGrade());
+			prestat1.setInt(4, basicInfo.getClassName() == null ? 0 : basicInfo.getClassName());
 			prestat1.setInt(5, basicInfo.getGender() == null ? 0 : basicInfo.getGender());
 			prestat1.setString(6, basicInfo.getNation());
 			Long time = Tools.parseTimeFromStr(basicInfo.getBirthday());
