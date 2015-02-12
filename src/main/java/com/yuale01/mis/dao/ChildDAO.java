@@ -67,53 +67,53 @@ public class ChildDAO implements IChildDAO {
                 BodyInfo bodyInfo = new BodyInfo();
 
                 basicInfo.setId(id);
-                basicInfo.setName(result.getString(Constants.BASIC_INFO_NAME));
-                basicInfo.setGrade(result.getInt(Constants.BASIC_INFO_GRADE));
-                basicInfo.setClassName(result.getInt(Constants.BASIC_INFO_CLASS_NAME));
-                basicInfo.setGender(result.getInt(Constants.BASIC_INFO_GENDER));
-                basicInfo.setNation(result.getString(Constants.BASIC_INFO_NATION));
-                basicInfo.setBirthday(Tools.convertLongTimeToStr(result.getLong(Constants.BASIC_INFO_BIRTHDAY)));
-                basicInfo.setIdCardNo(result.getString(Constants.BASIC_INFO_ID_CARD_NO));
-                basicInfo.setHuKou(result.getInt(Constants.BASIC_INFO_HUKOU));
-                basicInfo.setHuKouAddr(result.getString(Constants.BASIC_INFO_HUKOU_ADDR));
-                basicInfo.setMigration(result.getInt(Constants.BASIC_INFO_MIGRATION));
-                basicInfo.setOnlyChild(result.getInt(Constants.BASIC_INFO_ONLY_CHILD));
-                basicInfo.setMinLiving(result.getInt(Constants.BASIC_INFO_MIN_LIVING));
-                basicInfo.setImburse(result.getInt(Constants.BASIC_INFO_IMBURSE));
-                basicInfo.setOrphan(result.getInt(Constants.BASIC_INFO_ORPHAN));
-                basicInfo.setPathography(result.getInt(Constants.BASIC_INFO_PATHOGRAPHY));
-                basicInfo.setSpecialPerformance(result.getString(Constants.BASIC_INFO_SPECIAL_PERFORMANCE));
-                basicInfo.setOtherAnnouncement(result.getString(Constants.BASIC_INFO_OTHER_ANNOUNCEMENT));
-                basicInfo.setTimeStamp(result.getLong(Constants.BASIC_INFO_TIMESTAMP));
+                basicInfo.setName(result.getString(Constants.BASIC_INFO_NAME_dbField));
+                basicInfo.setGrade(result.getInt(Constants.BASIC_INFO_GRADE_dbField));
+                basicInfo.setClassName(result.getInt(Constants.BASIC_INFO_CLASS_NAME_dbField));
+                basicInfo.setGender(result.getInt(Constants.BASIC_INFO_GENDER_dbField));
+                basicInfo.setNation(result.getString(Constants.BASIC_INFO_NATION_dbField));
+                basicInfo.setBirthday(Tools.convertLongTimeToStr(result.getLong(Constants.BASIC_INFO_BIRTHDAY_dbField)));
+                basicInfo.setIdCardNo(result.getString(Constants.BASIC_INFO_ID_CARD_NO_dbField));
+                basicInfo.setHuKou(result.getInt(Constants.BASIC_INFO_HUKOU_dbField));
+                basicInfo.setHuKouAddr(result.getString(Constants.BASIC_INFO_HUKOU_ADDR_dbField));
+                basicInfo.setMigration(result.getInt(Constants.BASIC_INFO_MIGRATION_dbField));
+                basicInfo.setOnlyChild(result.getInt(Constants.BASIC_INFO_ONLY_CHILD_dbField));
+                basicInfo.setMinLiving(result.getInt(Constants.BASIC_INFO_MIN_LIVING_dbField));
+                basicInfo.setImburse(result.getInt(Constants.BASIC_INFO_IMBURSE_dbField));
+                basicInfo.setOrphan(result.getInt(Constants.BASIC_INFO_ORPHAN_dbField));
+                basicInfo.setPathography(result.getInt(Constants.BASIC_INFO_PATHOGRAPHY_dbField));
+                basicInfo.setSpecialPerformance(result.getString(Constants.BASIC_INFO_SPECIAL_PERFORMANCE_dbField));
+                basicInfo.setOtherAnnouncement(result.getString(Constants.BASIC_INFO_OTHER_ANNOUNCEMENT_dbField));
+                basicInfo.setTimeStamp(result.getLong(Constants.BASIC_INFO_TIMESTAMP_dbField));
 
                 contactInfo.setId(id);
-                contactInfo.setMotherName(result.getString(Constants.CONTACT_INFO_MOTHER_NAME));
-                contactInfo.setMotherCompany(result.getString(Constants.CONTACT_INFO_MOTHER_COMPANY));
-                contactInfo.setMotherContact(result.getString(Constants.CONTACT_INFO_MOTHER_CONTACT));
-                contactInfo.setMotherIdCard(Constants.CONTACT_INFO_MOTHER_ID_CARD);
-                contactInfo.setFatherName(result.getString(Constants.CONTACT_INFO_FATHER_NAME));
-                contactInfo.setFatherCompany(result.getString(Constants.CONTACT_INFO_FATHER_COMPANY));
-                contactInfo.setFatherContact(result.getString(Constants.CONTACT_INFO_FATHER_CONTACT));
-                contactInfo.setFatherIdCard(Constants.CONTACT_INFO_FATHER_ID_CARD);
-                contactInfo.setLivingAddr(result.getString(Constants.CONTACT_INFO_LIVING_ADDR));
-                contactInfo.setOtherContact(result.getString(Constants.CONTACT_INFO_OTHER_CONTACT));
-                contactInfo.setTimeStamp(result.getLong(Constants.CONTACT_INFO_TIMESTAMP));
+                contactInfo.setMotherName(result.getString(Constants.CONTACT_INFO_MOTHER_NAME_dbField));
+                contactInfo.setMotherCompany(result.getString(Constants.CONTACT_INFO_MOTHER_COMPANY_dbField));
+                contactInfo.setMotherContact(result.getString(Constants.CONTACT_INFO_MOTHER_CONTACT_dbField));
+                contactInfo.setMotherIdCard(Constants.CONTACT_INFO_MOTHER_ID_CARD_dbField);
+                contactInfo.setFatherName(result.getString(Constants.CONTACT_INFO_FATHER_NAME_dbField));
+                contactInfo.setFatherCompany(result.getString(Constants.CONTACT_INFO_FATHER_COMPANY_dbField));
+                contactInfo.setFatherContact(result.getString(Constants.CONTACT_INFO_FATHER_CONTACT_dbField));
+                contactInfo.setFatherIdCard(Constants.CONTACT_INFO_FATHER_ID_CARD_dbField);
+                contactInfo.setLivingAddr(result.getString(Constants.CONTACT_INFO_LIVING_ADDR_dbField));
+                contactInfo.setOtherContact(result.getString(Constants.CONTACT_INFO_OTHER_CONTACT_dbField));
+                contactInfo.setTimeStamp(result.getLong(Constants.CONTACT_INFO_TIMESTAMP_dbField));
 
                 bodyInfo.setId(id);
-                bodyInfo.setDoffDon(result.getInt(Constants.BODY_INFO_DOFF_DON));
-                bodyInfo.setEating(result.getInt(Constants.BODY_INFO_EATING));
-                bodyInfo.setToileting(result.getInt(Constants.BODY_INFO_TOILETING));
-                bodyInfo.setSleeping(result.getInt(Constants.BODY_INFO_SLEEPING));
-                bodyInfo.setSleepingInfo(result.getString(Constants.BODY_INFO_SLEEPING_INFO));
-                bodyInfo.setEatingSpeed(result.getInt(Constants.BODY_INFO_EATING_SPEED));
-                bodyInfo.setAppetite(result.getInt(Constants.BODY_INFO_APPETITE));
-                bodyInfo.setPickyEating(result.getInt(Constants.BODY_INFO_PICKY_EATING));
-                bodyInfo.setPickyEatingInfo(result.getString(Constants.BODY_INFO_PICKY_EATING_INFO));
-                bodyInfo.setEatingAbility(result.getInt(Constants.BODY_INFO_EATING_ABILITY));
-                bodyInfo.setFoodAllergy(result.getInt(Constants.BODY_INFO_FOOD_ALLERGY));
-                bodyInfo.setFoodAllergyInfo(result.getString(Constants.BODY_INFO_FOOD_ALLERGY_INFO));
-                bodyInfo.setHealthStatus(result.getInt(Constants.BODY_INFO_HEALTH_STATUS));
-                bodyInfo.setTimeStamp(result.getLong(Constants.BODY_INFO_TIMESTAMP));
+                bodyInfo.setDoffDon(result.getInt(Constants.BODY_INFO_DOFF_DON_dbField));
+                bodyInfo.setEating(result.getInt(Constants.BODY_INFO_EATING_dbField));
+                bodyInfo.setToileting(result.getInt(Constants.BODY_INFO_TOILETING_dbField));
+                bodyInfo.setSleeping(result.getInt(Constants.BODY_INFO_SLEEPING_dbField));
+                bodyInfo.setSleepingInfo(result.getString(Constants.BODY_INFO_SLEEPING_INFO_dbField));
+                bodyInfo.setEatingSpeed(result.getInt(Constants.BODY_INFO_EATING_SPEED_dbField));
+                bodyInfo.setAppetite(result.getInt(Constants.BODY_INFO_APPETITE_dbField));
+                bodyInfo.setPickyEating(result.getInt(Constants.BODY_INFO_PICKY_EATING_dbField));
+                bodyInfo.setPickyEatingInfo(result.getString(Constants.BODY_INFO_PICKY_EATING_INFO_dbField));
+                bodyInfo.setEatingAbility(result.getInt(Constants.BODY_INFO_EATING_ABILITY_dbField));
+                bodyInfo.setFoodAllergy(result.getInt(Constants.BODY_INFO_FOOD_ALLERGY_dbField));
+                bodyInfo.setFoodAllergyInfo(result.getString(Constants.BODY_INFO_FOOD_ALLERGY_INFO_dbField));
+                bodyInfo.setHealthStatus(result.getInt(Constants.BODY_INFO_HEALTH_STATUS_dbField));
+                bodyInfo.setTimeStamp(result.getLong(Constants.BODY_INFO_TIMESTAMP_dbField));
 
                 child.setBasicInfo(basicInfo);
                 child.setBodyInfo(bodyInfo);
@@ -172,55 +172,55 @@ public class ChildDAO implements IChildDAO {
                 ContactInfo contactInfo = new ContactInfo();
                 BodyInfo bodyInfo = new BodyInfo();
 
-                long id = result.getLong(Constants.BASIC_INFO_ID);
+                long id = result.getLong(Constants.BASIC_INFO_ID_dbField);
                 basicInfo.setId(id);
-                basicInfo.setName(result.getString(Constants.BASIC_INFO_NAME));
-                basicInfo.setGrade(result.getInt(Constants.BASIC_INFO_GRADE));
-                basicInfo.setClassName(result.getInt(Constants.BASIC_INFO_CLASS_NAME));
-                basicInfo.setGender(result.getInt(Constants.BASIC_INFO_GENDER));
-                basicInfo.setNation(result.getString(Constants.BASIC_INFO_NATION));
-                basicInfo.setBirthday(Tools.convertLongTimeToStr(result.getLong(Constants.BASIC_INFO_BIRTHDAY)));
-                basicInfo.setIdCardNo(result.getString(Constants.BASIC_INFO_ID_CARD_NO));
-                basicInfo.setHuKou(result.getInt(Constants.BASIC_INFO_HUKOU));
-                basicInfo.setHuKouAddr(result.getString(Constants.BASIC_INFO_HUKOU_ADDR));
-                basicInfo.setMigration(result.getInt(Constants.BASIC_INFO_MIGRATION));
-                basicInfo.setOnlyChild(result.getInt(Constants.BASIC_INFO_ONLY_CHILD));
-                basicInfo.setMinLiving(result.getInt(Constants.BASIC_INFO_MIN_LIVING));
-                basicInfo.setImburse(result.getInt(Constants.BASIC_INFO_IMBURSE));
-                basicInfo.setOrphan(result.getInt(Constants.BASIC_INFO_ORPHAN));
-                basicInfo.setPathography(result.getInt(Constants.BASIC_INFO_PATHOGRAPHY));
-                basicInfo.setSpecialPerformance(result.getString(Constants.BASIC_INFO_SPECIAL_PERFORMANCE));
-                basicInfo.setOtherAnnouncement(result.getString(Constants.BASIC_INFO_OTHER_ANNOUNCEMENT));
-                basicInfo.setTimeStamp(result.getLong(Constants.BASIC_INFO_TIMESTAMP));
+                basicInfo.setName(result.getString(Constants.BASIC_INFO_NAME_dbField));
+                basicInfo.setGrade(result.getInt(Constants.BASIC_INFO_GRADE_dbField));
+                basicInfo.setClassName(result.getInt(Constants.BASIC_INFO_CLASS_NAME_dbField));
+                basicInfo.setGender(result.getInt(Constants.BASIC_INFO_GENDER_dbField));
+                basicInfo.setNation(result.getString(Constants.BASIC_INFO_NATION_dbField));
+                basicInfo.setBirthday(Tools.convertLongTimeToStr(result.getLong(Constants.BASIC_INFO_BIRTHDAY_dbField)));
+                basicInfo.setIdCardNo(result.getString(Constants.BASIC_INFO_ID_CARD_NO_dbField));
+                basicInfo.setHuKou(result.getInt(Constants.BASIC_INFO_HUKOU_dbField));
+                basicInfo.setHuKouAddr(result.getString(Constants.BASIC_INFO_HUKOU_ADDR_dbField));
+                basicInfo.setMigration(result.getInt(Constants.BASIC_INFO_MIGRATION_dbField));
+                basicInfo.setOnlyChild(result.getInt(Constants.BASIC_INFO_ONLY_CHILD_dbField));
+                basicInfo.setMinLiving(result.getInt(Constants.BASIC_INFO_MIN_LIVING_dbField));
+                basicInfo.setImburse(result.getInt(Constants.BASIC_INFO_IMBURSE_dbField));
+                basicInfo.setOrphan(result.getInt(Constants.BASIC_INFO_ORPHAN_dbField));
+                basicInfo.setPathography(result.getInt(Constants.BASIC_INFO_PATHOGRAPHY_dbField));
+                basicInfo.setSpecialPerformance(result.getString(Constants.BASIC_INFO_SPECIAL_PERFORMANCE_dbField));
+                basicInfo.setOtherAnnouncement(result.getString(Constants.BASIC_INFO_OTHER_ANNOUNCEMENT_dbField));
+                basicInfo.setTimeStamp(result.getLong(Constants.BASIC_INFO_TIMESTAMP_dbField));
 
                 contactInfo.setId(id);
-                contactInfo.setMotherName(result.getString(Constants.CONTACT_INFO_MOTHER_NAME));
-                contactInfo.setMotherCompany(result.getString(Constants.CONTACT_INFO_MOTHER_COMPANY));
-                contactInfo.setMotherContact(result.getString(Constants.CONTACT_INFO_MOTHER_CONTACT));
-                contactInfo.setMotherIdCard(Constants.CONTACT_INFO_MOTHER_ID_CARD);
-                contactInfo.setFatherName(result.getString(Constants.CONTACT_INFO_FATHER_NAME));
-                contactInfo.setFatherCompany(result.getString(Constants.CONTACT_INFO_FATHER_COMPANY));
-                contactInfo.setFatherContact(result.getString(Constants.CONTACT_INFO_FATHER_CONTACT));
-                contactInfo.setFatherIdCard(Constants.CONTACT_INFO_FATHER_ID_CARD);
-                contactInfo.setLivingAddr(result.getString(Constants.CONTACT_INFO_LIVING_ADDR));
-                contactInfo.setOtherContact(result.getString(Constants.CONTACT_INFO_OTHER_CONTACT));
-                contactInfo.setTimeStamp(result.getLong(Constants.CONTACT_INFO_TIMESTAMP));
+                contactInfo.setMotherName(result.getString(Constants.CONTACT_INFO_MOTHER_NAME_dbField));
+                contactInfo.setMotherCompany(result.getString(Constants.CONTACT_INFO_MOTHER_COMPANY_dbField));
+                contactInfo.setMotherContact(result.getString(Constants.CONTACT_INFO_MOTHER_CONTACT_dbField));
+                contactInfo.setMotherIdCard(Constants.CONTACT_INFO_MOTHER_ID_CARD_dbField);
+                contactInfo.setFatherName(result.getString(Constants.CONTACT_INFO_FATHER_NAME_dbField));
+                contactInfo.setFatherCompany(result.getString(Constants.CONTACT_INFO_FATHER_COMPANY_dbField));
+                contactInfo.setFatherContact(result.getString(Constants.CONTACT_INFO_FATHER_CONTACT_dbField));
+                contactInfo.setFatherIdCard(Constants.CONTACT_INFO_FATHER_ID_CARD_dbField);
+                contactInfo.setLivingAddr(result.getString(Constants.CONTACT_INFO_LIVING_ADDR_dbField));
+                contactInfo.setOtherContact(result.getString(Constants.CONTACT_INFO_OTHER_CONTACT_dbField));
+                contactInfo.setTimeStamp(result.getLong(Constants.CONTACT_INFO_TIMESTAMP_dbField));
 
                 bodyInfo.setId(id);
-                bodyInfo.setDoffDon(result.getInt(Constants.BODY_INFO_DOFF_DON));
-                bodyInfo.setEating(result.getInt(Constants.BODY_INFO_EATING));
-                bodyInfo.setToileting(result.getInt(Constants.BODY_INFO_TOILETING));
-                bodyInfo.setSleeping(result.getInt(Constants.BODY_INFO_SLEEPING));
-                bodyInfo.setSleepingInfo(result.getString(Constants.BODY_INFO_SLEEPING_INFO));
-                bodyInfo.setEatingSpeed(result.getInt(Constants.BODY_INFO_EATING_SPEED));
-                bodyInfo.setAppetite(result.getInt(Constants.BODY_INFO_APPETITE));
-                bodyInfo.setPickyEating(result.getInt(Constants.BODY_INFO_PICKY_EATING));
-                bodyInfo.setPickyEatingInfo(result.getString(Constants.BODY_INFO_PICKY_EATING_INFO));
-                bodyInfo.setEatingAbility(result.getInt(Constants.BODY_INFO_EATING_ABILITY));
-                bodyInfo.setFoodAllergy(result.getInt(Constants.BODY_INFO_FOOD_ALLERGY));
-                bodyInfo.setFoodAllergyInfo(result.getString(Constants.BODY_INFO_FOOD_ALLERGY_INFO));
-                bodyInfo.setHealthStatus(result.getInt(Constants.BODY_INFO_HEALTH_STATUS));
-                bodyInfo.setTimeStamp(result.getLong(Constants.BODY_INFO_TIMESTAMP));
+                bodyInfo.setDoffDon(result.getInt(Constants.BODY_INFO_DOFF_DON_dbField));
+                bodyInfo.setEating(result.getInt(Constants.BODY_INFO_EATING_dbField));
+                bodyInfo.setToileting(result.getInt(Constants.BODY_INFO_TOILETING_dbField));
+                bodyInfo.setSleeping(result.getInt(Constants.BODY_INFO_SLEEPING_dbField));
+                bodyInfo.setSleepingInfo(result.getString(Constants.BODY_INFO_SLEEPING_INFO_dbField));
+                bodyInfo.setEatingSpeed(result.getInt(Constants.BODY_INFO_EATING_SPEED_dbField));
+                bodyInfo.setAppetite(result.getInt(Constants.BODY_INFO_APPETITE_dbField));
+                bodyInfo.setPickyEating(result.getInt(Constants.BODY_INFO_PICKY_EATING_dbField));
+                bodyInfo.setPickyEatingInfo(result.getString(Constants.BODY_INFO_PICKY_EATING_INFO_dbField));
+                bodyInfo.setEatingAbility(result.getInt(Constants.BODY_INFO_EATING_ABILITY_dbField));
+                bodyInfo.setFoodAllergy(result.getInt(Constants.BODY_INFO_FOOD_ALLERGY_dbField));
+                bodyInfo.setFoodAllergyInfo(result.getString(Constants.BODY_INFO_FOOD_ALLERGY_INFO_dbField));
+                bodyInfo.setHealthStatus(result.getInt(Constants.BODY_INFO_HEALTH_STATUS_dbField));
+                bodyInfo.setTimeStamp(result.getLong(Constants.BODY_INFO_TIMESTAMP_dbField));
 
                 child.setBasicInfo(basicInfo);
                 child.setBodyInfo(bodyInfo);
@@ -286,62 +286,62 @@ public class ChildDAO implements IChildDAO {
 
                 StringBuffer sqlBuffer = new StringBuffer("update basic_info set ");
                 if (basicInfo.getIdCardNo() != null)
-                    sqlBuffer.append(Constants.BASIC_INFO_ID_CARD_NO).append("='").append(basicInfo.getIdCardNo())
+                    sqlBuffer.append(Constants.BASIC_INFO_ID_CARD_NO_dbField).append("='").append(basicInfo.getIdCardNo())
                                     .append("', ");
                 if (basicInfo.getName() != null)
-                    sqlBuffer.append(Constants.BASIC_INFO_NAME).append("='").append(basicInfo.getName()).append("', ");
+                    sqlBuffer.append(Constants.BASIC_INFO_NAME_dbField).append("='").append(basicInfo.getName()).append("', ");
                 if (basicInfo.getGrade() != null)
-                    sqlBuffer.append(Constants.BASIC_INFO_GRADE).append("='").append(basicInfo.getGrade())
+                    sqlBuffer.append(Constants.BASIC_INFO_GRADE_dbField).append("='").append(basicInfo.getGrade())
                                     .append("', ");
                 if (basicInfo.getClassName() != null)
-                    sqlBuffer.append(Constants.BASIC_INFO_CLASS_NAME).append("='").append(basicInfo.getClassName())
+                    sqlBuffer.append(Constants.BASIC_INFO_CLASS_NAME_dbField).append("='").append(basicInfo.getClassName())
                                     .append("', ");
                 if (basicInfo.getGender() != null)
-                    sqlBuffer.append(Constants.BASIC_INFO_GENDER).append("=").append(basicInfo.getGender())
+                    sqlBuffer.append(Constants.BASIC_INFO_GENDER_dbField).append("=").append(basicInfo.getGender())
                                     .append(", ");
                 if (basicInfo.getNation() != null)
-                    sqlBuffer.append(Constants.BASIC_INFO_NATION).append("='").append(basicInfo.getNation())
+                    sqlBuffer.append(Constants.BASIC_INFO_NATION_dbField).append("='").append(basicInfo.getNation())
                                     .append("', ");
                 if (basicInfo.getBirthday() != null) {
                     Long time = Tools.parseTimeFromStr(basicInfo.getBirthday());
                     if (time == null)
                         throw new BadRequestException(ErrorCode.error_child_update_badinput,
                                         "Birthday is not recognized.");
-                    sqlBuffer.append(Constants.BASIC_INFO_BIRTHDAY).append("='").append(time).append("', ");
+                    sqlBuffer.append(Constants.BASIC_INFO_BIRTHDAY_dbField).append("='").append(time).append("', ");
                 }
                 if (basicInfo.getHuKou() != null)
-                    sqlBuffer.append(Constants.BASIC_INFO_HUKOU).append("='").append(basicInfo.getHuKou())
+                    sqlBuffer.append(Constants.BASIC_INFO_HUKOU_dbField).append("='").append(basicInfo.getHuKou())
                                     .append("', ");
                 if (basicInfo.getHuKouAddr() != null)
-                    sqlBuffer.append(Constants.BASIC_INFO_HUKOU_ADDR).append("='").append(basicInfo.getHuKouAddr())
+                    sqlBuffer.append(Constants.BASIC_INFO_HUKOU_ADDR_dbField).append("='").append(basicInfo.getHuKouAddr())
                                     .append("', ");
                 if (basicInfo.getMigration() != null)
-                    sqlBuffer.append(Constants.BASIC_INFO_MIGRATION).append("=").append(basicInfo.getMigration())
+                    sqlBuffer.append(Constants.BASIC_INFO_MIGRATION_dbField).append("=").append(basicInfo.getMigration())
                                     .append(", ");
                 if (basicInfo.getOnlyChild() != null)
-                    sqlBuffer.append(Constants.BASIC_INFO_ONLY_CHILD).append("=").append(basicInfo.getOnlyChild())
+                    sqlBuffer.append(Constants.BASIC_INFO_ONLY_CHILD_dbField).append("=").append(basicInfo.getOnlyChild())
                                     .append(", ");
                 if (basicInfo.getMinLiving() != null)
-                    sqlBuffer.append(Constants.BASIC_INFO_MIN_LIVING).append("=").append(basicInfo.getMinLiving())
+                    sqlBuffer.append(Constants.BASIC_INFO_MIN_LIVING_dbField).append("=").append(basicInfo.getMinLiving())
                                     .append(", ");
                 if (basicInfo.getImburse() != null)
-                    sqlBuffer.append(Constants.BASIC_INFO_IMBURSE).append("=").append(basicInfo.getImburse())
+                    sqlBuffer.append(Constants.BASIC_INFO_IMBURSE_dbField).append("=").append(basicInfo.getImburse())
                                     .append(", ");
                 if (basicInfo.getOrphan() != null)
-                    sqlBuffer.append(Constants.BASIC_INFO_ORPHAN).append("=").append(basicInfo.getOrphan())
+                    sqlBuffer.append(Constants.BASIC_INFO_ORPHAN_dbField).append("=").append(basicInfo.getOrphan())
                                     .append(", ");
                 if (basicInfo.getPathography() != null)
-                    sqlBuffer.append(Constants.BASIC_INFO_PATHOGRAPHY).append("=").append(basicInfo.getPathography())
+                    sqlBuffer.append(Constants.BASIC_INFO_PATHOGRAPHY_dbField).append("=").append(basicInfo.getPathography())
                                     .append(", ");
                 if (basicInfo.getSpecialPerformance() != null)
-                    sqlBuffer.append(Constants.BASIC_INFO_SPECIAL_PERFORMANCE).append("='")
+                    sqlBuffer.append(Constants.BASIC_INFO_SPECIAL_PERFORMANCE_dbField).append("='")
                                     .append(basicInfo.getSpecialPerformance()).append("', ");
                 if (basicInfo.getOtherAnnouncement() != null)
-                    sqlBuffer.append(Constants.BASIC_INFO_OTHER_ANNOUNCEMENT).append("='")
+                    sqlBuffer.append(Constants.BASIC_INFO_OTHER_ANNOUNCEMENT_dbField).append("='")
                                     .append(basicInfo.getOtherAnnouncement()).append("', ");
 
                 if (sqlBuffer.length() != "update basic_info set ".length()) {
-                    sqlBuffer.append(Constants.BASIC_INFO_TIMESTAMP).append("=").append(System.currentTimeMillis());
+                    sqlBuffer.append(Constants.BASIC_INFO_TIMESTAMP_dbField).append("=").append(System.currentTimeMillis());
                     sqlBuffer.append(" where id = ").append(id);
                     stat = conn.createStatement();
                     stat.executeUpdate(sqlBuffer.toString());
@@ -357,38 +357,38 @@ public class ChildDAO implements IChildDAO {
 
                 StringBuffer sqlBuffer = new StringBuffer("update contact_info set ");
                 if (contactInfo.getMotherName() != null)
-                    sqlBuffer.append(Constants.CONTACT_INFO_MOTHER_NAME).append("='")
+                    sqlBuffer.append(Constants.CONTACT_INFO_MOTHER_NAME_dbField).append("='")
                                     .append(contactInfo.getMotherName()).append("', ");
                 if (contactInfo.getMotherCompany() != null)
-                    sqlBuffer.append(Constants.CONTACT_INFO_MOTHER_COMPANY).append("='")
+                    sqlBuffer.append(Constants.CONTACT_INFO_MOTHER_COMPANY_dbField).append("='")
                                     .append(contactInfo.getMotherCompany()).append("', ");
                 if (contactInfo.getMotherContact() != null)
-                    sqlBuffer.append(Constants.CONTACT_INFO_MOTHER_CONTACT).append("='")
+                    sqlBuffer.append(Constants.CONTACT_INFO_MOTHER_CONTACT_dbField).append("='")
                                     .append(contactInfo.getMotherContact()).append("', ");
                 if (contactInfo.getMotherIdCard() != null)
-                    sqlBuffer.append(Constants.CONTACT_INFO_MOTHER_ID_CARD).append("='")
+                    sqlBuffer.append(Constants.CONTACT_INFO_MOTHER_ID_CARD_dbField).append("='")
                                     .append(contactInfo.getMotherIdCard()).append("', ");
                 if (contactInfo.getFatherName() != null)
-                    sqlBuffer.append(Constants.CONTACT_INFO_FATHER_NAME).append("='")
+                    sqlBuffer.append(Constants.CONTACT_INFO_FATHER_NAME_dbField).append("='")
                                     .append(contactInfo.getFatherName()).append("', ");
                 if (contactInfo.getFatherCompany() != null)
-                    sqlBuffer.append(Constants.CONTACT_INFO_FATHER_COMPANY).append("='")
+                    sqlBuffer.append(Constants.CONTACT_INFO_FATHER_COMPANY_dbField).append("='")
                                     .append(contactInfo.getFatherCompany()).append("', ");
                 if (contactInfo.getFatherContact() != null)
-                    sqlBuffer.append(Constants.CONTACT_INFO_FATHER_CONTACT).append("='")
+                    sqlBuffer.append(Constants.CONTACT_INFO_FATHER_CONTACT_dbField).append("='")
                                     .append(contactInfo.getFatherContact()).append("', ");
                 if (contactInfo.getFatherContact() != null)
-                    sqlBuffer.append(Constants.CONTACT_INFO_FATHER_ID_CARD).append("='")
+                    sqlBuffer.append(Constants.CONTACT_INFO_FATHER_ID_CARD_dbField).append("='")
                                     .append(contactInfo.getFatherIdCard()).append("', ");
                 if (contactInfo.getLivingAddr() != null)
-                    sqlBuffer.append(Constants.CONTACT_INFO_LIVING_ADDR).append("='")
+                    sqlBuffer.append(Constants.CONTACT_INFO_LIVING_ADDR_dbField).append("='")
                                     .append(contactInfo.getLivingAddr()).append("', ");
                 if (contactInfo.getOtherContact() != null)
-                    sqlBuffer.append(Constants.CONTACT_INFO_OTHER_CONTACT).append("='")
+                    sqlBuffer.append(Constants.CONTACT_INFO_OTHER_CONTACT_dbField).append("='")
                                     .append(contactInfo.getOtherContact()).append("', ");
 
                 if (sqlBuffer.length() != "update contact_info set ".length()) {
-                    sqlBuffer.append(Constants.CONTACT_INFO_TIMESTAMP).append("=").append(System.currentTimeMillis());
+                    sqlBuffer.append(Constants.CONTACT_INFO_TIMESTAMP_dbField).append("=").append(System.currentTimeMillis());
                     sqlBuffer.append(" where id = ").append(id);
                     stat = conn.createStatement();
                     stat.executeUpdate(sqlBuffer.toString());
@@ -403,46 +403,46 @@ public class ChildDAO implements IChildDAO {
 
                 StringBuffer sqlBuffer = new StringBuffer("update body_info set ");
                 if (bodyInfo.getDoffDon() != null)
-                    sqlBuffer.append(Constants.BODY_INFO_DOFF_DON).append("=").append(bodyInfo.getDoffDon())
+                    sqlBuffer.append(Constants.BODY_INFO_DOFF_DON_dbField).append("=").append(bodyInfo.getDoffDon())
                                     .append(", ");
                 if (bodyInfo.getEating() != null)
-                    sqlBuffer.append(Constants.BODY_INFO_EATING).append("=").append(bodyInfo.getEating()).append(", ");
+                    sqlBuffer.append(Constants.BODY_INFO_EATING_dbField).append("=").append(bodyInfo.getEating()).append(", ");
                 if (bodyInfo.getToileting() != null)
-                    sqlBuffer.append(Constants.BODY_INFO_TOILETING).append("=").append(bodyInfo.getEating())
+                    sqlBuffer.append(Constants.BODY_INFO_TOILETING_dbField).append("=").append(bodyInfo.getEating())
                                     .append(", ");
                 if (bodyInfo.getSleeping() != null)
-                    sqlBuffer.append(Constants.BODY_INFO_SLEEPING).append("=").append(bodyInfo.getSleeping())
+                    sqlBuffer.append(Constants.BODY_INFO_SLEEPING_dbField).append("=").append(bodyInfo.getSleeping())
                                     .append(", ");
                 if (bodyInfo.getSleepingInfo() != null)
-                    sqlBuffer.append(Constants.BODY_INFO_SLEEPING_INFO).append("='").append(bodyInfo.getSleepingInfo())
+                    sqlBuffer.append(Constants.BODY_INFO_SLEEPING_INFO_dbField).append("='").append(bodyInfo.getSleepingInfo())
                                     .append("', ");
                 if (bodyInfo.getEatingSpeed() != null)
-                    sqlBuffer.append(Constants.BODY_INFO_EATING_SPEED).append("=").append(bodyInfo.getEatingSpeed())
+                    sqlBuffer.append(Constants.BODY_INFO_EATING_SPEED_dbField).append("=").append(bodyInfo.getEatingSpeed())
                                     .append(", ");
                 if (bodyInfo.getAppetite() != null)
-                    sqlBuffer.append(Constants.BODY_INFO_APPETITE).append("=").append(bodyInfo.getAppetite())
+                    sqlBuffer.append(Constants.BODY_INFO_APPETITE_dbField).append("=").append(bodyInfo.getAppetite())
                                     .append(", ");
                 if (bodyInfo.getPickyEating() != null)
-                    sqlBuffer.append(Constants.BODY_INFO_PICKY_EATING).append("=").append(bodyInfo.getPickyEating())
+                    sqlBuffer.append(Constants.BODY_INFO_PICKY_EATING_dbField).append("=").append(bodyInfo.getPickyEating())
                                     .append(", ");
                 if (bodyInfo.getPickyEatingInfo() != null)
-                    sqlBuffer.append(Constants.BODY_INFO_PICKY_EATING_INFO).append("='")
+                    sqlBuffer.append(Constants.BODY_INFO_PICKY_EATING_INFO_dbField).append("='")
                                     .append(bodyInfo.getPickyEatingInfo()).append("', ");
                 if (bodyInfo.getEatingAbility() != null)
-                    sqlBuffer.append(Constants.BODY_INFO_EATING_ABILITY).append("=")
+                    sqlBuffer.append(Constants.BODY_INFO_EATING_ABILITY_dbField).append("=")
                                     .append(bodyInfo.getEatingAbility()).append(", ");
                 if (bodyInfo.getFoodAllergy() != null)
-                    sqlBuffer.append(Constants.BODY_INFO_FOOD_ALLERGY).append("=").append(bodyInfo.getFoodAllergy())
+                    sqlBuffer.append(Constants.BODY_INFO_FOOD_ALLERGY_dbField).append("=").append(bodyInfo.getFoodAllergy())
                                     .append(", ");
                 if (bodyInfo.getFoodAllergyInfo() != null)
-                    sqlBuffer.append(Constants.BODY_INFO_FOOD_ALLERGY_INFO).append("='")
+                    sqlBuffer.append(Constants.BODY_INFO_FOOD_ALLERGY_INFO_dbField).append("='")
                                     .append(bodyInfo.getFoodAllergyInfo()).append("', ");
                 if (bodyInfo.getHealthStatus() != null)
-                    sqlBuffer.append(Constants.BODY_INFO_HEALTH_STATUS).append("=").append(bodyInfo.getHealthStatus())
+                    sqlBuffer.append(Constants.BODY_INFO_HEALTH_STATUS_dbField).append("=").append(bodyInfo.getHealthStatus())
                                     .append(", ");
 
                 if (sqlBuffer.length() != "update body_info set ".length()) {
-                    sqlBuffer.append(Constants.BODY_INFO_TIMESTAMP).append("=").append(System.currentTimeMillis());
+                    sqlBuffer.append(Constants.BODY_INFO_TIMESTAMP_dbField).append("=").append(System.currentTimeMillis());
                     sqlBuffer.append(" where id = ").append(id);
                     stat = conn.createStatement();
                     stat.executeUpdate(sqlBuffer.toString());
@@ -791,25 +791,66 @@ public class ChildDAO implements IChildDAO {
         // ResourceBundle bundle = ResourceBundle.getBundle("i18n/resources",
         // locale);
         Properties props = Tools.loadProperties(locale);
-        String aa = props.getProperty("aa");
-        // TODO Auto-generated method stub
-        List<Child> children = getChildren();
         Workbook wb = new HSSFWorkbook();
         CreationHelper createHelper = wb.getCreationHelper();
         String safeName = WorkbookUtil.createSafeSheetName("[Children Information*?]");
         Sheet sheet = wb.createSheet(safeName);
-
         // Create header
         Row row = sheet.createRow((short) 0);
-        row.createCell(0).setCellValue(1.2);
-        row.createCell(2).setCellValue(createHelper.createRichTextString("This is a string"));
-        row.createCell(3).setCellValue(true);
-        row.createCell(4).setCellValue("a string");
+        row.createCell(Constants.BASIC_INFO_NAME_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_NAME_cellI18NKey));
+        row.createCell(Constants.BASIC_INFO_CLASS_NAME_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_CLASS_NAME_cellI18NKey));
+        row.createCell(Constants.BASIC_INFO_GENDER_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_GENDER_cellI18NKey));
+        row.createCell(Constants.BASIC_INFO_NATION_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_NATION_cellI18NKey));
+        row.createCell(Constants.BASIC_INFO_BIRTHDAY_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_BIRTHDAY_cellI18NKey));
+        row.createCell(Constants.BASIC_INFO_ID_CARD_NO_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_ID_CARD_NO_cellI18NKey));
+        row.createCell(Constants.BASIC_INFO_HUKOU_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_HUKOU_cellI18NKey));
+        row.createCell(Constants.BASIC_INFO_HUKOU_ADDR_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_HUKOU_ADDR_cellI18NKey));
+        row.createCell(Constants.BASIC_INFO_HUKOU_ADDR_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_MIGRATION_cellI18NKey));
+        row.createCell(Constants.BASIC_INFO_ONLY_CHILD_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_ONLY_CHILD_cellI18NKey));
+        row.createCell(Constants.BASIC_INFO_MIN_LIVING_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_MIN_LIVING_cellI18NKey));
+        row.createCell(Constants.BASIC_INFO_IMBURSE_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_IMBURSE_cellI18NKey));
+        row.createCell(Constants.BASIC_INFO_ORPHAN_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_ORPHAN_cellI18NKey));
+        row.createCell(Constants.BASIC_INFO_PATHOGRAPHY_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_PATHOGRAPHY_cellI18NKey));
+        row.createCell(Constants.BASIC_INFO_SPECIAL_PERFORMANCE_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_SPECIAL_PERFORMANCE_cellI18NKey));
+        row.createCell(Constants.BASIC_INFO_OTHER_ANNOUNCEMENT_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_OTHER_ANNOUNCEMENT_cellI18NKey));
+        
+        row.createCell(Constants.CONTACT_INFO_MOTHER_NAME_cellIndex).setCellValue(props.getProperty(Constants.CONTACT_INFO_MOTHER_NAME_cellI18NKey));
+        row.createCell(Constants.CONTACT_INFO_MOTHER_COMPANY_cellIndex).setCellValue(props.getProperty(Constants.CONTACT_INFO_MOTHER_COMPANY_cellI18NKey));
+        row.createCell(Constants.CONTACT_INFO_MOTHER_CONTACT_cellIndex).setCellValue(props.getProperty(Constants.CONTACT_INFO_MOTHER_CONTACT_cellI18NKey));
+        row.createCell(Constants.CONTACT_INFO_MOTHER_ID_CARD_cellIndex).setCellValue(props.getProperty(Constants.CONTACT_INFO_MOTHER_ID_CARD_cellI18NKey));
+        row.createCell(Constants.CONTACT_INFO_FATHER_NAME_cellIndex).setCellValue(props.getProperty(Constants.CONTACT_INFO_FATHER_NAME_cellI18NKey));
+        row.createCell(Constants.CONTACT_INFO_FATHER_COMPANY_cellIndex).setCellValue(props.getProperty(Constants.CONTACT_INFO_FATHER_COMPANY_cellI18NKey));
+        row.createCell(Constants.CONTACT_INFO_FATHER_CONTACT_cellIndex).setCellValue(props.getProperty(Constants.CONTACT_INFO_FATHER_CONTACT_cellI18NKey));
+        row.createCell(Constants.CONTACT_INFO_FATHER_ID_CARD_cellIndex).setCellValue(props.getProperty(Constants.CONTACT_INFO_FATHER_ID_CARD_cellI18NKey));
+        row.createCell(Constants.CONTACT_INFO_LIVING_ADDR_cellIndex).setCellValue(props.getProperty(Constants.CONTACT_INFO_LIVING_ADDR_cellI18NKey));
+        row.createCell(Constants.CONTACT_INFO_OTHER_CONTACT_cellIndex).setCellValue(props.getProperty(Constants.CONTACT_INFO_OTHER_CONTACT_cellI18NKey));
+        
+        row.createCell(Constants.BODY_INFO_DOFF_DON_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_DOFF_DON_cellI18NKey));
+        row.createCell(Constants.BODY_INFO_EATING_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_EATING_cellI18NKey));
+        row.createCell(Constants.BODY_INFO_TOILETING_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_TOILETING_cellI18NKey));
+        row.createCell(Constants.BODY_INFO_SLEEPING_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_SLEEPING_cellI18NKey));
+        //row.createCell(3).setCellValue(props.getProperty("SLEEPING_ABILITY"Constants.BODY_INFO_SLEEPING));
+        row.createCell(Constants.BODY_INFO_SLEEPING_INFO_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_SLEEPING_INFO_cellI18NKey));
+        row.createCell(Constants.BODY_INFO_EATING_SPEED_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_EATING_SPEED_cellI18NKey));
+        row.createCell(Constants.BODY_INFO_APPETITE_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_APPETITE_cellI18NKey));
+        row.createCell(Constants.BODY_INFO_PICKY_EATING_cellIndex)).setCellValue(props.getProperty(Constants.BODY_INFO_PICKY_EATING_cellI18NKey));
+        row.createCell(Constants.BODY_INFO_PICKY_EATING_INFO_cellIndex)).setCellValue(props.getProperty(Constants.BODY_INFO_PICKY_EATING_INFO_cellI18NKey));
+        row.createCell(Constants.BODY_INFO_EATING_ABILITY_cellIndex)).setCellValue(props.getProperty(Constants.BODY_INFO_EATING_ABILITY_cellI18NKey));
+        row.createCell(Constants.BODY_INFO_FOOD_ALLERGY_cellIndex)).setCellValue(props.getProperty(Constants.BODY_INFO_FOOD_ALLERGY_cellI18NKey));
+        row.createCell(Constants.BODY_INFO_FOOD_ALLERGY_INFO_cellIndex)).setCellValue(props.getProperty(Constants.BODY_INFO_FOOD_ALLERGY_INFO_cellI18NKey));
+        row.createCell(Constants.BODY_INFO_HEALTH_STATUS_cellIndex)).setCellValue(props.getProperty(Constants.BODY_INFO_HEALTH_STATUS_cellI18NKey));
+        
+        List<Child> children = getChildren();
+        int validateRowLength = (children == null || children.isEmpty()) ? 1 : children.size();
+        
+        //Generate Data Validation
+        
 
-        String[] list = new String[] { "'10", "'20", "'30" };
-        row.createCell(0).setCellValue("30");
-        CellRangeAddressList addressList = new CellRangeAddressList(0, 0, 0, 0);
-        DVConstraint dvConstraint = DVConstraint.createExplicitListConstraint(list);
+        
+
+        String[] genderList = new String[] { props.getProperty("GENDER_MALE"), props.getProperty("GENDER_FEMALE") };
+        CellRangeAddressList addressList = new CellRangeAddressList(1, validateRowLength, 2, 2);
+        DVConstraint dvConstraint = DVConstraint.createExplicitListConstraint(genderList);
         DataValidation dataValidation = new HSSFDataValidation(addressList, dvConstraint);
         dataValidation.setSuppressDropDownArrow(false); // add arrow
         dataValidation.setEmptyCellAllowed(false);// cannot be empty
