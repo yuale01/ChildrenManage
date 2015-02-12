@@ -833,12 +833,12 @@ public class ChildDAO implements IChildDAO {
         row.createCell(Constants.BODY_INFO_SLEEPING_INFO_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_SLEEPING_INFO_cellI18NKey));
         row.createCell(Constants.BODY_INFO_EATING_SPEED_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_EATING_SPEED_cellI18NKey));
         row.createCell(Constants.BODY_INFO_APPETITE_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_APPETITE_cellI18NKey));
-        row.createCell(Constants.BODY_INFO_PICKY_EATING_cellIndex)).setCellValue(props.getProperty(Constants.BODY_INFO_PICKY_EATING_cellI18NKey));
-        row.createCell(Constants.BODY_INFO_PICKY_EATING_INFO_cellIndex)).setCellValue(props.getProperty(Constants.BODY_INFO_PICKY_EATING_INFO_cellI18NKey));
-        row.createCell(Constants.BODY_INFO_EATING_ABILITY_cellIndex)).setCellValue(props.getProperty(Constants.BODY_INFO_EATING_ABILITY_cellI18NKey));
-        row.createCell(Constants.BODY_INFO_FOOD_ALLERGY_cellIndex)).setCellValue(props.getProperty(Constants.BODY_INFO_FOOD_ALLERGY_cellI18NKey));
-        row.createCell(Constants.BODY_INFO_FOOD_ALLERGY_INFO_cellIndex)).setCellValue(props.getProperty(Constants.BODY_INFO_FOOD_ALLERGY_INFO_cellI18NKey));
-        row.createCell(Constants.BODY_INFO_HEALTH_STATUS_cellIndex)).setCellValue(props.getProperty(Constants.BODY_INFO_HEALTH_STATUS_cellI18NKey));
+        row.createCell(Constants.BODY_INFO_PICKY_EATING_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_PICKY_EATING_cellI18NKey));
+        row.createCell(Constants.BODY_INFO_PICKY_EATING_INFO_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_PICKY_EATING_INFO_cellI18NKey));
+        row.createCell(Constants.BODY_INFO_EATING_ABILITY_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_EATING_ABILITY_cellI18NKey));
+        row.createCell(Constants.BODY_INFO_FOOD_ALLERGY_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_FOOD_ALLERGY_cellI18NKey));
+        row.createCell(Constants.BODY_INFO_FOOD_ALLERGY_INFO_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_FOOD_ALLERGY_INFO_cellI18NKey));
+        row.createCell(Constants.BODY_INFO_HEALTH_STATUS_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_HEALTH_STATUS_cellI18NKey));
         
         List<Child> children = getChildren();
         int validateRowLength = (children == null || children.isEmpty()) ? 1 : children.size();
