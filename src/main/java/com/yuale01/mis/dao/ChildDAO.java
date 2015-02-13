@@ -1,6 +1,5 @@
 package com.yuale01.mis.dao;
 
-import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,21 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.Properties;
-import java.util.ResourceBundle;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.hssf.usermodel.DVConstraint;
-import org.apache.poi.hssf.usermodel.HSSFDataValidation;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.CreationHelper;
-import org.apache.poi.ss.usermodel.DataValidation;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.util.CellRangeAddressList;
-import org.apache.poi.ss.util.WorkbookUtil;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.yuale01.mis.controller.ConnectionPoolManager;
@@ -782,88 +768,6 @@ public class ChildDAO implements IChildDAO {
                 }
                 conn = null;
             }
-        }
-
-    }
-
-    @Override
-    public void exportChildren(String locale) throws CommonException {
-        // ResourceBundle bundle = ResourceBundle.getBundle("i18n/resources",
-        // locale);
-        Properties props = Tools.loadProperties(locale);
-        Workbook wb = new HSSFWorkbook();
-        CreationHelper createHelper = wb.getCreationHelper();
-        String safeName = WorkbookUtil.createSafeSheetName("[Children Information*?]");
-        Sheet sheet = wb.createSheet(safeName);
-        // Create header
-        Row row = sheet.createRow((short) 0);
-        row.createCell(Constants.BASIC_INFO_NAME_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_NAME_cellI18NKey));
-        row.createCell(Constants.BASIC_INFO_CLASS_NAME_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_CLASS_NAME_cellI18NKey));
-        row.createCell(Constants.BASIC_INFO_GENDER_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_GENDER_cellI18NKey));
-        row.createCell(Constants.BASIC_INFO_NATION_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_NATION_cellI18NKey));
-        row.createCell(Constants.BASIC_INFO_BIRTHDAY_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_BIRTHDAY_cellI18NKey));
-        row.createCell(Constants.BASIC_INFO_ID_CARD_NO_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_ID_CARD_NO_cellI18NKey));
-        row.createCell(Constants.BASIC_INFO_HUKOU_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_HUKOU_cellI18NKey));
-        row.createCell(Constants.BASIC_INFO_HUKOU_ADDR_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_HUKOU_ADDR_cellI18NKey));
-        row.createCell(Constants.BASIC_INFO_HUKOU_ADDR_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_MIGRATION_cellI18NKey));
-        row.createCell(Constants.BASIC_INFO_ONLY_CHILD_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_ONLY_CHILD_cellI18NKey));
-        row.createCell(Constants.BASIC_INFO_MIN_LIVING_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_MIN_LIVING_cellI18NKey));
-        row.createCell(Constants.BASIC_INFO_IMBURSE_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_IMBURSE_cellI18NKey));
-        row.createCell(Constants.BASIC_INFO_ORPHAN_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_ORPHAN_cellI18NKey));
-        row.createCell(Constants.BASIC_INFO_PATHOGRAPHY_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_PATHOGRAPHY_cellI18NKey));
-        row.createCell(Constants.BASIC_INFO_SPECIAL_PERFORMANCE_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_SPECIAL_PERFORMANCE_cellI18NKey));
-        row.createCell(Constants.BASIC_INFO_OTHER_ANNOUNCEMENT_cellIndex).setCellValue(props.getProperty(Constants.BASIC_INFO_OTHER_ANNOUNCEMENT_cellI18NKey));
-        
-        row.createCell(Constants.CONTACT_INFO_MOTHER_NAME_cellIndex).setCellValue(props.getProperty(Constants.CONTACT_INFO_MOTHER_NAME_cellI18NKey));
-        row.createCell(Constants.CONTACT_INFO_MOTHER_COMPANY_cellIndex).setCellValue(props.getProperty(Constants.CONTACT_INFO_MOTHER_COMPANY_cellI18NKey));
-        row.createCell(Constants.CONTACT_INFO_MOTHER_CONTACT_cellIndex).setCellValue(props.getProperty(Constants.CONTACT_INFO_MOTHER_CONTACT_cellI18NKey));
-        row.createCell(Constants.CONTACT_INFO_MOTHER_ID_CARD_cellIndex).setCellValue(props.getProperty(Constants.CONTACT_INFO_MOTHER_ID_CARD_cellI18NKey));
-        row.createCell(Constants.CONTACT_INFO_FATHER_NAME_cellIndex).setCellValue(props.getProperty(Constants.CONTACT_INFO_FATHER_NAME_cellI18NKey));
-        row.createCell(Constants.CONTACT_INFO_FATHER_COMPANY_cellIndex).setCellValue(props.getProperty(Constants.CONTACT_INFO_FATHER_COMPANY_cellI18NKey));
-        row.createCell(Constants.CONTACT_INFO_FATHER_CONTACT_cellIndex).setCellValue(props.getProperty(Constants.CONTACT_INFO_FATHER_CONTACT_cellI18NKey));
-        row.createCell(Constants.CONTACT_INFO_FATHER_ID_CARD_cellIndex).setCellValue(props.getProperty(Constants.CONTACT_INFO_FATHER_ID_CARD_cellI18NKey));
-        row.createCell(Constants.CONTACT_INFO_LIVING_ADDR_cellIndex).setCellValue(props.getProperty(Constants.CONTACT_INFO_LIVING_ADDR_cellI18NKey));
-        row.createCell(Constants.CONTACT_INFO_OTHER_CONTACT_cellIndex).setCellValue(props.getProperty(Constants.CONTACT_INFO_OTHER_CONTACT_cellI18NKey));
-        
-        row.createCell(Constants.BODY_INFO_DOFF_DON_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_DOFF_DON_cellI18NKey));
-        row.createCell(Constants.BODY_INFO_EATING_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_EATING_cellI18NKey));
-        row.createCell(Constants.BODY_INFO_TOILETING_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_TOILETING_cellI18NKey));
-        row.createCell(Constants.BODY_INFO_SLEEPING_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_SLEEPING_cellI18NKey));
-        //row.createCell(3).setCellValue(props.getProperty("SLEEPING_ABILITY"Constants.BODY_INFO_SLEEPING));
-        row.createCell(Constants.BODY_INFO_SLEEPING_INFO_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_SLEEPING_INFO_cellI18NKey));
-        row.createCell(Constants.BODY_INFO_EATING_SPEED_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_EATING_SPEED_cellI18NKey));
-        row.createCell(Constants.BODY_INFO_APPETITE_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_APPETITE_cellI18NKey));
-        row.createCell(Constants.BODY_INFO_PICKY_EATING_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_PICKY_EATING_cellI18NKey));
-        row.createCell(Constants.BODY_INFO_PICKY_EATING_INFO_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_PICKY_EATING_INFO_cellI18NKey));
-        row.createCell(Constants.BODY_INFO_EATING_ABILITY_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_EATING_ABILITY_cellI18NKey));
-        row.createCell(Constants.BODY_INFO_FOOD_ALLERGY_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_FOOD_ALLERGY_cellI18NKey));
-        row.createCell(Constants.BODY_INFO_FOOD_ALLERGY_INFO_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_FOOD_ALLERGY_INFO_cellI18NKey));
-        row.createCell(Constants.BODY_INFO_HEALTH_STATUS_cellIndex).setCellValue(props.getProperty(Constants.BODY_INFO_HEALTH_STATUS_cellI18NKey));
-        
-        List<Child> children = getChildren();
-        int validateRowLength = (children == null || children.isEmpty()) ? 1 : children.size();
-        
-        //Generate Data Validation
-        
-
-        
-
-        String[] genderList = new String[] { props.getProperty("GENDER_MALE"), props.getProperty("GENDER_FEMALE") };
-        CellRangeAddressList addressList = new CellRangeAddressList(1, validateRowLength, 2, 2);
-        DVConstraint dvConstraint = DVConstraint.createExplicitListConstraint(genderList);
-        DataValidation dataValidation = new HSSFDataValidation(addressList, dvConstraint);
-        dataValidation.setSuppressDropDownArrow(false); // add arrow
-        dataValidation.setEmptyCellAllowed(false);// cannot be empty
-        sheet.addValidationData(dataValidation);
-
-        try {
-            FileOutputStream fileOut = new FileOutputStream("workbookPOI.xls");
-            wb.write(fileOut);
-            wb.close();
-            fileOut.close();
-        }
-        catch (Exception e) {
-
         }
 
     }

@@ -20,6 +20,6 @@ public interface IChildDAO {
 
     public Child createChild(Child child) throws CommonException;
 
-    public void exportChildren(String locale) throws CommonException;
+    //public void exportChildren(String locale) throws CommonException;
 
 }

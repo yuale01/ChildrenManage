@@ -1,7 +1,5 @@
 package com.yuale01.mis.resources;
 
-import java.util.Locale;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -14,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.yuale01.mis.controller.ChildrenController;
 import com.yuale01.mis.controller.DAOFactory;
 import com.yuale01.mis.dao.IChildDAO;
 import com.yuale01.mis.exception.CommonException;
@@ -23,6 +22,7 @@ import com.yuale01.mis.po.Child;
 @Path("Children")
 public class ChildrenResource {
     private IChildDAO childDAO = DAOFactory.getChildDAO();
+    private ChildrenController controller = new ChildrenController();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -140,11 +140,11 @@ public class ChildrenResource {
     @POST
     @Path("/export")
     @Produces(MediaType.APPLICATION_JSON)
-    // @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response exportChildren() {
         Response res = null;
         try {
-            childDAO.exportChildren("zh_CN");
+            controller.exportChildren("zh_CN");
             // res = Response.status(Status.CREATED).entity().build();
         }
         catch (CommonException e) {

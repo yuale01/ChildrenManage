@@ -4,11 +4,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
+
+import org.apache.commons.codec.Charsets;
 
 public class Tools {
     public synchronized static long getCurrentLongTime() {
@@ -43,14 +46,15 @@ public class Tools {
     public static Properties loadProperties(String locale) {
         Properties prop = null;
         InputStream input = null;
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         try {
-            if (locale != null && new File("i18n/resource_" + locale + "properties").exists()) {
-                input = new FileInputStream("i18n/resource_" + locale + ".properties");
+            if (locale != null && classloader.getResource("i18n/resources_" + locale + ".properties") != null) {
+                input = classloader.getResourceAsStream("i18n/resources_" + locale + ".properties");
             }
             else
-                input = new FileInputStream("i18n/resource.properties");
+                input = classloader.getResourceAsStream("i18n/resources.properties");
             prop = new Properties();
-            prop.load(input);
+            prop.load(new InputStreamReader(input, Charsets.UTF_8));
         }
         catch (IOException ex) {
             ex.printStackTrace();
