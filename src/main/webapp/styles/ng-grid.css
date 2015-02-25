@@ -100,3 +100,7 @@ input.ng-valid {
 input.ng-invalid {
     border:1px solid #a94442;
 }
+
+@media print {
+    #main { display: none; }
+}

@@ -1,5 +1,8 @@
 package com.yuale01.mis.resources;
 
+import java.io.File;
+import java.io.InputStream;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -12,12 +15,14 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.sun.jersey.multipart.FormDataParam;
 import com.yuale01.mis.controller.ChildrenController;
 import com.yuale01.mis.controller.DAOFactory;
 import com.yuale01.mis.dao.IChildDAO;
 import com.yuale01.mis.exception.CommonException;
 import com.yuale01.mis.exception.ErrorMessage;
 import com.yuale01.mis.po.Child;
+import com.yuale01.mis.utils.Constants;
 
 @Path("Children")
 public class ChildrenResource {
@@ -44,14 +49,14 @@ public class ChildrenResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createChild(Child child) {
         Response res = null;
-        /*
-         * for (int i=0; i< 200; i++) { try { res =
-         * Response.status(Status.CREATED
-         * ).entity(childDAO.createChild(child)).build(); } catch
-         * (CommonException e) { ErrorMessage em = new
-         * ErrorMessage(e.getStatusCode(), e.getErrorCode(), e.getMessage());
-         * res = Response.status(e.getStatusCode()).entity(em).build(); } }
-         */
+        
+//          for (int i=0; i< 200; i++) { try { res =
+//          Response.status(Status.CREATED
+//          ).entity(childDAO.createChild(child)).build(); } catch
+//          (CommonException e) { ErrorMessage em = new
+//          ErrorMessage(e.getStatusCode(), e.getErrorCode(), e.getMessage());
+//          res = Response.status(e.getStatusCode()).entity(em).build(); } }
+         
         try {
             res = Response.status(Status.CREATED)
                             .entity(childDAO.createChild(child)).build();
@@ -137,21 +142,41 @@ public class ChildrenResource {
         return res;
     }
 
-    @POST
+    @GET
     @Path("/export")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(Constants.MEDIA_TYPE_EXCEL)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response exportChildren() {
         Response res = null;
         try {
-            controller.exportChildren("zh_CN");
-            // res = Response.status(Status.CREATED).entity().build();
+        	File file = controller.exportChildren("zh_CN");
+        	res = Response.status(Status.OK).entity(file).
+            		header("Content-Disposition", "attachment; filename=Children.xls").build();
+        	file.deleteOnExit();
         }
         catch (CommonException e) {
             ErrorMessage em = new ErrorMessage(e.getStatusCode(),
                             e.getErrorCode(), e.getMessage());
             res = Response.status(e.getStatusCode()).entity(em).build();
         }
+        return res;
+    }
+    
+    @POST
+    @Path("/import")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public Response importChildren(@FormDataParam("file") InputStream fileInputStream) {
+        Response res = null;
+        /*try {
+        	res = Response.status(Status.OK).entity(controller.exportChildren("zh_CN")).
+            		header("Content-Disposition", "attachment; filename=Children.xls").build();
+        }
+        catch (CommonException e) {
+            ErrorMessage em = new ErrorMessage(e.getStatusCode(),
+                            e.getErrorCode(), e.getMessage());
+            res = Response.status(e.getStatusCode()).entity(em).build();
+        }*/
         return res;
     }
 

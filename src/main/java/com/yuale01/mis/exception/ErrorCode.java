@@ -16,5 +16,8 @@ public class ErrorCode {
     public static final int error_child_update_conflict   = 2016;
     public static final int error_child_delete            = 2017;
     public static final int error_child_delete_idnull     = 2018;
+    
+    public static final int error_export                  = 2019;
+    public static final int error_export_noproperties     = 2020;
 
 }

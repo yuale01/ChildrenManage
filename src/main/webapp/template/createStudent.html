@@ -1,7 +1,7 @@
 <div id="create-student-dialog">
-  <div class="modal-header">
+  <div class="modal-header hidden-print" id="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
-      <h4 class="modal-title">{{ 'CREATE_NEW_CHILD' | translate }}</h4>
+      <h4 class="modal-title">{{title}}</h4>
   </div>
   <!--start_print-->
   <div class="modal-body" id="modal-body" >
@@ -10,12 +10,17 @@
          <alert type="{{alert.type}}" close="closeAlert()" ng-show="alert.show">{{alert.msg}}</alert>
        </div>
     </div>
-    <fieldset ng-disabled="{{disable}}">
+    <div class="row hidden-print" ng-show="viewType">
+       <div class="col-xs-3">
+         <input ng-model="editBoxChecked" type="checkbox" ng-click="disable=!editBoxChecked" style="margin-bottom:10px">{{'START_EDIT' | translate}}</input>
+       </div>
+    </div>
+    <fieldset ng-disabled="disable" id="fieldset">
 	    <div class="row no-gutter">
 	      <div class="form-group col-xs-3">
 			  <label for="name" class="col-xs-4">{{ 'NAME' | translate }}:</label>
 			  <div class="col-xs-8">
-				<input ng-model="child.basicInfo.name" type="text" class="form-control input-sm" id="name" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}">
+				<input autofocus focus-on="name" ng-model="child.basicInfo.name" type="text" class="form-control input-sm" id="name" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}">
 			  </div>
 	      </div>
 		  <div class="form-group col-xs-3">
@@ -157,7 +162,7 @@
 	      <div class="form-group col-xs-3 no-gutter">
 			  <label for="fatherName" class="col-xs-4 no-gutter">{{ 'FATHER_NAME' | translate }}:</label>
 			  <div class="col-xs-8 no-gutter">
-				<input ng-model="child.contactInfo.fatherName" type="text" class="form-control input-sm" id="fatherName" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}">
+				<input focus-on="fatherName" ng-model="child.contactInfo.fatherName" type="text" class="form-control input-sm" id="fatherName" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}">
 			  </div>
 	      </div>
 		  <div class="form-group col-xs-3 no-gutter">
@@ -169,7 +174,7 @@
 		  <div class="form-group col-xs-3 no-gutter">
 			  <label for="fatherTel" class="col-xs-4 no-gutter">{{ 'TEL' | translate }}:</label>
 			  <div class="col-xs-8 no-gutter">
-				<input ng-model="child.contactInfo.fatherContact" type="text" class="form-control input-sm" id="fatherTel" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}">
+				<input focus-on="fatherTel" ng-model="child.contactInfo.fatherContact" type="text" class="form-control input-sm" id="fatherTel" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}">
 			  </div>
 	      </div>
 		  <div class="form-group col-xs-3 no-gutter">
@@ -184,7 +189,7 @@
 	      <div class="form-group col-xs-3 no-gutter">
 			  <label for="motherName" class="col-xs-4 no-gutter">{{ 'MOTHER_NAME' | translate }}:</label>
 			  <div class="col-xs-8 no-gutter">
-				<input ng-model="child.contactInfo.motherName" type="text" class="form-control input-sm" id="motherName" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}">
+				<input focus-on="motherName" ng-model="child.contactInfo.motherName" type="text" class="form-control input-sm" id="motherName" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}">
 			  </div>
 	      </div>
 		  <div class="form-group col-xs-3 no-gutter">
@@ -196,7 +201,7 @@
 		  <div class="form-group col-xs-3 no-gutter">
 			  <label for="motherTel" class="col-xs-4 no-gutter">{{ 'TEL' | translate }}:</label>
 			  <div class="col-xs-8 no-gutter">
-				<input ng-model="child.contactInfo.motherContact" type="text" class="form-control input-sm" id="motherTel" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}">
+				<input focus-on="matherTel" ng-model="child.contactInfo.motherContact" type="text" class="form-control input-sm" id="motherTel" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}">
 			  </div>
 	      </div>
 		  <div class="form-group col-xs-3 no-gutter">
@@ -211,7 +216,7 @@
 		  <div class="form-group col-xs-6">
 			  <label for="liveAddress" class="col-xs-3">{{ 'LIVING_ADDR' | translate }}:</label>
 			  <div class="col-xs-9">
-				<input ng-model="child.contactInfo.livingAddr" type="text" class="form-control input-sm" id="liveAddress" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}">
+				<input focus-on="livingAddr" ng-model="child.contactInfo.livingAddr" type="text" class="form-control input-sm" id="liveAddress" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}">
 			  </div>
 	      </div>
 		  <div class="form-group col-xs-6">
@@ -414,7 +419,8 @@
   <!--end_print-->
   
   <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="ok()">{{okText}}</button>
-    <button class="btn btn-warning" ng-click="cancel()">{{cancleText}}</button>
+    <button class="btn btn-primary" ng-click="print()" ng-show="viewType">{{'PRINT' | translate}}</button>
+    <button class="btn btn-primary" ng-click="ok()">{{'OK' | translate}}</button>
+    <button class="btn btn-warning" ng-click="cancel()">{{'CLOSE' | translate}}</button>
   </div>
 </div>

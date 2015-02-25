@@ -1,0 +1,457 @@
+<!doctype html>
+<html ng-app="print">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <head>
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css"/>
+	<link rel="stylesheet" href="styles/ng-grid.css" type="text/css">
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/bower-angular-i18n-master/angular-locale_zh-cn.js"></script>
+	<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.min.js"></script>
+	
+  </head>
+  <body class="body" >
+    <script>
+    angular.module('print', []).controller('PrintCtrl', ['$scope', function ($scope) {
+      
+  	$scope.child = {"basicInfo": {
+  		"name": 'test',
+  		"grade": 0,
+  		"className": 0,
+  		"gender": 0,
+  		"birthday": new Date(),
+  		"huKou": 0,
+  		"migration": 0,
+  		"onlyChild": 1,
+  		"minLiving": 0,
+  		"imburse": 0,
+  		"orphan": 0,
+  		"pathography": 0
+  	},
+  	"contactInfo": {},
+  	"bodyInfo": {
+  		"doffDon": 0,
+  		"eating": 0,
+  		"toileting": 0,
+  		"sleeping": 0,
+  		"eatingSpeed": 0,
+  		"appetite": 0,
+  		"pickyEating": 0,
+  		"eatingAbility": 0,
+  		"foodAllergy": 0,
+  		"healthStatus": 0
+  	}};
+  	
+  	
+    }]);
+    </script>
+    
+    <div style="margin-right:300px;margin-left:300px;margin-top:20px;margin-bottom:20px" ng-controller="PrintCtrl">
+    <fieldset ng-disabled="true">
+	    <div class="row no-gutter">
+	      <div class="form-group col-xs-3">
+			  <label for="name" class="col-xs-4">{{ 'NAME'  }}:</label>
+			  <div class="col-xs-8">
+				<input autofocus focus-on="name" ng-model="child.basicInfo.name" type="text" class="form-control input-sm" id="name" ng-required="true" placeholder="{{ 'EMPTY_FIELD'  }}">
+			  </div>
+	      </div>
+		  <div class="form-group col-xs-3">
+			  <label for="grade" class="col-xs-4">{{ 'GRADE'  }}:</label>
+			  <div class="col-xs-8">
+                <select  ng-model="child.basicInfo.grade" class="form-control input-sm" id="grade">
+                      <option value="0">{{ 'GRADE_ONE'  }}</option>
+                      <option value="1">{{ 'GRADE_TWO'  }}</option>
+                      <option value="2">{{ 'GRADE_THREE'  }}</option>
+                </select>
+			  </div>
+	      </div>
+		  <div class="form-group col-xs-3">
+			  <label for="class" class="col-xs-4">{{ 'CLASS'  }}:</label>
+			  <div class="col-xs-8">
+                <select  ng-model="child.basicInfo.className" class="form-control input-sm" id="class">
+                      <option value="0">{{ 'CLASS_ONE'  }}</option>
+                      <option value="1">{{ 'CLASS_TWO'  }}</option>
+                      <option value="2">{{ 'CLASS_THREE'  }}</option>
+                      <!-- option value="3">{{ 'CLASS_FOUR'  }}</option -->
+                </select>
+			  </div>
+	      </div>
+		  <div class="form-group col-xs-3">
+			  <label for="gender" class="col-xs-4">{{ 'GENDER'  }}:</label>
+			  <div class="col-xs-8">
+				<select  ng-model="child.basicInfo.gender" class="form-control input-sm" id="gender">
+				  <option value="0">{{ 'GENDER_MALE'  }}</option>
+				  <option value="1">{{ 'GENDER_FEMALE'  }}</option>
+				</select>
+			  </div>
+	        </div>
+	    </div>
+		
+		<div class="row  no-gutter">
+	      <div class="form-group col-xs-3">
+			  <label for="nation" class="col-xs-4">{{ 'NATION'  }}:</label>
+			  <div class="col-xs-8">
+				<input ng-model="child.basicInfo.nation" type="text" class="form-control input-sm" id="nation">
+			  </div>
+	      </div>
+		  <div class="form-group col-xs-4">
+			  <label for="birthday" class="col-xs-4">{{ 'BIRTHDAY'  }}:</label>
+			  <div class="input-group col-xs-8">
+	            <input ng-model="child.basicInfo.birthday" type="text" class="form-control" datepicker-popup="{{datepicker.format}}" is-open="datepicker.opened" min-date="datepicker.minDate" max-date="datepicker.maxDate" date-disabled="disabled(date, mode)" ng-required="true" placeholder="{{ 'EMPTY_FIELD'  }}" ng-disabled="true" close-text="{{ 'DONE'  }}" current-text="{{ 'CURRENT'  }}" clear-text="{{ 'CLEAR'  }}" />
+	            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="datepicker.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+			  </div>
+			  
+	      </div>
+		  <div class="form-group col-xs-5">
+			  <label for="id" class="col-xs-4">{{ 'ID_CARD_NO.'  }}:</label>
+			  <div class="col-xs-8">
+				<input ng-model="child.basicInfo.idCardNo" type="text" class="form-control input-sm" id="id">
+			  </div>
+	      </div>
+	    </div>
+		
+		<div class="row no-gutter">
+	      <div class="form-group col-xs-3">
+			  <label for="hukou" class="col-xs-4">{{ 'HUKOU'  }}:</label>
+			  <div class="col-xs-8">
+				<select ng-model="child.basicInfo.huKou" class="form-control input-sm" id="hukou">
+				  <option value="0">{{ 'HUKOU_CONTRY'  }}</option>
+				  <option value="1">{{ 'HUKOU_CITY'  }}</option>
+				</select>
+			  </div>
+	      </div>
+		  <div class="form-group col-xs-9">
+			  <label for="registrationAddr" class="col-xs-3">{{ 'REGISTRY_ADDR'  }}:</label>
+			  <div class="col-xs-9">
+				<input ng-model="child.basicInfo.huKouAddr" type="text" class="form-control input-sm" id="registrationAddr">
+			  </div>
+	      </div>
+	    </div>
+		
+		<div class="row no-gutter">
+	      <div class="form-group col-xs-4">
+			  <label for="migrantChildren" class="col-xs-6">{{ 'MIGRATION_CHILD'  }}:</label>
+			  <div class="col-xs-6">
+				<select ng-model="child.basicInfo.migration" class="form-control input-sm" id="migrantChildren">
+				  <option value="0">{{ 'NO'  }}</option>
+				  <option value="1">{{ 'YES'  }}</option>
+				</select>
+			  </div>
+	      </div>
+		  <div class="form-group col-xs-4">
+			  <label for="orphanhood" class="col-xs-6">{{ 'ORPHANHOOD'  }}:</label>
+			  <div class="col-xs-6">
+				<select ng-model="child.basicInfo.orphan" class="form-control input-sm" id="orphanhood">
+				  <option value="0">{{ 'NO'  }}</option>
+				  <option value="1">{{ 'YES'  }}</option>
+				</select>
+			  </div>
+	      </div>
+		  <div class="form-group col-xs-4">
+			  <label for="minimumLiving" class="col-xs-6">{{ 'MIN_LIVING'  }}:</label>
+			  <div class="col-xs-6">
+				<select ng-model="child.basicInfo.minLiving" class="form-control input-sm" id="minimumLiving">
+				  <option value="0">{{ 'NO'  }}</option>
+				  <option value="1">{{ 'YES'  }}</option>
+				</select>
+			  </div>
+	      </div>
+	    </div>
+		
+		<div class="row no-gutter">
+	      <div class="form-group col-xs-4">
+			  <label for="imburse" class="col-xs-6">{{ 'IMBURSE'  }}:</label>
+			  <div class="col-xs-6">
+				<select ng-model="child.basicInfo.imburse" class="form-control input-sm" id="imburse">
+				  <option value="0">{{ 'NO'  }}</option>
+				  <option value="1">{{ 'YES'  }}</option>
+				</select>
+			  </div>
+	      </div>
+		  <div class="form-group col-xs-4">
+			  <label for="onlyChild" class="col-xs-6">{{ 'ONLY_CHILD'  }}:</label>
+			  <div class="col-xs-6">
+				<select ng-model="child.basicInfo.onlyChild" class="form-control input-sm" id="onlyChild">
+				  <option value="0">{{ 'NO'  }}</option>
+				  <option value="1">{{ 'YES'  }}</option>
+				</select>
+			  </div>
+	      </div>
+		  <div class="form-group col-xs-4">
+			  <label for="pathography" class="col-xs-6">{{ 'PATHOGRAPHY'  }}:</label>
+			  <div class="col-xs-6">
+				<select ng-model="child.basicInfo.pathography" class="form-control input-sm" id="pathography">
+				  <option value="0">{{ 'NO'  }}</option>
+				  <option value="1">{{ 'YES'  }}</option>
+				</select>
+			  </div>
+	      </div>
+	    </div>
+		
+		<div class="row">
+	      <div class="form-group col-xs-3 no-gutter">
+			  <label for="fatherName" class="col-xs-4 no-gutter">{{ 'FATHER_NAME'  }}:</label>
+			  <div class="col-xs-8 no-gutter">
+				<input focus-on="fatherName" ng-model="child.contactInfo.fatherName" type="text" class="form-control input-sm" id="fatherName" ng-required="true" placeholder="{{ 'EMPTY_FIELD'  }}">
+			  </div>
+	      </div>
+		  <div class="form-group col-xs-3 no-gutter">
+			  <label for="fatherWorkUnit" class="col-xs-4 no-gutter">{{ 'WORK_UNIT'  }}:</label>
+			  <div class="col-xs-8 no-gutter">
+				<input ng-model="child.contactInfo.fatherCompany" type="text" class="form-control input-sm" id="fatherWorkUnit">
+			  </div>
+	      </div>
+		  <div class="form-group col-xs-3 no-gutter">
+			  <label for="fatherTel" class="col-xs-4 no-gutter">{{ 'TEL'  }}:</label>
+			  <div class="col-xs-8 no-gutter">
+				<input focus-on="fatherTel" ng-model="child.contactInfo.fatherContact" type="text" class="form-control input-sm" id="fatherTel" ng-required="true" placeholder="{{ 'EMPTY_FIELD'  }}">
+			  </div>
+	      </div>
+		  <div class="form-group col-xs-3 no-gutter">
+			  <label for="fatherID" class="col-xs-3 no-gutter">{{ 'ID'  }}:</label>
+			  <div class="col-xs-9 no-gutter">
+				<input ng-model="child.contactInfo.fatherIdCard" type="text" class="form-control input-sm" id="fatherID">
+			  </div>
+	        </div>
+	    </div>
+		
+		<div class="row">
+	      <div class="form-group col-xs-3 no-gutter">
+			  <label for="motherName" class="col-xs-4 no-gutter">{{ 'MOTHER_NAME'  }}:</label>
+			  <div class="col-xs-8 no-gutter">
+				<input focus-on="motherName" ng-model="child.contactInfo.motherName" type="text" class="form-control input-sm" id="motherName" ng-required="true" placeholder="{{ 'EMPTY_FIELD'  }}">
+			  </div>
+	      </div>
+		  <div class="form-group col-xs-3 no-gutter">
+			  <label for="motherWorkUnit" class="col-xs-4 no-gutter">{{ 'WORK_UNIT'  }}:</label>
+			  <div class="col-xs-8 no-gutter">
+				<input ng-model="child.contactInfo.motherCompany" type="text" class="form-control input-sm" id="motherWorkUnit">
+			  </div>
+	      </div>
+		  <div class="form-group col-xs-3 no-gutter">
+			  <label for="motherTel" class="col-xs-4 no-gutter">{{ 'TEL'  }}:</label>
+			  <div class="col-xs-8 no-gutter">
+				<input focus-on="matherTel" ng-model="child.contactInfo.motherContact" type="text" class="form-control input-sm" id="motherTel" ng-required="true" placeholder="{{ 'EMPTY_FIELD'  }}">
+			  </div>
+	      </div>
+		  <div class="form-group col-xs-3 no-gutter">
+			  <label for="motherID" class="col-xs-3 no-gutter">{{ 'ID'  }}:</label>
+			  <div class="col-xs-9 no-gutter">
+				<input ng-model="child.contactInfo.motherIdCard" type="text" class="form-control input-sm" id="motherID">
+			  </div>
+	        </div>
+	    </div>
+		
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-6">
+			  <label for="liveAddress" class="col-xs-3">{{ 'LIVING_ADDR'  }}:</label>
+			  <div class="col-xs-9">
+				<input focus-on="livingAddr" ng-model="child.contactInfo.livingAddr" type="text" class="form-control input-sm" id="liveAddress" ng-required="true" placeholder="{{ 'EMPTY_FIELD'  }}">
+			  </div>
+	      </div>
+		  <div class="form-group col-xs-6">
+			  <label for="otherContact" class="col-xs-4">{{ 'OTHER_CONTACT'  }}:</label>
+			  <div class="col-xs-8">
+				<textarea ng-model="child.contactInfo.otherContact" class="form-control input-sm" rows="2" id="otherContact" placeholder="{{ 'OTHER_CONTACT_PLACE_HOLDER'  }}"></textarea>
+			  </div>
+	      </div>
+		</div>
+		
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+			  <label class="col-xs-2">{{ 'DOFF_DON_CAPACITY'  }}:</label>
+			  <div class="col-xs-10">
+				<label class="radio-inline">
+	              <input ng-model="child.bodyInfo.doffDon" type="radio" name="doffRadioOptions" id="doffRadio1" value="0"> {{ 'DOFF_DON_CAPACITY_0'  }}
+	            </label>
+	            <label class="radio-inline">
+	              <input ng-model="child.bodyInfo.doffDon" type="radio" name="doffRadioOptions" id="doffRadio2" value="1"> {{ 'DOFF_DON_CAPACITY_1'  }}
+	            </label>
+	            <label class="radio-inline">
+	              <input ng-model="child.bodyInfo.doffDon" type="radio" name="doffRadioOptions" id="doffRadio3" value="2"> {{ 'DOFF_DON_CAPACITY_2'  }}
+	            </label>
+			  </div>
+	      </div>
+		</div>
+		
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+			  <label class="col-xs-2">{{ 'EATING'  }}:</label>
+			  <div class="col-xs-10">
+				<label class="radio-inline">
+	              <input ng-model="child.bodyInfo.eating" type="radio" name="eatingRadioOptions" id="eatingRadio1" value="0"> {{ 'EATING_0'  }}
+	            </label>
+	            <label class="radio-inline">
+	              <input ng-model="child.bodyInfo.eating" type="radio" name="eatingRadioOptions" id="eatingRadio2" value="1"> {{ 'EATING_1'  }}
+	            </label>
+	            <label class="radio-inline">
+	              <input ng-model="child.bodyInfo.eating" type="radio" name="eatingRadioOptions" id="eatingRadio3" value="2"> {{ 'EATING_2'  }}
+	            </label>
+			  </div>
+	      </div>
+		</div>
+		
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+			  <label class="col-xs-2">{{ 'TOILETING_SELF_CARE'  }}:</label>
+			  <div class="col-xs-10">
+				<label class="radio-inline">
+	              <input ng-model="child.bodyInfo.toileting" type="radio" name="toiletingRadioOptions" id="toiletingRadio1" value="0"> {{ 'TOILETING_SELF_CARE_0'  }}
+	            </label>
+	            <label class="radio-inline">
+	              <input ng-model="child.bodyInfo.toileting" type="radio" name="toiletingRadioOptions" id="toiletingRadio2" value="1"> {{ 'TOILETING_SELF_CARE_1'  }}
+	            </label>
+	            <label class="radio-inline">
+	              <input ng-model="child.bodyInfo.toileting" type="radio" name="toiletingRadioOptions" id="toiletingRadio3" value="2"> {{ 'TOILETING_SELF_CARE_2'  }}
+	            </label>
+				<label class="radio-inline">
+	              <input ng-model="child.bodyInfo.toileting" type="radio" name="toiletingRadioOptions" id="toiletingRadio4" value="3"> {{ 'TOILETING_SELF_CARE_3'  }}
+	            </label>
+			  </div>
+	      </div>
+		</div>
+		
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+			  <label class="col-xs-2">{{ 'SLEEPING_ABILITY'  }}:</label>
+			  <div class="col-xs-10">
+				<label class="radio-inline">
+	              <input ng-model="child.bodyInfo.sleeping" type="radio" name="sleepingRadioOptions" id="sleepingRadio1" value="0" ng-click="child.bodyInfo.sleepingInfo=''"> {{ 'SLEEPING_ABIlITY_0'  }}
+	            </label>
+	            <label class="radio-inline">
+	              <input ng-model="child.bodyInfo.sleeping" type="radio" name="sleepingRadioOptions" id="sleepingRadio2" value="1" ng-click="child.bodyInfo.sleepingInfo=''"> {{ 'SLEEPING_ABIlITY_1'  }}
+	            </label>
+	            <label class="radio-inline">
+	              <input ng-model="child.bodyInfo.sleeping" type="radio" name="sleepingRadioOptions" id="sleepingRadio3" value="2"> {{ 'SLEEPING_ABIlITY_2'  }}
+				  <input ng-model="child.bodyInfo.sleepingInfo" type="text" id="specialHabitText" ng-disabled="child.bodyInfo.sleeping != 2">
+	            </label>
+			  </div>
+	      </div>
+		</div>
+		
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+			  <label class="col-xs-2">{{ 'EATING_SPEED'  }}:</label>
+			  <div class="col-xs-10">
+				<label class="radio-inline">
+	              <input ng-model="child.bodyInfo.eatingSpeed" type="radio" name="eatingSpeedRadioOptions" id="eatingSpeedRadio1" value="0"> {{ 'EATING_SPEED_0'  }}
+	            </label>
+	            <label class="radio-inline">
+	              <input ng-model="child.bodyInfo.eatingSpeed" type="radio" name="eatingSpeedRadioOptions" id="eatingSpeedRadio2" value="1"> {{ 'EATING_SPEED_1'  }}
+	            </label>
+	            <label class="radio-inline">
+	              <input ng-model="child.bodyInfo.eatingSpeed" type="radio" name="eatingSpeedRadioOptions" id="eatingSpeedRadio3" value="2"> {{ 'EATING_SPEED_2'  }}
+	            </label>
+			  </div>
+	      </div>
+		</div>
+		
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+			  <label class="col-xs-2">{{ 'APPETITE'  }}:</label>
+			  <div class="col-xs-10">
+				<label class="radio-inline">
+	              <input ng-model="child.bodyInfo.appetite" type="radio" name="appetiteRadioOptions" id="appetiteRadio1" value="0"> {{ 'APPETITE_0'  }}
+	            </label>
+	            <label class="radio-inline">
+	              <input ng-model="child.bodyInfo.appetite" type="radio" name="appetiteRadioOptions" id="appetiteRadio2" value="1"> {{ 'APPETITE_1'  }}
+	            </label>
+	            <label class="radio-inline">
+	              <input ng-model="child.bodyInfo.appetite" type="radio" name="appetiteRadioOptions" id="appetiteRadio3" value="2"> {{ 'APPETITE_2'  }}
+	            </label>
+			  </div>
+	      </div>
+		</div>
+		
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+			  <label class="col-xs-2">{{ 'PICKY_EATING'  }}:</label>
+			  <div class="col-xs-10">
+				<label class="radio-inline">
+	              <input ng-model="child.bodyInfo.pickyEating" type="radio" name="pickEatingRadioOptions" id="pickyEatingRadio1" value="0" ng-click="child.bodyInfo.pickyEatingInfo=''"> {{ 'PICKY_EATING_0'  }}
+	            </label>
+	            <label class="radio-inline">
+	              <input ng-model="child.bodyInfo.pickyEating" type="radio" name="pickEatingRadioOptions" id="pickyEatingRadio2" value="1"> {{ 'PICKY_EATING_1'  }}
+				  <input ng-model="child.bodyInfo.pickyEatingInfo" type="text" id="pickyEatingText" ng-disabled="child.bodyInfo.pickyEating != 1">
+	            </label>
+			  </div>
+	      </div>
+		</div>
+		
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+			  <label class="col-xs-2">{{ 'EATING_ABILITY'  }}:</label>
+			  <div class="col-xs-10">
+				<label class="radio-inline">
+	              <input ng-model="child.bodyInfo.eatingAbility" type="radio" name="eatingAbilityRadioOptions" id="eatingAbilityRadio1" value="0"> {{ 'EATING_ABILITY_0'  }}
+	            </label>
+	            <label class="radio-inline">
+	              <input ng-model="child.bodyInfo.eatingAbility" type="radio" name="eatingAbilityRadioOptions" id="eatingAbilityRadio2" value="1"> {{ 'EATING_ABILITY_1'  }}
+	            </label>
+			  </div>
+	      </div>
+		</div>
+		
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+			  <label class="col-xs-2">{{ 'FOOD_ALLERGY'  }}:</label>
+			  <div class="col-xs-10">
+				<label class="radio-inline">
+	              <input ng-model="child.bodyInfo.foodAllergy" type="radio" name="foodAllergyRadioOptions" id="foodAllergyRadio1" value="0" ng-click="child.bodyInfo.foodAllergyInfo=''"> {{ 'FOOD_ALLERGY_0'  }}
+	            </label>
+	            <label class="radio-inline">
+	              <input ng-model="child.bodyInfo.foodAllergy" type="radio" name="foodAllergyRadioOptions" id="foodAllergyRadio2" value="1"> {{ 'FOOD_ALLERGY_1'  }}
+				  <input ng-model="child.bodyInfo.foodAllergyInfo" type="text" id="foodAllergyText" ng-disabled="child.bodyInfo.foodAllergy != 1">
+	            </label>
+			  </div>
+	      </div>
+		</div>
+		
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+			  <label class="col-xs-2">{{ 'HEALTH_STATUS'  }}:</label>
+			  <div class="col-xs-10">
+				<label class="radio-inline">
+	              <input ng-model="child.bodyInfo.healthStatus" type="radio" name="healthStatusRadioOptions" id="healthStatusRadio1" value="0"> {{ 'HEALTH_STATUS_0'  }}
+	            </label>
+	            <label class="radio-inline">
+	              <input ng-model="child.bodyInfo.healthStatus" type="radio" name="healthStatusRadioOptions" id="healthStatusRadio2" value="1"> {{ 'HEALTH_STATUS_1'  }}
+	            </label>
+				<label class="radio-inline">
+	              <input ng-model="child.bodyInfo.healthStatus" type="radio" name="healthStatusRadioOptions" id="healthStatusRadio2" value="2"> {{ 'HEALTH_STATUS_2'  }}
+	            </label>
+				<label class="radio-inline">
+	              <input ng-model="child.bodyInfo.healthStatus" type="radio" name="healthStatusRadioOptions" id="healthStatusRadio2" value="3"> {{ 'HEALTH_STATUS_3'  }}
+	            </label>
+			  </div>
+	      </div>
+		</div>
+		
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+		    <label for="specialPerformance" class="col-xs-2">{{ 'DISTINCT_ABILITIES'  }}:</label>
+			<div class="col-xs-10">
+			  <textarea ng-model="child.basicInfo.specialPerformance" class="form-control input-sm" rows="3" id="specialPerformance" placeholder="{{ 'DISTINCT_ABILITIES_PLACE_HOLDER'  }}"></textarea>
+			</div>
+		  </div>
+		</div>
+	    
+		<div class="row no-gutter">
+		  <div class="form-group col-xs-12">
+		    <label for="otherAnnouncement" class="col-xs-2">{{ 'SPECIAL_CASE_ILLUSTRATION'  }}:</label>
+			<div class="col-xs-10">
+			  <textarea ng-model="child.basicInfo.otherAnnouncement" class="form-control input-sm" rows="3" id="otherAnnouncement" placeholder="{{ 'SPECIAL_CASE_ILLUSTRATION_PLACE_HOLDER'  }}"></textarea>
+			</div>
+		  </div>
+		</div>
+  	</fieldset>
+  	</div>
+  </body>
+</html>

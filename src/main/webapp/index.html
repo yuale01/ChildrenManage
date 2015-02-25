@@ -24,6 +24,8 @@
 	<script src="bower_components/spin.js/spin.js"></script>
     <script src="bower_components/angular-translate/angular-translate.min.js"></script>
     <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+    <script src="bower_components/ng-focus-on/ng-focus-on.min.js"></script>
+    <script src="misc/autofocus.js"></script>
     <script src="scripts/app.js"></script>
 	<script src="scripts/controllers/createStudent.js"></script>
 	<script src="scripts/controllers/msgDialog.js"></script>
@@ -38,10 +40,12 @@
 	  <div id="button" class="button">
 	    <button type="button" id="create" class="btn btn-success" ng-click="create()">{{ 'CREATE' | translate }}</button>
 	    <button type="button" id="view" class="btn btn-success" ng-click="view()">{{ 'VIEW' | translate }}</button>
-        <button type="button" id="edit" class="btn btn-success" ng-click="edit()">{{ 'EDIT' | translate }}</button>
+        <!-- button type="button" id="edit" class="btn btn-success" ng-click="edit()">{{ 'EDIT' | translate }}</button -->
         <button type="button" id="delete" class="btn btn-success" ng-click="deleteChildren()">{{ 'DELETE' | translate }}</button>
         <button type="button" id="refresh" class="btn btn-success" ng-click="refresh()">{{ 'REFRESH' | translate }}</button>
+        <!--  button type="button" id="import" class="btn btn-success" ng-click="import()">{{ 'IMPORT' | translate }}</button-->     
         <button type="button" id="refresh" class="btn btn-info" ng-click="filterCollapsed = !filterCollapsed">{{ 'FILTER' | translate }}</button>
+        <a id="export_href" href="/ChildrenManage/webapi/Children/export">{{ 'EXPORT' | translate }}</a>
 	  </div>
 	  <div collapse="filterCollapsed" class="filter">
 		<div class="well well-lg">
@@ -55,6 +59,7 @@
 			  	<div class="form-group">
 				  <label for="filter_grade">{{ 'GRADE' | translate }}:</label>
                   <select  ng-model="filter.grade" class="form-control input-sm" id="filter.grade">
+                      <option value="-1">{{ 'ALL' | translate }}</option>
                       <option value="0">{{ 'GRADE_ONE' | translate }}</option>
                       <option value="1">{{ 'GRADE_TWO' | translate }}</option>
                       <option value="2">{{ 'GRADE_THREE' | translate }}</option>
@@ -63,6 +68,7 @@
 			  	<div class="form-group">
 				  <label for="filter_class">{{ 'CLASS' | translate }}:</label>
                   <select  ng-model="filter.className" class="form-control input-sm" id="filter.className">
+                      <option value="-1">{{ 'ALL' | translate }}</option>
                       <option value="0">{{ 'CLASS_ONE' | translate }}</option>
                       <option value="1">{{ 'CLASS_TWO' | translate }}</option>
                       <option value="2">{{ 'CLASS_THREE' | translate }}</option>
@@ -72,6 +78,7 @@
 			  <div class="form-group">
 				  <label for="filter_gender">{{ 'GENDER' | translate }}:</label>
 				  <select  ng-model="filter.gender" class="form-control input-sm" id="filter_gender">
+				      <option value="-1">{{ 'ALL' | translate }}</option>
 					  <option value="0">{{ 'GENDER_MALE' | translate }}</option>
 					  <option value="1">{{ 'GENDER_FEMALE' | translate }}</option>
 				  </select>
@@ -102,12 +109,11 @@
 				  <label for="filter_nation">{{ 'NATION' | translate }}:</label>
 					<input ng-model="child.basicInfo.className" type="text" class="form-control input-sm" id="filter_nation">
 		      </div-->
+		      <div class="form-group">
+		      	  <button type="button" id="filter" class="btn btn-default" ng-click="doFilter()" style="float: right;">{{ 'GO' | translate }}</button>
+		      </div>
 	        </div>
-
-	        <div class="row">    
-		      <button type="button" id="filter" class="btn btn-default" ng-click="doFilter()" style="float: right;">{{ 'GO' | translate }}</button>
-	        </div>
-
+	        
 		</div> 
 	  </div>
       <div id="grid" ui-grid="gridOptions" ui-grid-paging ui-grid-exporter ui-grid-selection class="grid"></div>

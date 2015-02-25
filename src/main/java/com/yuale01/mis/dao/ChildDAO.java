@@ -183,11 +183,11 @@ public class ChildDAO implements IChildDAO {
                 contactInfo.setMotherName(result.getString(Constants.CONTACT_INFO_MOTHER_NAME_dbField));
                 contactInfo.setMotherCompany(result.getString(Constants.CONTACT_INFO_MOTHER_COMPANY_dbField));
                 contactInfo.setMotherContact(result.getString(Constants.CONTACT_INFO_MOTHER_CONTACT_dbField));
-                contactInfo.setMotherIdCard(Constants.CONTACT_INFO_MOTHER_ID_CARD_dbField);
+                contactInfo.setMotherIdCard(result.getString(Constants.CONTACT_INFO_MOTHER_ID_CARD_dbField));
                 contactInfo.setFatherName(result.getString(Constants.CONTACT_INFO_FATHER_NAME_dbField));
                 contactInfo.setFatherCompany(result.getString(Constants.CONTACT_INFO_FATHER_COMPANY_dbField));
                 contactInfo.setFatherContact(result.getString(Constants.CONTACT_INFO_FATHER_CONTACT_dbField));
-                contactInfo.setFatherIdCard(Constants.CONTACT_INFO_FATHER_ID_CARD_dbField);
+                contactInfo.setFatherIdCard(result.getString(Constants.CONTACT_INFO_FATHER_ID_CARD_dbField));
                 contactInfo.setLivingAddr(result.getString(Constants.CONTACT_INFO_LIVING_ADDR_dbField));
                 contactInfo.setOtherContact(result.getString(Constants.CONTACT_INFO_OTHER_CONTACT_dbField));
                 contactInfo.setTimeStamp(result.getLong(Constants.CONTACT_INFO_TIMESTAMP_dbField));

@@ -38,6 +38,7 @@
     </dependencyManagement>
 
     <dependencies>
+	
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
             <artifactId>jersey-container-servlet-core</artifactId>
@@ -49,6 +50,12 @@
 			<artifactId>jersey-media-json-jackson</artifactId>
 			<version>2.15</version>
 		</dependency>
+		<dependency>
+		<groupId>com.sun.jersey.contribs</groupId>
+			<artifactId>jersey-multipart</artifactId>
+			<version>1.9.1</version>
+		</dependency>
+
 		<dependency>
 			<groupId>c3p0</groupId>
 			<artifactId>c3p0</artifactId>
@@ -75,7 +82,13 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>3.11</version>
 		</dependency>
-
+		
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+		
     </dependencies>
     <properties>
         <jersey.version>2.15</jersey.version>

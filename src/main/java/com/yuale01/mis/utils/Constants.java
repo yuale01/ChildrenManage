@@ -3,6 +3,10 @@ package com.yuale01.mis.utils;
 import java.util.Properties;
 
 public class Constants {
+	
+	public final static String MEDIA_TYPE_JSON = "application/vnd.yuale01.v1+json";
+	public final static String MEDIA_TYPE_XML = "application/vnd.yuale01.v1+xml";
+	public final static String MEDIA_TYPE_EXCEL = "application/vnd.ms-excel";
 
     public static String BASIC_INFO_ID_dbField = "id";
 

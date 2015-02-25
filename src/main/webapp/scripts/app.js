@@ -1,4 +1,4 @@
-var app = angular.module('app', ['app.children.controllers', 'pascalprecht.translate', 'ngTouch', 'ui.grid', 'ui.grid.paging', 'ui.grid.exporter', 'ui.grid.selection', 'ui.bootstrap', 'ui.grid.resizeColumns']);
+var app = angular.module('app', ['app.children.controllers', 'pascalprecht.translate', 'utils.autofocus', 'ngTouch', 'ui.grid', 'ui.grid.paging', 'ui.grid.exporter', 'ui.grid.selection', 'ui.bootstrap', 'ui.grid.resizeColumns']);
 
 app.config(['$translateProvider', function ($translateProvider){
 	
@@ -40,13 +40,13 @@ app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal',
   
   var fullData = []; 
   
-  $scope.data = [];
+  //$scope.data = [];
   
   $scope.filter= {
 		'name': '',
-		'grade': '',
-		'className': '',
-		'gender': '',
+		'grade': -1,
+		'className': -1,
+		'gender': -1,
 		'birthdayFrom': '',
 		'birthdayTo': '',
 		'id': ''
@@ -57,19 +57,19 @@ app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal',
 		  return true;
 	  else 
 		  return false;
-  }
+  };
   
   var filterData = function(data) {
 	  var result = [];
-	  for (i = 0; i< data.length; i++)
+	  for (var i = 0; i< data.length; i++)
 	  {
 		  if (!isEmpty($scope.filter.name) && data[i].basicInfo.name.indexOf($scope.filter.name)==-1)
 			  continue;
-		  if (!isEmpty($scope.filter.grade) && data[i].basicInfo.grade != $scope.filter.grade )
+		  if ($scope.filter.grade != -1 && data[i].basicInfo.grade != $scope.filter.grade )
 			  continue;
-		  if (!isEmpty($scope.filter.className) && data[i].basicInfo.className != $scope.filter.className)
+		  if ($scope.filter.className != -1 && data[i].basicInfo.className != $scope.filter.className)
 			  continue;
-		  if (!isEmpty($scope.filter.gender) && data[i].basicInfo.gender != $scope.filter.gender )
+		  if ($scope.filter.gender != -1 && data[i].basicInfo.gender != $scope.filter.gender )
 			  continue;
 		  if (!isEmpty($scope.filter.id) && data[i].basicInfo.idCardNo != $scope.filter.id )
 			  continue;
@@ -80,11 +80,11 @@ app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal',
 		  result.push(data[i]);
 	  }
 	  return result;
-  }
+  };
   
   $scope.doFilter = function() {
-	  $scope.data = filterData(fullData);
-  }
+	  $scope.gridOptions.data = filterData(fullData);
+  };
   
   var showAlert = function(type, msg) {
 	    $scope.alert.type = type;
@@ -185,7 +185,7 @@ app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal',
 	  },
       { field: 'contactInfo.motherContact',
 		headerCellFilter: 'translate',
-	    displayName: $translate.instant('MOTHER_PHONE')
+	    displayName: $translate.instant('MOTHER_TEL')
 	    //enableFiltering: false,
 	    //suppressRemoveSort: true
 	  },
@@ -197,7 +197,7 @@ app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal',
 	  },
 	  { field: 'contactInfo.fatherContact',
 		headerCellFilter: 'translate',
-	    displayName: $translate.instant('FATHER_PHONE')
+	    displayName: $translate.instant('FATHER_TEL')
 	    //enableFiltering: false,
 	    //suppressRemoveSort: true
 	  },
@@ -210,8 +210,6 @@ app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal',
 	  }
     ]
   };
-  
-  $scope.gridOptions.data = 'data';
   
   $scope.gridOptions.onRegisterApi = function(gridApi){
       //set gridApi on scope
@@ -246,16 +244,17 @@ app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal',
 			else if (data[i].basicInfo.className == 2)
 				data[i].basicInfo.translatedClassName = $translate.instant('CLASS_THREE');
 	  }
-  }
+	  return data;
+  };
   
   var loadData = function() {
 	  $scope.closeAlert();
 	  $("#grid").mask({spinner: { lines: 10, length: 6, width: 3, radius: 5}, delay: 0, label: $translate.instant('LOADING')});
 	  $http.get("/ChildrenManage/webapi/Children").
 	  	success(function(data) {
-	  		
+	  		$("#grid").unmask()
 	  		fullData = translateData(data);
-	  		$scope.data = filterData(data);
+	  		$scope.gridOptions.data = filterData(fullData);
 	  		$("#grid").unmask();
 	  	}).
 	  	error(function(data) {
@@ -360,7 +359,7 @@ app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal',
 			  var ids = JSON.parse('[]');
 			  for (var i=0; i<rows.length; i++)
 				  ids.push(rows[i].id);
-			  
+			  $("#grid").mask({spinner: { lines: 10, length: 6, width: 3, radius: 5}, delay: 0, label: $translate.instant('DELETING')});
 			  $http({
 				url: '/ChildrenManage/webapi/Children',
 				method: 'DELETE',
@@ -389,7 +388,7 @@ app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal',
 	  var modalInstance = $modal.open({
 		  templateUrl: 'template/createStudent.html',
 		  controller: 'CreateStudentCtrl',
-		  backdrop: true,
+		  backdrop: 'static',
 		  size: 'lg',
 		  resolve: {
 			  child: function() {
@@ -401,11 +400,12 @@ app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal',
 		  }
 		});
 		modalInstance.result.then(function () {
+			loadData();
 	    }, function () {
 	    });
   };
   
-  $scope.edit = function() {
+  /*$scope.edit = function() {
 	  $scope.closeAlert();
 	  var rows = $scope.gridApi.selection.getSelectedRows();
 	  if (rows.length !== 1)
@@ -431,16 +431,33 @@ app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal',
 		  loadData();
 	    }, function () {
 	    });
+  };*/
+  
+  $scope.import = function() {
+	  
+  };
+  
+  $scope.export = function() {
+	  $scope.closeAlert();
+	  $http.get("/ChildrenManage/webapi/Children/export").
+	  	success(function(data) {
+	  		//$("#grid").unmask();
+	  	}).
+	  	error(function(data) {
+	  		//$("#grid").unmask();
+	  		showAlert('danger', $translate.instant('FAIL_EXPORT_DATA', {msg: data.message}));
+	  	});
+	  
   };
   
   /*angular.forEach($scope.gridOptions.columnDefs, function(value){
 	  $translate(value.displayName).then(function(data){value.displayName = data;});
 	  });*/
   
-  $translate(['CONDITION_PLACE_HOLDER_GREATER_THAN', 'CONDITION_PLACE_HOLDER_LESS_THAN']).then(function (translations) {
+  /*$translate(['CONDITION_PLACE_HOLDER_GREATER_THAN', 'CONDITION_PLACE_HOLDER_LESS_THAN']).then(function (translations) {
 	  $scope.gridOptions.columnDefs[6].filters[0].placeholder = translations.CONDITION_PLACE_HOLDER_GREATER_THAN;
 	  $scope.gridOptions.columnDefs[6].filters[1].placeholder = translations.CONDITION_PLACE_HOLDER_LESS_THAN;
-  });
+  });*/
   
   $rootScope.$on('$translateLoadingEnd', function(promise) {
 	  //$translate.refresh('CREATE');
