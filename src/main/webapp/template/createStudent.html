@@ -5,12 +5,12 @@
   </div>
   <!--start_print-->
   <div class="modal-body" id="modal-body" >
-    <div class="row hidden-print">
+    <div class="row">
        <div class="col-xs-12">
          <alert type="{{alert.type}}" close="closeAlert()" ng-show="alert.show">{{alert.msg}}</alert>
        </div>
     </div>
-    <div class="row hidden-print" ng-show="viewType">
+    <div class="row" ng-show="viewType">
        <div class="col-xs-3">
          <input ng-model="editBoxChecked" type="checkbox" ng-click="disable=!editBoxChecked" style="margin-bottom:10px">{{'START_EDIT' | translate}}</input>
        </div>

@@ -167,10 +167,10 @@ angular.module('app.children.controllers', ['ui.bootstrap', 'focusOn'])
 					        "<script src=\"bower_components/angular-touch/angular-touch.min.js\"></script>"+
 						"</head>";
     	var jsHTML = "<script>angular.module('print', []).controller('PrintCtrl', ['$scope', function ($scope) {$scope.child ="+JSON.stringify($scope.child)+" }]);</script>";
-		var bodyHTML = "<body>"+jsHTML+"<div ng-controller=\"PrintCtrl\" style=\"width: 800px;\">" + window.document.getElementById("fieldset").innerHTML + "</div></body>";
+		var bodyHTML = "<body>"+jsHTML+"<div ng-controller=\"PrintCtrl\" style=\"width: 900px;margin-right:auto;margin-left:auto;\"><button class=\"btn btn-default hidden-print\" onClick=\"window.print()\">Print</button><h2 align=\"center\";><b>幼儿信息表</b></h2><br><fieldset ng-disabled=\"true\">" + window.document.getElementById("fieldset").innerHTML + "</fieldset></div></body>";
 		var printWindow = window.open();
 		var html = "<html ng-app=\"print\">"+hdHTML+bodyHTML+"</html>";
-		printWindow.document.write("<html ng-app=\"print\">"+hdHTML+bodyHTML+"</html>");
+		printWindow.document.write(html);
 		printWindow.document.close();
     	
     	//var childStr = "$scope.child = "+JSON.stringify(child);
