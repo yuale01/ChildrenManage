@@ -143,15 +143,6 @@ angular.module('app.children.controllers', ['ui.bootstrap', 'focusOn'])
     $scope.print = function() {
     	$scope.closeAlert();
     	
-//    	var printContents = document.getElementById("modal-body").innerHTML;
-//        var originalContents = document.body.innerHTML;
-//
-//        document.body.innerHTML = printContents;
-//
-//        window.print();
-//
-//        document.body.innerHTML = originalContents;
-    	
     	var hdHTML = "<!doctype html><head>" +
 					    	"<link rel=\"stylesheet\" href=\"bower_components/bootstrap/dist/css/bootstrap.min.css\" type=\"text/css\"/>"+
 					    	"<link rel=\"stylesheet\" href=\"styles/ng-grid.css\" type=\"text/css\">"+
@@ -167,51 +158,11 @@ angular.module('app.children.controllers', ['ui.bootstrap', 'focusOn'])
 					        "<script src=\"bower_components/angular-touch/angular-touch.min.js\"></script>"+
 						"</head>";
     	var jsHTML = "<script>angular.module('print', []).controller('PrintCtrl', ['$scope', function ($scope) {$scope.child ="+JSON.stringify($scope.child)+" }]);</script>";
-		var bodyHTML = "<body>"+jsHTML+"<div ng-controller=\"PrintCtrl\" style=\"width: 900px;margin-right:auto;margin-left:auto;\"><button class=\"btn btn-default hidden-print\" onClick=\"window.print()\">Print</button><h2 align=\"center\";><b>幼儿信息表</b></h2><br><fieldset ng-disabled=\"true\">" + window.document.getElementById("fieldset").innerHTML + "</fieldset></div></body>";
+		var bodyHTML = "<body>"+jsHTML+"<div ng-controller=\"PrintCtrl\" style=\"width: 900px;margin-right:auto;margin-left:auto;\"><button class=\"btn btn-default hidden-print\" onClick=\"window.print()\">"+$translate.instant('PRINT')+"</button><h2 align=\"center\";><b>"+$translate.instant('CHILD_INFO_TABLE')+"</b></h2><br><fieldset ng-disabled=\"true\">" + window.document.getElementById("fieldset").innerHTML + "</fieldset></div></body>";
 		var printWindow = window.open();
 		var html = "<html ng-app=\"print\">"+hdHTML+bodyHTML+"</html>";
 		printWindow.document.write(html);
 		printWindow.document.close();
-    	
-    	//var childStr = "$scope.child = "+JSON.stringify(child);
-    	//<script>"+childStr+";window.print();</script>
-		
-//    	var hdHTML = "<head>"+window.document.getElementsByTagName('head')[0].innerHTML+"</head>";
-//    	var bodyHTML = "<body><div style=\"width: 800px;\">" + window.document.getElementById("modal-body").innerHTML + "</div></body>";
-//    	var printWindow = $window.open();
-//    	printWindow.document.write(hdHTML+bodyHTML);
-//    	printWindow.document.close();
-    	
-    	/*var innerHTML = window.document.getElementById("modal-body").innerHTML;
-    	
-    	for (var i=0; i<childStructure.length; i++)
-    	{
-    		var category = childStructure[i].category;
-    		var fields = childStructure[i].fields;
-    		
-    		for (var j=0; j<fields.length; j++)
-    		{
-    			var field = fields[j];
-    			innerHTML = innerHTML.replace("ng-model=\"child."+category+"."+field+"\"","ng-init=\"child."+category+"."+field+"='"+$scope.child[category][field]+"'\""+" ng-model=\"child."+category+"."+field+"\"");
-    			if (currentChild[category][field] != originChild[category][field])
-    			{
-    				
-    				if (changedChild[category] == undefined)
-    				{
-    					changedChild[category] = {};
-    					changedChild[category].timeStamp = originChild[category].timeStamp;
-    				}
-    					
-    				changedChild[category][field] = currentChild[category][field];
-    			}
-    				
-    		}
-    	};
-    	var hdHTML = "<head>"+window.document.getElementsByTagName('head')[0].innerHTML+"</head>";
-    	var bodyHTML = "<body><div style=\"width: 800px;\">" + innerHTML + "</div></body>";
-    	var printWindow = $window.open();
-    	printWindow.document.write(hdHTML+bodyHTML);
-    	printWindow.document.close();*/
     	
     };
     
