@@ -65,7 +65,7 @@
 		  <div class="form-group col-xs-4">
 			  <label for="birthday" class="col-xs-4">{{ 'BIRTHDAY' | translate }}:</label>
 			  <div class="input-group col-xs-8">
-	            <input ng-model="child.basicInfo.birthday" type="text" class="form-control" datepicker-popup="{{datepicker.format}}" is-open="datepicker.opened" min-date="datepicker.minDate" max-date="datepicker.maxDate" date-disabled="disabled(date, mode)" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}" ng-disabled="true" close-text="{{ 'DONE' | translate }}" current-text="{{ 'CURRENT' | translate }}" clear-text="{{ 'CLEAR' | translate }}" />
+	            <input ng-model="child.basicInfo.birthday" type="text" class="form-control" datepicker-popup="{{datepicker.format}}" is-open="datepicker.opened" min-date="datepicker.minDate" max-date="datepicker.maxDate" date-disabled="disabled(date, mode)" ng-required="true" placeholder="{{ 'EMPTY_FIELD' | translate }}" ng-disabled="false" close-text="{{ 'DONE' | translate }}" current-text="{{ 'CURRENT' | translate }}" clear-text="{{ 'CLEAR' | translate }}" />
 	            <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="datepicker.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
               </span>

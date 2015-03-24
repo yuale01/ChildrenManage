@@ -21,7 +21,7 @@ app.config(['$translateProvider', function ($translateProvider){
 	    suffix: '.json'
   });
  
-  $translateProvider.preferredLanguage(getLocale());
+  $translateProvider.preferredLanguage("zh_CN");
   $translateProvider.fallbackLanguage('en');
 	
 }]);
@@ -73,9 +73,9 @@ app.controller('MainCtrl', ['$rootScope', '$scope', '$interval', '$q', '$modal',
 			  continue;
 		  if (!isEmpty($scope.filter.id) && data[i].basicInfo.idCardNo != $scope.filter.id )
 			  continue;
-		  if (!isEmpty($scope.filter.birthdayFrom) && new Date(data[i].basicInfo.birthday).getTime() < $scope.filter.birthdayFrom.getTime() )
+		  if (!isEmpty($scope.filter.birthdayFrom) && new Date(data[i].basicInfo.birthday+", 00:00:00").getTime() < $scope.filter.birthdayFrom.getTime() )
 			  continue;
-		  if (!isEmpty($scope.filter.birthdayTo) && new Date(data[i].basicInfo.birthday).getTime() > $scope.filter.birthdayTo )
+		  if (!isEmpty($scope.filter.birthdayTo) && new Date(data[i].basicInfo.birthday+", 00:00:00").getTime() > $scope.filter.birthdayTo.getTime() )
 			  continue;
 		  result.push(data[i]);
 	  }

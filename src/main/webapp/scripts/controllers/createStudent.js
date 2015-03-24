@@ -43,6 +43,8 @@ angular.module('app.children.controllers', ['ui.bootstrap', 'focusOn'])
       };
       
       var showAlert = function(type, msg) {
+    	  	$location.hash('create-student-dialog');
+		    $anchorScroll();
     	    $scope.alert.type = type;
     	    $scope.alert.msg = msg;
     	    $scope.alert.show = true;

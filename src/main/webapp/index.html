@@ -87,14 +87,14 @@
 			     <label >{{ 'BIRTHDAY' | translate }}:</label>
 			     <label >{{ 'FROM' | translate }}</label>
 			     <div class="input-group">
-	                <input ng-model="filter.birthdayFrom" type="text" class="form-control" datepicker-popup="{{datepicker.format}}" is-open="datepicker.fromOpened" min-date="datepicker.minDate" max-date="datepicker.maxDate" date-disabled="disabled(date, mode)" placeholder="" ng-disabled="true" close-text="{{ 'DONE' | translate }}" current-text="{{ 'CURRENT' | translate }}" clear-text="{{ 'CLEAR' | translate }}" style="width:100px;"/>
+	                <input ng-model="filter.birthdayFrom" type="text" class="form-control" datepicker-popup="{{datepicker.format}}" is-open="datepicker.fromOpened" min-date="datepicker.minDate" max-date="datepicker.maxDate" date-disabled="disabled(date, mode)" placeholder="" ng-disabled="false" close-text="{{ 'DONE' | translate }}" current-text="{{ 'CURRENT' | translate }}" clear-text="{{ 'CLEAR' | translate }}" style="width:100px;"/>
 	            	<span class="input-group-btn">
                 		<button type="button" class="btn btn-default" ng-click="datepicker.openFrom($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                 	</span>
 			  	 </div>
 			     <label >{{ 'TO' | translate }}</label>
 			     <div class="input-group">
-	                <input ng-model="filter.birthdayTo" type="text" class="form-control" datepicker-popup="{{datepicker.format}}" is-open="datepicker.toOpened" min-date="datepicker.minDate" max-date="datepicker.maxDate" date-disabled="disabled(date, mode)" placeholder="" ng-disabled="true" close-text="{{ 'DONE' | translate }}" current-text="{{ 'CURRENT' | translate }}" clear-text="{{ 'CLEAR' | translate }}" style="width:100px;"/>
+	                <input ng-model="filter.birthdayTo" type="text" class="form-control" datepicker-popup="{{datepicker.format}}" is-open="datepicker.toOpened" min-date="datepicker.minDate" max-date="datepicker.maxDate" date-disabled="disabled(date, mode)" placeholder="" ng-disabled="false" close-text="{{ 'DONE' | translate }}" current-text="{{ 'CURRENT' | translate }}" clear-text="{{ 'CLEAR' | translate }}" style="width:100px;"/>
 	            	<span class="input-group-btn">
                 		<button type="button" class="btn btn-default" ng-click="datepicker.openTo($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                 	</span>
